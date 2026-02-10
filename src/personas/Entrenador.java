@@ -29,17 +29,17 @@ public class Entrenador extends Personas {
         this.seleccionadorNacional = seleccionadorNacional;
     }
 
-    public void incrementarSou () {
-        System.out.print("El sueldo a incrementado de " + this.sueldoAnual + " a ");
-        this.sueldoAnual = this.sueldoAnual + this.sueldoAnual / 200;
-        System.out.println(this.sueldoAnual + " (0,5%)");
-    }
-
     @Override
     public String toString() {
         return super.toString() + "Entrenador{" +
                 "numTorneosGanados='" + numTorneosGanados + '\'' +
                 ", seleccionadorNacional=" + seleccionadorNacional +
                 '}';
+    }
+
+    public void incrementarSou () {
+        System.out.print("El sueldo a incrementado de " + this.sueldoAnual + " a ");
+        this.sueldoAnual = this.sueldoAnual + this.sueldoAnual / 200;
+        System.out.println(this.sueldoAnual + " (0,5%)");
     }
 }

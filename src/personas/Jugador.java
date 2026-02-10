@@ -3,6 +3,7 @@ package personas;
 import java.util.Random;
 
 public class Jugador extends Personas {
+    /*VARIABLES*/
     final String[] Posiciones = {"POR", "DEF", "MIG", "DAV"};
 
     private String posicion; // POR, DEF, MIG i DAV
@@ -12,13 +13,14 @@ public class Jugador extends Personas {
     public Jugador() {
     }
 
+    /*CONSTRUCTOR*/
     public Jugador(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, int sueldoAnual, int dorsal, String posicion, int qualidadTeorica) {
         super(nombre, apellido, fechaNacimiento, nivelMotivacion, sueldoAnual);
         this.dorsal = dorsal;
         this.posicion = posicion;
         this.qualidad = qualidadTeorica;
     }
-
+     /*GETTERS Y SETTERS*/
     public int getDorsal() {
         return dorsal;
     }
@@ -43,6 +45,16 @@ public class Jugador extends Personas {
         this.qualidad = qualidad;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "Jugador{" +
+                "dorsal=" + dorsal +
+                ", posicion='" + posicion + '\'' +
+                ", qualidadTeorica=" + qualidad +
+                '}';
+    }
+
+    /*CAMBI DE POSICIONS ENTRE JUGADORS*/
     public void canviDePosicion(String nuevaPosicion) {
         Random random = new Random();
         int numRandom = random.nextInt(100) + 1;
@@ -68,16 +80,6 @@ public class Jugador extends Personas {
                     System.out.println(Posiciones[j]);
                 }
             }
-
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + "Jugador{" +
-                "dorsal=" + dorsal +
-                ", posicion='" + posicion + '\'' +
-                ", qualidadTeorica=" + qualidad +
-                '}';
     }
 }
 

@@ -11,7 +11,9 @@ public class Personas {
         this.fechaNacimiento = fechaNacimiento;
         this.nivelMotivacion = nivelMotivacion;
         this.sueldoAnual = sueldoAnual;
+
     }
+        /*GETTERS Y SETTER*/
         public double getNivelMotivacion() {
             return nivelMotivacion;
         }
