@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Jugador extends Personas {
     /*VARIABLES*/
-    final String[] Posiciones = {"POR", "DEF", "MIG", "DAV"};
+    final static String[] Posiciones = {"POR", "DEF", "MIG", "DAV"};
 
     private String posicion; // POR, DEF, MIG i DAV
     private int dorsal;
