@@ -3,7 +3,9 @@ package personas;
 public class Personas {
     protected String nombre, apellido, fechaNacimiento;
     protected double nivelMotivacion, sueldoAnual;
-    public Personas() {}
+
+    public Personas() {
+    }
 
     public Personas(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, int sueldoAnual) {
         this.nombre = nombre;
@@ -13,22 +15,35 @@ public class Personas {
         this.sueldoAnual = sueldoAnual;
 
     }
-        /*GETTERS Y SETTER*/
-        public double getNivelMotivacion() {
-            return nivelMotivacion;
-        }
 
-        public void setNivelMotivacion(double nivelMotivacion) {
-            this.nivelMotivacion = nivelMotivacion;
-        }
+    /*GETTERS Y SETTER*/
+    public double getNivelMotivacion() {
+        return nivelMotivacion;
+    }
 
-        public double getSueldoAnual() {
-            return sueldoAnual;
-        }
+    public void setNivelMotivacion(double nivelMotivacion) {
+        this.nivelMotivacion = nivelMotivacion;
+    }
 
-        public void setSueldoAnual(double sueldoAnual) {
-            this.sueldoAnual = sueldoAnual;
-        }
+    public double getSueldoAnual() {
+        return sueldoAnual;
+    }
+
+    public void setSueldoAnual(double sueldoAnual) {
+        this.sueldoAnual = sueldoAnual;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
 
     @Override
     public String toString() {

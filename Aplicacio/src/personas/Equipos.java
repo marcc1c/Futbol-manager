@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Equipos {
     private String nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, entrenador;
-    ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+    private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 
     public Equipos() {
     }
