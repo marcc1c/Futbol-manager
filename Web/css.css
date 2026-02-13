@@ -1,0 +1,23 @@
+:root{
+    --rojo-primario: #C1121F;
+    --rojo-fondo: #780000;
+    --negro-pers: #1B1B1B;
+    --blanco-contraste: #FDF0D5;
+    --daurat-accent: #FFB703;
+}
+header {
+    background-color: var(--rojo-fondo);
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+header h1 {
+    color: var(--blanco-contraste);
+    position: absolute;
+}
+header a {
+    color: var(--blanco-contraste);
+}
+header div{
+    margin-left:60% ;
+}
