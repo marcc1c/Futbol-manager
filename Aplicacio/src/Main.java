@@ -31,11 +31,10 @@ public class Main {
     }
 
     public static char login(String[] opcionesAdmin, String[] opcionesGestorEquipos, ArrayList<String> opcionesUsuarioActual) {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("-".repeat(15) + "Iniciando login" + "-".repeat(15));
         System.out.println("¿Eres admin (a) o eres un gestor de equipo (g)?");
-        scanner.hasNextLine();
-        String input = scanner.nextLine();
+        String input = Validador.numero2("a", "g");
 
         char tipousuario = input.charAt(0);
         if (input.equalsIgnoreCase("a")) {
@@ -99,10 +98,10 @@ public class Main {
 
             boolean encontrado = false;
 
-                for (String opcion : opcionesUsuario) {
-                    if (opcion.equalsIgnoreCase(input)) {
-                        encontrado = true;
-                    }
+            for (String opcion : opcionesUsuario) {
+                if (opcion.equalsIgnoreCase(input)) {
+                    encontrado = true;
+                }
             }
             if (encontrado) {
                 valido = true;
@@ -134,7 +133,7 @@ public class Main {
             case "DD":
                 break;
             case "GE":
-                getstionarMiEquipo();
+                gestionarMiEquipo();
                 break;
             case "TJ":
                 break;
@@ -144,7 +143,9 @@ public class Main {
         }
     }
 
-    public static void getstionarMiEquipo() {
+    public static void gestionarMiEquipo() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Team Manager:");
         System.out.println("1- Donar de baixa l'equip");
         System.out.println("2- Modificar president/a");
@@ -152,6 +153,28 @@ public class Main {
         System.out.println("4- Fitxar jugador/a o entrenador/a");
         System.out.println("0- Sortir");
 
+        int input = Validador.numerosInicioFinal(0, 4);
+
+        switch (input) {
+            case 1:
+                bajaEquipo();
+                break;
+        }
+
+    }
+
+    public static void bajaEquipo() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Estas seguro que quieres dar de baja al equipo actual?");
+        System.out.println();
+        String input = Validador.numero2("s", "n");
+
+        if (input.equalsIgnoreCase("s")) {
+            // borrar equipo de la liga
+        } else {
+            System.out.println("No se ha borrado el equipo de la liga");
+        }
     }
 
 }
