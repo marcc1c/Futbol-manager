@@ -1,60 +1,155 @@
-:root{
+:root {
     --rojo-primario: #C1121F;
     --rojo-fondo: #780000;
     --negro-pers: #1B1B1B;
     --blanco-contraste: #FDF0D5;
     --daurat-accent: #FFB703;
 }
-body{
+
+h2 {
+    font-size: 35px;
+}
+
+body {
     background-color: var(--blanco-contraste);
     margin: 0%;
 }
+
 header {
     background-color: var(--rojo-fondo);
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
 }
+
 header h1 {
     color: var(--blanco-contraste);
     position: absolute;
 }
+
 header a {
     color: var(--blanco-contraste);
 }
-nav{
-    margin-left:60%;
 
+nav {
+    margin-left: 60%;
 }
-nav a{
+
+nav a {
     margin: 5px;
+    text-decoration: none;
 }
-main{
-    display: grid;
+
+main {
     justify-items: center;
 }
-main h2, h3, p{
+
+main h2,
+h3,
+p {
     color: var(--negro-pers);
 }
-main h2{
 
-}
-main img{
+main img {
     width: 239px;
 }
-.Grupnoticies{
-        border: greenyellow 7px solid ;*/
-    display: grid;
+
+.Grupnoticies {
+    margin-top: 100px;
     align-items: center;
     justify-content: center;
-    max-width: 40%;
-    min-width: 40%;
+    max-width: 45%;
+    min-width: 45%;
 }
-.Grupnoticies h2{
-    margin-left: 40%;
+
+.Grupnoticies h2 {
+    text-align: center;
 }
-.Noticia{
-    display: grid;
-    align-items: center;
+
+.Noticia {
+    margin: 10px;
+}
+
+.Noticia h3 {
+    display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+
+.TextFoto {
+    display: flex;
+    justify-content: space-between;
+}
+
+.TextFoto img {
+    border-radius: 3px;
+    margin-left: 40px;
+}
+
+.raya-vertical {
+    width: 2px;
+    height: 100px;
+    background-color: black;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: var(--rojo-primario);
+}
+
+.tarjetas-jugadores {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+
+}
+
+.tarjeta-jugador {
+    border: red 2px solid;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.imagen-fondo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imagen-encima {
+    position: absolute;
+    top: 5px;
+    height: 160px;
+    width: 160px;
+}
+
+#numero {
+    position: absolute;
+    left: 5px;
+    top: -10px;
+    color: var(--blanco-contraste);
+    font-size: 20px;
+}
+
+#posicion {
+    position: absolute;
+    left: 5px;
+    top: 20px;
+    color: var(--blanco-contraste);
+    font-size: 20px;
+
+
+}
+
+#nombre {
+    position: absolute;
+    left: 1px;
+    color: var(--blanco-contraste);
+    font-size: 60px;
 }
