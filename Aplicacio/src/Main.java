@@ -2,6 +2,11 @@ import personas.Entrenador;
 import personas.Jugador;
 import personas.Personas;
 
+import javax.print.event.PrintJobEvent;
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +14,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        leerJugadores(Personas p1);
 
         Personas p1 = new Personas("a", "b", "12121", 12, 200);
         Jugador j1 = new Jugador("a", "b", "12121", 12, 200, 12, "DEL", 99);
@@ -29,6 +36,45 @@ public class Main {
         escogerOpcion(input, tipoUsuario);
 
     }
+
+    private static void leerJugadores(Personas p1)) {
+
+        int i = 0;
+
+        try (BufferedReader br = new BufferedReader(new FileReader("mercat_fitxatges.txt"))) {
+            String linia;
+
+            while ((linia = br.readLine()) != null) {
+
+                String[] dades = linia.split(";");
+
+                String JoE = dades[0];
+
+
+                String Nombre = dades[1];
+                String Apellido = dades[2];
+                String FechaNacimiento = dades[3];
+                int NivelMotivacion = Integer.parseInt(dades[4]);
+                int Salario = Integer.parseInt(dades[5]);
+                if (JoE.equals("J")) {
+                    int Dorsal = Integer.parseInt(dades[6]);
+                    String Posicion = dades[7];
+                    int CalidadTeorica = Integer.parseInt(dades[8]);
+                    Jugador j1 = new Jugador(Nombre, Apellido, FechaNacimiento, NivelMotivacion, Salario, Dorsal, Posicion, CalidadTeorica);
+                } else {
+                    int TorneosGanados = Integer.parseInt(dades[6]);
+                    Boolean SeleccionadoNacional = Boolean.parseBoolean(dades[7]);
+                    Entrenador e1 = new Entrenador(Nombre, Apellido, FechaNacimiento, NivelMotivacion, Salario, TorneosGanados, SeleccionadoNacional);
+                }
+                i++;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error al leer el fichero: " + e.getMessage());
+        }
+    }
+
 
     public static char login(String[] opcionesAdmin, String[] opcionesGestorEquipos, ArrayList<String> opcionesUsuarioActual) {
 
