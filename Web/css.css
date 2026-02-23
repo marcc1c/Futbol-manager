@@ -6,15 +6,21 @@
     --daurat-accent: #FFB703;
 }
 
+/* GENERAL */
+body {
+    background-color: var(--blanco-contraste);
+    margin: 0;
+}
+
 h2 {
     font-size: 35px;
 }
 
-body {
-    background-color: var(--blanco-contraste);
-    margin: 0%;
+main h2, h3, p {
+    color: var(--negro-pers);
 }
 
+/* HEADER */
 header {
     background-color: var(--rojo-fondo);
     display: flex;
@@ -29,6 +35,7 @@ header h1 {
 
 header a {
     color: var(--blanco-contraste);
+    text-decoration: none;
 }
 
 nav {
@@ -37,23 +44,9 @@ nav {
 
 nav a {
     margin: 5px;
-    text-decoration: none;
 }
 
-main {
-    justify-items: center;
-}
-
-main h2,
-h3,
-p {
-    color: var(--negro-pers);
-}
-
-main img {
-    width: 239px;
-}
-
+/* GRUP NOTICIES */
 .Grupnoticies {
     margin-top: 100px;
     align-items: center;
@@ -76,7 +69,6 @@ main img {
     align-items: center;
 }
 
-
 .TextFoto {
     display: flex;
     justify-content: space-between;
@@ -87,69 +79,63 @@ main img {
     margin-left: 40px;
 }
 
-.raya-vertical {
-    width: 2px;
-    height: 100px;
-    background-color: black;
-}
-
 hr {
     border: none;
     height: 2px;
     background-color: var(--rojo-primario);
 }
 
-.tarjetas-jugadores {
+/* TARJETAS JUGADORES */
+.targetes-jugadors {
     display: flex;
+    justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content: center;
     margin-top: 50px;
-
 }
 
-.tarjeta-jugador {
-    border: red 2px solid;
+.targeta-jugador {
     position: relative;
-    justify-content: center;
-    text-align: center;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.imagen-fondo {
-    width: 100%;
-    height: 100%;
+/* Imagen fondo */
+.imatge-fondo {
+    width: 440px;
+    height: 440px;
+    height: auto;
     object-fit: cover;
 }
 
-.imagen-encima {
+/* Imagen jugador arriba */
+.imatge-a-dalt {
     position: absolute;
-    top: 5px;
-    height: 160px;
+    top: 40px;
     width: 160px;
 }
 
-#numero {
+/* NOMBRE CENTRADO HORIZONTAL Y VERTICAL */
+.Nom {
     position: absolute;
-    left: 5px;
-    top: -10px;
-    color: var(--blanco-contraste);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
     font-size: 20px;
+    color: var(--negro-pers);
+    text-align: center;
 }
 
-#posicion {
+/* INFO DEBAJO DEL NOMBRE */
+.info {
     position: absolute;
-    left: 5px;
-    top: 20px;
-    color: var(--blanco-contraste);
-    font-size: 20px;
-
-
-}
-
-#nombre {
-    position: absolute;
-    left: 1px;
-    color: var(--blanco-contraste);
-    font-size: 60px;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 16px;
+    color: var(--negro-pers);
+    text-align: center;
 }
