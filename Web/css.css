@@ -103,8 +103,8 @@ hr {
 
 /* Imagen fondo */
 .imatge-fondo {
-    width: 440px;
-    height: 440px;
+    width: 439px;
+    height: 439px;
     height: auto;
     object-fit: cover;
 }
