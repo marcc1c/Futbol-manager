@@ -1,2 +1,2 @@
-SIGMAEQUIPO;2026;Barcelona;Grieta del invocador;Marc;Roc;
+SIGMAEQUIPO;2026;Barcelona;Grieta del invocador;peperoni;Roc;
 pepe;202020;na;;;a;
