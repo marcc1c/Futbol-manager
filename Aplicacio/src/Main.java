@@ -24,7 +24,6 @@ public class Main {
         opciones.put("VA", "Veure classificació lliga actual 🏆");
         opciones.put("GE", "Gestionar el meu equip ⚽");
 
-        String[] tipoMenu = {};
 
         ArrayList<Personas> listaPersonasDisponibles = new ArrayList<>();
         ArrayList<Equipos> listaEquipos = new ArrayList<>();
@@ -35,6 +34,7 @@ public class Main {
         String[] opcionesGestorEquipos = new String[]{
                 "VA", "GE", "DA", "DJ", "TJ", "DD", "S"
         };
+
         ArrayList<String> opcionesUsuarioActual = new ArrayList<>();
 
 
@@ -45,7 +45,7 @@ public class Main {
 
         boolean bucleMenuMain = true;
         while (bucleMenuMain) {
-            String input = mostrarMenu(tipoUsuario, opcionesUsuarioActual);
+            String input = mostrarMenu(tipoUsuario, opcionesAdmin, opcionesGestorEquipos, opciones);
             bucleMenuMain = escogerOpcion(input, tipoUsuario, listaEquipos, listaPersonasDisponibles);
         }
     }
@@ -102,7 +102,8 @@ public class Main {
                 String nombreEstadio = (dades[3]);
                 String nombrePresidente = (dades[4]);
                 String entrenador = dades[5];
-                for (int i = 0; i < listaEquipos.size(); i++) {}
+                for (int i = 0; i < listaEquipos.size(); i++) {
+                }
 
 
                 Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, entrenador);
@@ -130,6 +131,7 @@ public class Main {
                 }
             }
         }
+
         String nombre = input;
         System.out.println("Introduce el año de fundación");
         int añoFundacion = scanner.nextInt();
@@ -213,42 +215,21 @@ public class Main {
         return tipousuario;
     }
 
-    public static String mostrarMenu(char tipoUsuario, ArrayList<String> opcionesUsuarioActual) {
+    public static String mostrarMenu(char tipoUsuario, String[] opcionesAdmin, String[] opcionesGestorEquipos, HashMap<String, String> opcionesTotales) {
         String[] tipoMenu = {};
-        String[] menuAdmin = {
-                "Welcome to Politècnics Football Manager:",
-                "VC- Veure classificació lliga actual 🏆",
-                "AE- Donar d'alta equip",
-                "AJ- Donar d'alta jugador/a o entrenador/a",
-                "DA- Consultar dades equip",
-                "DJ- Consultar dades jugador/a equip",
-                "DV- Disputar nova lliga",
-                "SE- Realitzar sessió entrenament (del mercat fitxatges)",
-                "DD- Desar dades equips",
-                "S- Sortir"
-        };
-        String[] menuGestorEquipos = {
-                "Welcome to Politècnics Football Manager:",
-                "VA- Veure classificació lliga actual 🏆",
-                "GE- Gestionar el meu equip ⚽",
-                "DA- Consultar dades equip",
-                "DJ- Consultar dades jugador/a equip",
-                "TJ- Transferir jugador/a",
-                "DD- Desar dades equips",
-                "S- Sortir"
-        };
 
         if (tipoUsuario == 'a') {
-            tipoMenu = menuAdmin;
+            tipoMenu = opcionesAdmin;
         } else if (tipoUsuario == 'g') {
-            tipoMenu = menuGestorEquipos;
+            tipoMenu = opcionesGestorEquipos;
         }
 
         for (String linea : tipoMenu) {
-            System.out.println(linea);
+            if (opcionesTotales.containsKey(linea)) {
+                System.out.println(linea + " " + opcionesTotales.get(linea));
+            }
         }
-        return Validador.arraylist(opcionesUsuarioActual);
-
+        return Validador.array(tipoMenu);
     }
 
     public static boolean escogerOpcion(String input, char tipoUsuario, ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
