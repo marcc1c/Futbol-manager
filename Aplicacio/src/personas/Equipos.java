@@ -3,47 +3,36 @@ package personas;
 import java.util.ArrayList;
 
 public class Equipos {
-    private String nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, entrenador;
+    private String nombre, ciudad, nombreEstadio, nombrePresidente, entrenador;
+    private int añoFundacion;
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 
     public Equipos() {
     }
 
 
-    public Equipos(String nombre, String añoFundacion, String ciudad, String entrenador, ArrayList<Jugador> jugadores) {
+    public Equipos(String nombre, int añoFundacion, String ciudad, String entrenador) {
         this.nombre = nombre;
         this.añoFundacion = añoFundacion;
         this.ciudad = ciudad;
         this.entrenador = entrenador;
-        this.jugadores = jugadores;
     }
 
-    public Equipos(String nombre, String añoFundacion, String ciudad, String nombreEstadio, String entrenador, ArrayList<Jugador> jugadores) {
+    public Equipos(String nombre, int añoFundacion, String ciudad, String nombreEstadio, String entrenador) {
         this.nombre = nombre;
         this.añoFundacion = añoFundacion;
         this.ciudad = ciudad;
         this.nombreEstadio = nombreEstadio;
         this.entrenador = entrenador;
-        this.jugadores = jugadores;
     }
 
-    public Equipos(String nombre, String añoFundacion, String ciudad, String entrenador, ArrayList<Jugador> jugadores, String nombreEstadio) {
-        this.nombre = nombre;
-        this.añoFundacion = añoFundacion;
-        this.ciudad = ciudad;
-        this.entrenador = entrenador;
-        this.jugadores = jugadores;
-        this.nombreEstadio = nombreEstadio;
-    }
-
-    public Equipos(String nombre, String añoFundacion, String ciudad, String nombreEstadio, String nombrePresidente, String entrenador, ArrayList<Jugador> jugadores) {
+    public Equipos(String nombre, int añoFundacion, String ciudad, String nombreEstadio, String nombrePresidente, String entrenador) {
         this.nombre = nombre;
         this.añoFundacion = añoFundacion;
         this.ciudad = ciudad;
         this.nombreEstadio = nombreEstadio;
         this.nombrePresidente = nombrePresidente;
         this.entrenador = entrenador;
-        this.jugadores = jugadores;
     }
 
     public String getNombre() {
@@ -54,11 +43,11 @@ public class Equipos {
         this.nombre = nombre;
     }
 
-    public String getAñoFundacion() {
+    public int getAñoFundacion() {
         return añoFundacion;
     }
 
-    public void setAñoFundacion(String añoFundacion) {
+    public void setAñoFundacion(int añoFundacion) {
         this.añoFundacion = añoFundacion;
     }
 
@@ -102,13 +91,47 @@ public class Equipos {
         this.jugadores = jugadores;
     }
 
-    public double calcularMediana() {
-        double mediaQualidadJugadores = 0;
+    public String calcularMediana() {
+        double suma = 0;
+        String mensaje;
 
-        for (Jugador j : jugadores) {
-            mediaQualidadJugadores += j.getQualidad();
+        if (jugadores.isEmpty()) {
+            mensaje = "No existen jugadores";
+        } else {
+
+            for (Jugador j : jugadores) {
+                suma += j.getQualidad();
+            }
+
+            double media = suma / jugadores.size();
+            mensaje = String.format("%.2f", media);
         }
 
-        return mediaQualidadJugadores / jugadores.size();
+        return mensaje;
+    }
+
+    public String guardarInfo() {
+
+        return nombre + ";" +
+                añoFundacion + ";" +
+                ciudad + ";" +
+                nombreEstadio + ";" +
+                nombrePresidente + ";" +
+                entrenador + ";";
+    }
+
+    @Override
+    public String toString() {
+        return "\n======================================" +
+                "\n            " + nombre.toUpperCase() +
+                "\n======================================" +
+                "\nAño de fundación : " + añoFundacion +
+                "\nCiudad           : " + ciudad +
+                "\nEstadio          : " + nombreEstadio +
+                "\nPresidente       : " + nombrePresidente +
+                "\nEntrenador       : " + entrenador +
+                "\nNúmero jugadores : " + jugadores.size() +
+                "\nMedia calidad    : " + calcularMediana() +
+                "\n======================================\n";
     }
 }
