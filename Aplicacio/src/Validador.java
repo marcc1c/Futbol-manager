@@ -40,6 +40,25 @@ public class Validador {
         return input;
     }
 
+    public static String array(String[] arrayValoresPosibles) {
+        Scanner scanner = new Scanner(System.in);
+        String input = "";
+
+        boolean valido = false;
+        while (!valido) {
+            input = scanner.nextLine();
+            for (String arrayValoresPosible : arrayValoresPosibles) {
+                if (arrayValoresPosible.equalsIgnoreCase(input)) {
+                    valido = true;
+                }
+            }
+            if (!valido) {
+                System.out.println("Valor incorrecto");
+            }
+        }
+        return input;
+    }
+
 
     public static String numero1(String numero) {
         Scanner scanner = new Scanner(System.in);
