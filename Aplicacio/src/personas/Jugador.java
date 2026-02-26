@@ -7,14 +7,13 @@ public class Jugador extends Personas {
     final static String[] Posiciones = {"POR", "DEF", "MIG", "DAV"};
 
     private String posicion; // POR, DEF, MIG i DAV
-    private int dorsal;
-    private int qualidad;
+    private int dorsal, qualidad;
 
     public Jugador() {
     }
 
-    /*CONSTRUCTOR*/
-    public Jugador(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, int sueldoAnual, int dorsal, String posicion, int qualidadTeorica) {
+
+    public Jugador(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, double sueldoAnual, int dorsal, String posicion, int qualidadTeorica) {
         super(nombre, apellido, fechaNacimiento, nivelMotivacion, sueldoAnual);
         this.dorsal = dorsal;
         this.posicion = posicion;

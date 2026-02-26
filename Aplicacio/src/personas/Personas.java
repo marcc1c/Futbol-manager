@@ -2,12 +2,13 @@ package personas;
 
 public class Personas {
     protected String nombre, apellido, fechaNacimiento;
-    protected double nivelMotivacion, sueldoAnual;
+    protected double sueldoAnual;
+    int nivelMotivacion;
 
     public Personas() {
     }
 
-    public Personas(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, int sueldoAnual) {
+    public Personas(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, double sueldoAnual) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
@@ -17,11 +18,11 @@ public class Personas {
     }
 
     /*GETTERS Y SETTER*/
-    public double getNivelMotivacion() {
+    public int getNivelMotivacion() {
         return nivelMotivacion;
     }
 
-    public void setNivelMotivacion(double nivelMotivacion) {
+    public void setNivelMotivacion(int nivelMotivacion) {
         this.nivelMotivacion = nivelMotivacion;
     }
 

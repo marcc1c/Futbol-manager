@@ -25,7 +25,7 @@ public class Main {
         opciones.put("GE", "Gestionar el meu equip ⚽");
 
 
-        ArrayList<Personas> listaPersonasDisponibles = new ArrayList<>();
+        ArrayList<Personas> listaPersonas = new ArrayList<>();
         ArrayList<Equipos> listaEquipos = new ArrayList<>();
 
         String[] opcionesAdmin = new String[]{
@@ -38,21 +38,21 @@ public class Main {
         ArrayList<String> opcionesUsuarioActual = new ArrayList<>();
 
 
-        leerJugadores(listaPersonasDisponibles);
-        leerEquipos(listaEquipos);
+        leerJugadores(listaPersonas);
+        leerEquipos(listaEquipos, listaPersonas);
         char tipoUsuario = login(opcionesAdmin, opcionesGestorEquipos, opcionesUsuarioActual);
 
 
         boolean bucleMenuMain = true;
         while (bucleMenuMain) {
             String input = mostrarMenu(tipoUsuario, opcionesAdmin, opcionesGestorEquipos, opciones);
-            bucleMenuMain = escogerOpcion(input, tipoUsuario, listaEquipos, listaPersonasDisponibles);
+            bucleMenuMain = escogerOpcion(input, tipoUsuario, listaEquipos, listaPersonas);
         }
     }
 
     private static void leerJugadores(ArrayList<Personas> listaPersonas) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/resources/mercat_fitxatges.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
             String linea;
 
             while ((linea = br.readLine()) != null) {
@@ -87,36 +87,69 @@ public class Main {
         }
     }
 
-    private static void leerEquipos(ArrayList<Equipos> listaEquipos) {
+    private static void leerEquipos(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/resources/guardarEquipos.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/guardarEquipos.txt"))) {
             String linea;
+            Entrenador objetoEntrenador = new Entrenador();
 
             while ((linea = br.readLine()) != null) {
 
                 String[] dades = linea.split(";");
 
-                String nombre = dades[0];
-                int añoFundacion = Integer.parseInt(dades[1]);
-                String ciudad = dades[2];
-                String nombreEstadio = (dades[3]);
-                String nombrePresidente = (dades[4]);
-                String entrenador = dades[5];
-                for (int i = 0; i < listaEquipos.size(); i++) {
+                if (!linea.isEmpty()) {
+                    String nombre = dades[0];
+                    int añoFundacion = Integer.parseInt(dades[1]);
+                    String ciudad = dades[2];
+                    String nombreEstadio = (dades[3]);
+                    String nombrePresidente = (dades[4]);
+                    String entrenador = dades[5];
+
+
+                    for (Personas persona : listaPersonas) {
+                        if (entrenador.equals(persona.getNombre())) {
+                            objetoEntrenador = (Entrenador) persona;
+                        }
+                    }
+
+                    Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, objetoEntrenador);
+                    listaEquipos.add(e1);
                 }
+            }
 
+            for (Equipos equipos : listaEquipos) {
+                try (BufferedReader brr = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/equipos/" + equipos.getNombre() + ".txt"))) {
+                    String lineaa;
 
-                Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, entrenador);
-                listaEquipos.add(e1);
+                    while ((lineaa = brr.readLine()) != null) {
+                        String[] datosJugador = lineaa.split(";");
+
+                        if (!lineaa.isEmpty()) {
+                            String nombreJugador = datosJugador[0];
+                            String apellido = datosJugador[1];
+                            String fechaNacimiento = datosJugador[2];
+                            int nivelMotivacion = Integer.parseInt(datosJugador[3]);
+                            double sueldoAnualJugador = Double.parseDouble(datosJugador[4]);
+                            int dorsal = Integer.parseInt(datosJugador[5]);
+                            String posicion = datosJugador[6];
+                            int calidad = Integer.parseInt(datosJugador[7]);
+
+                            Jugador j1 = new Jugador(nombreJugador, apellido, fechaNacimiento, nivelMotivacion, sueldoAnualJugador, dorsal, posicion, calidad);
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error al leer el archivo de jugadores para el equipo " + equipos.getNombre() + ": " + e.getMessage());
+                }
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el fichero: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
-    public static void altaEquipo(ArrayList<Equipos> listaEquipos) {
+    public static void altaEquipo(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Que equipo quieres dar de alta?");
+        Entrenador objetoEntrenador = new Entrenador();
 
         String input = "";
         boolean nombreRepetido = true;
@@ -145,17 +178,23 @@ public class Main {
         System.out.println("(Opcional) Introduce el nombre del estadio del equipo");
         String nombreEstadio = scanner.nextLine();
 
+        for (Personas persona : listaPersonas) {
+            if (nombreEntrenador.equals(persona.getNombre())) {
+                objetoEntrenador = (Entrenador) persona;
+            }
+        }
+
         if (nombrePresidente != null && nombreEstadio != null) {
-            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, nombreEntrenador);
+            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, objetoEntrenador);
             listaEquipos.add(e1);
         } else if (nombrePresidente != null && nombreEstadio.isEmpty()) {
-            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombrePresidente, nombreEntrenador);
+            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombrePresidente, objetoEntrenador);
             listaEquipos.add(e1);
         } else if (nombrePresidente.isEmpty() && nombreEstadio != null) {
-            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombreEntrenador);
+            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, objetoEntrenador);
             listaEquipos.add(e1);
         } else {
-            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEntrenador);
+            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, objetoEntrenador);
             listaEquipos.add(e1);
         }
     }
@@ -173,7 +212,7 @@ public class Main {
         System.out.println("Introduce la fecha nacimiento");
         String fechaNacimiento = scanner.nextLine();
         System.out.println("Introduce la salario anual");
-        int salarioAnual = scanner.nextInt();
+        double salarioAnual = scanner.nextInt();
 
         if (JoE.equalsIgnoreCase("j"
         )) {
@@ -215,7 +254,8 @@ public class Main {
         return tipousuario;
     }
 
-    public static String mostrarMenu(char tipoUsuario, String[] opcionesAdmin, String[] opcionesGestorEquipos, HashMap<String, String> opcionesTotales) {
+    public static String mostrarMenu(char tipoUsuario, String[] opcionesAdmin, String[] opcionesGestorEquipos,
+                                     HashMap<String, String> opcionesTotales) {
         String[] tipoMenu = {};
 
         if (tipoUsuario == 'a') {
@@ -232,7 +272,8 @@ public class Main {
         return Validador.array(tipoMenu);
     }
 
-    public static boolean escogerOpcion(String input, char tipoUsuario, ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
+    public static boolean escogerOpcion(String input, char tipoUsuario, ArrayList<
+            Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
         boolean salir = true;
         switch (input.toUpperCase()) {
             case "S":
@@ -242,7 +283,7 @@ public class Main {
             case "VC":
                 break;
             case "AE":
-                altaEquipo(listaEquipos);
+                altaEquipo(listaEquipos, listaPersonas);
                 break;
             case "AJ":
                 altaJugadorEntrenador(listaPersonas);
@@ -258,7 +299,7 @@ public class Main {
             case "SE":
                 break;
             case "DD":
-                guardarDatos(listaEquipos);
+                guardarEquipos(listaEquipos);
                 break;
             case "GE":
                 gestionarMiEquipo(listaEquipos, listaPersonas);
@@ -311,26 +352,60 @@ public class Main {
 
     }
 
-    public static void ficharJugadorEntrenador(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas, String nombreEquipoGestionar) {
+    public static void ficharJugadorEntrenador
+            (ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas, String nombreEquipoGestionar) {
         Scanner scanner = new Scanner(System.in);
 
+        boolean fichado = false;
+        String JoE = "";
         for (Equipos equipo : listaEquipos) {
+
             if (equipo.getNombre().equalsIgnoreCase(nombreEquipoGestionar)) {
                 System.out.println("Quieres fichar un jugador (j) o un entrandor (e)");
-                String JoE = Validador.numero2("j", "e");
-                if (JoE.equalsIgnoreCase("j")) {
+                String entradaJoE = Validador.numero2("j", "e");
+
+                if (entradaJoE.equalsIgnoreCase("j")) {
                     for (Personas persona : listaPersonas) {
                         if (persona instanceof Jugador) {
                             System.out.println(persona);
-                        } else {
+                            JoE = "Jugador";
+                        }
+                    }
+                } else {
+                    for (Personas persona : listaPersonas) {
+                        if (persona instanceof Entrenador) {
                             System.out.println(persona);
+                            JoE = "Entrenador";
                         }
                     }
                 }
+                System.out.println("A que " + JoE + "quieres fichar");
+                System.out.print("Nombre: ");
+                String nombre = scanner.nextLine();
+                System.out.print("Apellido: ");
+                String apellido = scanner.nextLine();
 
+                if (entradaJoE.equalsIgnoreCase("j")) {
+                    for (Personas personas : listaPersonas) {
+                        if (nombre.equalsIgnoreCase(personas.getNombre()) && apellido.equalsIgnoreCase(personas.getApellido())) {
+                            equipo.setJugadores((Jugador) personas);
+                            System.out.println("El jugador " + nombre + " ha sido fichado en " + equipo.getNombre());
+                            fichado = true;
+                        }
+                    }
+                } else {
+                    for (Personas personas : listaPersonas) {
+                        if (nombre.equalsIgnoreCase(personas.getNombre()) && apellido.equalsIgnoreCase(personas.getApellido())) {
+                            equipo.setEntrenador((Entrenador) personas);
+                            System.out.println("El entrenador " + nombre + " ahora es entrenador de " + equipo.getNombre());
+                        }
+                    }
+                }
+                if (fichado) {
+                    System.out.println("No se ha fichado a este fichaje, dotos incorrectos");
+                }
             }
         }
-
     }
 
     public static void modificarPresidente(ArrayList<Equipos> listaEquipos, String nombreEquipoGestionar) {
@@ -419,23 +494,45 @@ public class Main {
         }
     }
 
-    public static void guardarDatos(ArrayList<Equipos> listaEquipos) {
+    public static void guardarEquipos(List<Equipos> listaEquipos) {
+
+        String rutaCarpeta = "Aplicacio/src/archivosGuardado/guardarEquipos.txt";
+        String rutaArchivoEquipos = "Aplicacio/src/archivosGuardado/equipos/";
+
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("Aplicacio/src/resources/guardarEquipos.txt"));
-            for (Equipos equipo : listaEquipos) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaCarpeta))) {
+                for (Equipos equipo : listaEquipos) {
+                    bw.write(equipo.getNombre() + ";" +
+                            equipo.getAñoFundacion() + ";" +
+                            equipo.getCiudad() + ";" +
+                            equipo.getNombreEstadio() + ";" +
+                            equipo.getNombrePresidente() + ";" +
+                            equipo.getEntrenador());
+                    bw.newLine();
 
-                bw.write(equipo.guardarInfo());
-                for (Jugador jugador : equipo.getJugadores()) {
-                    bw.write(jugador.getNombre() + ";" + jugador.getDorsal());
+
+                    try (BufferedWriter bwJugadores = new BufferedWriter(new FileWriter(rutaArchivoEquipos + "/" + equipo.getNombre() + ".txt"))) {
+                        for (Jugador jugador : equipo.getJugadores()) {
+                            bwJugadores.write(jugador.getNombre() + ";" +
+                                    jugador.getApellido() + ";" +
+                                    jugador.getFechaNacimiento() + ";" +
+                                    jugador.getNivelMotivacion() + ";" +
+                                    jugador.getSueldoAnual() + ";" +
+                                    jugador.getDorsal() + ";" +
+                                    jugador.getPosicion() + ";" +
+                                    jugador.getQualidad());
+
+                            bwJugadores.newLine();
+                        }
+
+                    } catch (IOException e) {
+                        System.out.println("Error al escribir el archivo de jugadores para el equipo " + equipo.getNombre() + ": " + e.getMessage());
+                    }
                 }
-
-                bw.write(System.lineSeparator());
             }
-            bw.close();
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error al leer el archivo + " + e.getMessage());
         }
     }
 }

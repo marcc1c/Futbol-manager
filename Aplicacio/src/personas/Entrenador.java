@@ -7,7 +7,7 @@ public class Entrenador extends Personas {
     public Entrenador() {
     }
 
-    public Entrenador(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, int sueldoAnual, int numTorneosGanados, boolean seleccionadorNacional) {
+    public Entrenador(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, double sueldoAnual, int numTorneosGanados, boolean seleccionadorNacional) {
         super(nombre, apellido, fechaNacimiento, nivelMotivacion, sueldoAnual);
         this.numTorneosGanados = numTorneosGanados;
         this.seleccionadorNacional = seleccionadorNacional;

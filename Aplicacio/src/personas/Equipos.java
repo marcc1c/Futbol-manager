@@ -3,22 +3,21 @@ package personas;
 import java.util.ArrayList;
 
 public class Equipos {
-    private String nombre, ciudad, nombreEstadio, nombrePresidente, entrenador;
+    private String nombre, ciudad, nombreEstadio, nombrePresidente;
     private int añoFundacion;
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-
+    private Entrenador entrenador;
     public Equipos() {
     }
 
-
-    public Equipos(String nombre, int añoFundacion, String ciudad, String entrenador) {
+    public Equipos(String nombre, int añoFundacion, String ciudad, Entrenador entrenador) {
         this.nombre = nombre;
         this.añoFundacion = añoFundacion;
         this.ciudad = ciudad;
         this.entrenador = entrenador;
     }
 
-    public Equipos(String nombre, int añoFundacion, String ciudad, String nombreEstadio, String entrenador) {
+    public Equipos(String nombre, int añoFundacion, String ciudad, String nombreEstadio, Entrenador entrenador) {
         this.nombre = nombre;
         this.añoFundacion = añoFundacion;
         this.ciudad = ciudad;
@@ -26,7 +25,7 @@ public class Equipos {
         this.entrenador = entrenador;
     }
 
-    public Equipos(String nombre, int añoFundacion, String ciudad, String nombreEstadio, String nombrePresidente, String entrenador) {
+    public Equipos(String nombre, int añoFundacion, String ciudad, String nombreEstadio, String nombrePresidente, Entrenador entrenador) {
         this.nombre = nombre;
         this.añoFundacion = añoFundacion;
         this.ciudad = ciudad;
@@ -75,11 +74,11 @@ public class Equipos {
         this.nombrePresidente = nombrePresidente;
     }
 
-    public String getEntrenador() {
+    public Entrenador getEntrenador() {
         return entrenador;
     }
 
-    public void setEntrenador(String entrenador) {
+    public void setEntrenador(Entrenador entrenador) {
         this.entrenador = entrenador;
     }
 
@@ -87,8 +86,8 @@ public class Equipos {
         return jugadores;
     }
 
-    public void setJugadores(ArrayList<Jugador> jugadores) {
-        this.jugadores = jugadores;
+    public void setJugadores(Jugador jugadores) {
+        this.jugadores.add(jugadores);
     }
 
     public String calcularMediana() {
@@ -108,16 +107,6 @@ public class Equipos {
         }
 
         return mensaje;
-    }
-
-    public String guardarInfo() {
-
-        return nombre + ";" +
-                añoFundacion + ";" +
-                ciudad + ";" +
-                nombreEstadio + ";" +
-                nombrePresidente + ";" +
-                entrenador + ";";
     }
 
     @Override
