@@ -1,2 +1,0 @@
-E;Manuel;Pellegrini;16/09/1953;8;3500000.0;12;true
-J;Pau;Torres;16/01/1997;8;5000000.0;4;DEF;77

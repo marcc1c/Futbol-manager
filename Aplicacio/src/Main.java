@@ -361,6 +361,7 @@ public class Main {
                 break;
             case "DD":
                 guardarEquipos(listaEquipos);
+                actualizarMercadoFichaje(listaPersonas);
                 break;
             case "GE":
                 gestionarMiEquipo(listaEquipos, listaPersonas);
@@ -395,15 +396,16 @@ public class Main {
 
                 switch (input) {
                     case 1:
-                        bajaEquipo(listaEquipos, nombreEquipoGestionar);
+                        bajaEquipo(listaEquipos, equipo);
                         break;
                     case 2:
-                        modificarPresidente(listaEquipos, nombreEquipoGestionar);
+                        modificarPresidente(listaEquipos, equipo);
                         break;
                     case 3:
+                        destituirEntrenador(listaEquipos, equipo);
                         break;
                     case 4:
-                        ficharJugadorEntrenador(listaEquipos, listaPersonas, nombreEquipoGestionar);
+                        ficharJugadorEntrenador(listaEquipos, listaPersonas, equipo);
                         break;
                 }
             } else {
@@ -413,105 +415,112 @@ public class Main {
 
     }
 
-    public static void ficharJugadorEntrenador
-            (ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas, String nombreEquipoGestionar) {
+    public static void ficharJugadorEntrenador(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas, Equipos equipo) {
         Scanner scanner = new Scanner(System.in);
 
         boolean fichado = false;
         String JoE = "";
-        for (Equipos equipo : listaEquipos) {
 
-            if (equipo.getNombre().equalsIgnoreCase(nombreEquipoGestionar)) {
-                System.out.println("Quieres fichar un jugador (j) o un entrandor (e)");
-                String entradaJoE = Validador.numero2("j", "e");
+        System.out.println("Quieres fichar un jugador (j) o un entrandor (e)");
+        String entradaJoE = Validador.numero2("j", "e");
 
-                if (entradaJoE.equalsIgnoreCase("j")) {
-                    for (Personas persona : listaPersonas) {
-                        if (persona instanceof Jugador) {
-                            System.out.println(persona);
-                            JoE = "Jugador";
-                        }
-                    }
-                } else {
-                    for (Personas persona : listaPersonas) {
-                        if (persona instanceof Entrenador) {
-                            System.out.println(persona);
-                            JoE = "Entrenador";
-                        }
-                    }
+        if (entradaJoE.equalsIgnoreCase("j")) {
+            for (Personas persona : listaPersonas) {
+                if (persona instanceof Jugador) {
+                    System.out.println(persona);
+                    JoE = "Jugador";
                 }
-                System.out.println("A que " + JoE + "quieres fichar");
-                System.out.print("Nombre: ");
-                String nombre = scanner.nextLine();
-                System.out.print("Apellido: ");
-                String apellido = scanner.nextLine();
-
-                if (entradaJoE.equalsIgnoreCase("j")) {
-                    for (Personas personas : listaPersonas) {
-                        if (nombre.equalsIgnoreCase(personas.getNombre()) && apellido.equalsIgnoreCase(personas.getApellido())) {
-                            equipo.setJugadores((Jugador) personas);
-                            System.out.println("El jugador " + nombre + " ha sido fichado en " + equipo.getNombre());
-                            fichado = true;
-                        }
-                    }
-                } else {
-                    for (Personas personas : listaPersonas) {
-                        if (nombre.equalsIgnoreCase(personas.getNombre()) && apellido.equalsIgnoreCase(personas.getApellido())) {
-                            equipo.setEntrenador((Entrenador) personas);
-                            System.out.println("El entrenador " + nombre + " ahora es entrenador de " + equipo.getNombre());
-                        }
-                    }
-                }
-                if (fichado) {
-                    System.out.println("No se ha fichado a este fichaje, dotos incorrectos");
+            }
+        } else {
+            for (Personas persona : listaPersonas) {
+                if (persona instanceof Entrenador) {
+                    System.out.println(persona);
+                    JoE = "Entrenador";
                 }
             }
         }
+
+        System.out.println("A que " + JoE + " quieres fichar");
+        System.out.print("Nombre: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Apellido: ");
+        String apellido = scanner.nextLine();
+
+        Personas personaABorrar = null;
+
+        if (entradaJoE.equalsIgnoreCase("j")) {
+            for (Personas personas : listaPersonas) {
+                if (personas instanceof Jugador) {
+                    if (nombre.equalsIgnoreCase(personas.getNombre()) && apellido.equalsIgnoreCase(personas.getApellido())) {
+                        equipo.setJugadores((Jugador) personas);
+                        personaABorrar = personas;
+                        System.out.println("El jugador " + nombre + " ha sido fichado en " + equipo.getNombre());
+                        fichado = true;
+                    }
+                }
+            }
+        } else {
+            for (Personas personas : listaPersonas) {
+                if (personas instanceof Entrenador) {
+                    if (nombre.equalsIgnoreCase(personas.getNombre()) && apellido.equalsIgnoreCase(personas.getApellido())) {
+                        listaPersonas.add(equipo.getEntrenador());
+                        equipo.setEntrenador((Entrenador) personas);
+                        personaABorrar = personas;
+                        System.out.println("El entrenador " + nombre + " ahora es entrenador de " + equipo.getNombre());
+                        fichado = true;
+                    }
+                }
+            }
+        }
+
+        if (personaABorrar != null) {
+            listaPersonas.remove(personaABorrar);
+        }
+
+        if (!fichado) {
+            System.out.println("No se ha fichado a este fichaje, datos incorrectos");
+        }
     }
 
-    public static void modificarPresidente(ArrayList<Equipos> listaEquipos, String nombreEquipoGestionar) {
+    public static void modificarPresidente(ArrayList<Equipos> listaEquipos, Equipos equipo) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Indica el nuevo presidente");
         String nuevoPresidente = scanner.nextLine();
 
-        for (Equipos equipo : listaEquipos) {
-            if (equipo.getNombre().equalsIgnoreCase(nombreEquipoGestionar)) {
-                if (equipo.getNombrePresidente().equalsIgnoreCase(nuevoPresidente)) {
-                    System.out.println("Estas introduciendo el mismo presidente, no ha habido cambios");
-                } else if (equipo.getNombrePresidente().isBlank()) {
-                    System.out.println("No existia presidente, el nuevo presidente serà " + nuevoPresidente);
-                } else {
-                    System.out.println("Se ha cambiado el presidente de " + equipo.getNombrePresidente() + " a " + nuevoPresidente);
-                }
-                equipo.setNombrePresidente(nuevoPresidente);
-            }
+        if (equipo.getNombrePresidente().equalsIgnoreCase(nuevoPresidente)) {
+            System.out.println("Estas introduciendo el mismo presidente, no ha habido cambios");
+        } else if (equipo.getNombrePresidente().isBlank()) {
+            System.out.println("No existia presidente, el nuevo presidente serà " + nuevoPresidente);
+        } else {
+            System.out.println("Se ha cambiado el presidente de " + equipo.getNombrePresidente() + " a " + nuevoPresidente);
+
+            equipo.setNombrePresidente(nuevoPresidente);
         }
     }
 
-    public static void bajaEquipo(ArrayList<Equipos> listaEquipos, String nombreEquipoGestionar) {
+    public static void destituirEntrenador(ArrayList<Equipos> listaEquipos, Equipos equipo) {
+        System.out.println("¿Seguro que quieres que tu entrenador deje de ser entrandor de " + equipo.getNombre() + "?" + "Si (s), No (n)");
+
+        String entrada = Validador.numero2("s", "n");
+
+        if (entrada.equalsIgnoreCase("s")) {
+
+        }
+
+
+    }
+
+    public static void bajaEquipo(ArrayList<Equipos> listaEquipos, Equipos equipo) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("¿Estás seguro que quieres dar de baja al equipo actual? (s) sí, (n) no");
         String input = Validador.numero2("s", "n");
 
         if (input.equalsIgnoreCase("s")) {
-            boolean encontrado = false;
 
-            for (int i = 0; i < listaEquipos.size(); i++) {
-                Equipos equipo = listaEquipos.get(i);
-                if (nombreEquipoGestionar.equalsIgnoreCase(equipo.getNombre()) && !encontrado) {
-                    listaEquipos.remove(i);
-                    System.out.println("Equipo eliminado, guarda los cambios en el menú principal");
-                    encontrado = true;
-                }
-            }
-
-            if (!encontrado) {
-                System.out.println("Equipo no encontrado");
-            }
-        } else {
-            System.out.println("No se ha borrado el equipo de la liga");
+            listaEquipos.remove(equipo);
+            System.out.println("Equipo eliminado, guarda los cambios en el menú principal");
         }
     }
 
@@ -607,6 +616,41 @@ public class Main {
 
         } catch (IOException e) {
             System.out.println("Error al escribir guardarEquipos.txt: " + e.getMessage());
+        }
+    }
+
+    public static void actualizarMercadoFichaje(ArrayList<Personas> listaEquipos) {
+        try (BufferedWriter bwJugadores = new BufferedWriter(new FileWriter("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
+
+            for (Personas persona : listaEquipos) {
+                if (persona instanceof Entrenador) {
+                    bwJugadores.write(
+                            "E;" +
+                                    persona.getNombre() + ";" +
+                                    persona.getApellido() + ";" +
+                                    persona.getFechaNacimiento() + ";" +
+                                    persona.getNivelMotivacion() + ";" +
+                                    persona.getSueldoAnual() + ";" +
+                                    ((Entrenador) persona).getNumTorneosGanados() + ";" +
+                                    ((Entrenador) persona).isSeleccionadorNacional()
+                    );
+                    bwJugadores.newLine();
+                } else if (persona instanceof Jugador) {
+                    bwJugadores.write(
+                            "J;" +
+                                    persona.getNombre() + ";" +
+                                    persona.getApellido() + ";" +
+                                    persona.getFechaNacimiento() + ";" +
+                                    persona.getNivelMotivacion() + ";" +
+                                    persona.getSueldoAnual() + ";" +
+                                    ((Jugador) persona).getDorsal() + ";" +
+                                    ((Jugador) persona).getPosicion() + ";" +
+                                    ((Jugador) persona).getQualidad());
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 

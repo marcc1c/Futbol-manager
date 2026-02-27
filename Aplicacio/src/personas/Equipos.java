@@ -7,6 +7,7 @@ public class Equipos {
     private int añoFundacion;
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private Entrenador entrenador;
+
     public Equipos() {
     }
 
@@ -111,16 +112,16 @@ public class Equipos {
 
     @Override
     public String toString() {
-        return "\n======================================" +
-                "\n            " + nombre.toUpperCase() +
-                "\n======================================" +
+        return "\n" + "=".repeat(35) +
+                "\n         " + nombre.toUpperCase() +
+                "\n" + "=".repeat(35) +
                 "\nAño de fundación : " + añoFundacion +
                 "\nCiudad           : " + ciudad +
                 "\nEstadio          : " + nombreEstadio +
                 "\nPresidente       : " + nombrePresidente +
-                "\nEntrenador       : " + entrenador +
                 "\nNúmero jugadores : " + jugadores.size() +
                 "\nMedia calidad    : " + calcularMediana() +
-                "\n======================================\n";
+                "\n" + entrenador +
+                "\n" + "=".repeat(30);
     }
 }

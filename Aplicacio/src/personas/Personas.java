@@ -48,12 +48,11 @@ public class Personas {
 
     @Override
     public String toString() {
-        return "Personas{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", fechaNacimiento='" + fechaNacimiento + '\'' +
-                ", nivelMotivacion='" + nivelMotivacion + '\'' +
-                ", sueldoAnual='" + sueldoAnual + '\'' +
-                '}';
+        return
+                "\nNombre:           " + nombre + "\n" +
+                "Apellido:         " + apellido + "\n" +
+                "Fecha nacimiento: " + fechaNacimiento + "\n" +
+                "Motivación:       " + nivelMotivacion + "\n" +
+                "Sueldo anual:     " + sueldoAnual;
     }
 }
