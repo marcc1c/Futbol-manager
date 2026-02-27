@@ -87,62 +87,114 @@ public class Main {
         }
     }
 
-    private static void leerEquipos(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
+    public static void leerEquipos(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
 
         try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/guardarEquipos.txt"))) {
             String linea;
-            Entrenador objetoEntrenador = new Entrenador();
 
             while ((linea = br.readLine()) != null) {
+                if (linea.isEmpty()) continue;
 
                 String[] dades = linea.split(";");
+                if (dades.length < 6) continue;
 
-                if (!linea.isEmpty()) {
-                    String nombre = dades[0];
-                    int añoFundacion = Integer.parseInt(dades[1]);
-                    String ciudad = dades[2];
-                    String nombreEstadio = (dades[3]);
-                    String nombrePresidente = (dades[4]);
-                    String entrenador = dades[5];
+                String nombre = dades[0];
+                int añoFundacion = Integer.parseInt(dades[1]);
+                String ciudad = dades[2];
+                String nombreEstadio = dades[3];
+                String nombrePresidente = dades[4];
+                String entrenadorNombre = dades[5];
 
-
-                    for (Personas persona : listaPersonas) {
-                        if (entrenador.equals(persona.getNombre())) {
+                Entrenador objetoEntrenador = null;
+                for (Personas persona : listaPersonas) {
+                    if (persona instanceof Entrenador) {
+                        if (entrenadorNombre.equals(persona.getNombre())) {
                             objetoEntrenador = (Entrenador) persona;
                         }
                     }
-
-                    Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, objetoEntrenador);
-                    listaEquipos.add(e1);
                 }
+                if (objetoEntrenador == null) objetoEntrenador = new Entrenador();
+
+                Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, objetoEntrenador);
+                listaEquipos.add(e1);
             }
 
-            for (Equipos equipos : listaEquipos) {
-                try (BufferedReader brr = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/equipos/" + equipos.getNombre() + ".txt"))) {
-                    String lineaa;
-
-                    while ((lineaa = brr.readLine()) != null) {
-                        String[] datosJugador = lineaa.split(";");
-
-                        if (!lineaa.isEmpty()) {
-                            String nombreJugador = datosJugador[0];
-                            String apellido = datosJugador[1];
-                            String fechaNacimiento = datosJugador[2];
-                            int nivelMotivacion = Integer.parseInt(datosJugador[3]);
-                            double sueldoAnualJugador = Double.parseDouble(datosJugador[4]);
-                            int dorsal = Integer.parseInt(datosJugador[5]);
-                            String posicion = datosJugador[6];
-                            int calidad = Integer.parseInt(datosJugador[7]);
-
-                            Jugador j1 = new Jugador(nombreJugador, apellido, fechaNacimiento, nivelMotivacion, sueldoAnualJugador, dorsal, posicion, calidad);
-                        }
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error al leer el archivo de jugadores para el equipo " + equipos.getNombre() + ": " + e.getMessage());
-                }
-            }
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error al leer guardarEquipos.txt: " + e.getMessage());
+            return;
+        }
+
+        for (Equipos equipos : listaEquipos) {
+            try (BufferedReader brr = new BufferedReader(
+                    new FileReader("Aplicacio/src/archivosGuardado/equipos/" + equipos.getNombre() + ".txt"))) {
+
+                String lineaa;
+
+                while ((lineaa = brr.readLine()) != null) {
+                    if (lineaa.isEmpty()) continue;
+
+                    String[] datos = lineaa.split(";");
+                    if (datos.length < 2) continue;
+
+                    String tipo = datos[0];
+
+                    if (tipo.equals("E")) {
+                        // E;Nombre;Apellido;Fecha;Motivacion;Sueldo;NumTorneos;Seleccionador
+                        if (datos.length < 8) continue;
+
+                        String nombreEntrenador = datos[1];
+                        String apellidoEntrenador = datos[2];
+                        String fechaNacimientoEntrenador = datos[3];
+                        int nivelMotivacionEntrenador = Integer.parseInt(datos[4]);
+                        double salarioEntrenador = Double.parseDouble(datos[5]);
+                        int numTorneosEntrenador = Integer.parseInt(datos[6]);
+                        boolean seleccionadorNacional = Boolean.parseBoolean(datos[7]);
+
+                        Entrenador ent = new Entrenador(
+                                nombreEntrenador,
+                                apellidoEntrenador,
+                                fechaNacimientoEntrenador,
+                                nivelMotivacionEntrenador,
+                                salarioEntrenador,
+                                numTorneosEntrenador,
+                                seleccionadorNacional
+                        );
+
+                        equipos.setEntrenador(ent);
+                        listaPersonas.add(ent);
+
+                    } else if (tipo.equals("J")) {
+                        // J;Nombre;Apellido;Fecha;Motivacion;Sueldo;Dorsal;Posicion;Calidad
+                        if (datos.length < 9) continue;
+
+                        String nombreJugador = datos[1];
+                        String apellidoJugador = datos[2];
+                        String fechaNacimiento = datos[3];
+                        int nivelMotivacion = Integer.parseInt(datos[4]);
+                        double sueldoAnualJugador = Double.parseDouble(datos[5]);
+                        int dorsal = Integer.parseInt(datos[6]);
+                        String posicion = datos[7];
+                        int calidad = Integer.parseInt(datos[8]);
+
+                        Jugador j1 = new Jugador(
+                                nombreJugador,
+                                apellidoJugador,
+                                fechaNacimiento,
+                                nivelMotivacion,
+                                sueldoAnualJugador,
+                                dorsal,
+                                posicion,
+                                calidad
+                        );
+
+                        equipos.getJugadores().add(j1);
+                        listaPersonas.add(j1);
+                    }
+                }
+
+            } catch (IOException e) {
+                System.out.println("Error al leer el archivo del equipo " + equipos.getNombre() + ": " + e.getMessage());
+            }
         }
     }
 
@@ -171,18 +223,27 @@ public class Main {
         scanner.nextLine();
         System.out.println("Introduce la ciudad del equipo");
         String ciudad = scanner.nextLine();
-        System.out.println("Introduce el nombre del entrenador");
-        String nombreEntrenador = scanner.nextLine();
+
+        boolean entrenadorCorrecto = true;
+        while (entrenadorCorrecto) {
+            System.out.println("Introduce el nombre del entrenador");
+            String nombreEntrenador = scanner.nextLine();
+
+            for (Personas personas : listaPersonas) {
+                if (personas.getNombre().equalsIgnoreCase(nombreEntrenador)) {
+                    objetoEntrenador = (Entrenador) personas;
+                    entrenadorCorrecto = false;
+                }
+            }
+            if (entrenadorCorrecto) {
+                System.out.println("introduce un entrenador valido");
+            }
+        }
+
         System.out.println("(Opcional) Introduce el nombre del presidente");
         String nombrePresidente = scanner.nextLine();
         System.out.println("(Opcional) Introduce el nombre del estadio del equipo");
         String nombreEstadio = scanner.nextLine();
-
-        for (Personas persona : listaPersonas) {
-            if (nombreEntrenador.equals(persona.getNombre())) {
-                objetoEntrenador = (Entrenador) persona;
-            }
-        }
 
         if (nombrePresidente != null && nombreEstadio != null) {
             Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, objetoEntrenador);
@@ -499,40 +560,54 @@ public class Main {
         String rutaCarpeta = "Aplicacio/src/archivosGuardado/guardarEquipos.txt";
         String rutaArchivoEquipos = "Aplicacio/src/archivosGuardado/equipos/";
 
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaCarpeta))) {
 
-        try {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaCarpeta))) {
-                for (Equipos equipo : listaEquipos) {
-                    bw.write(equipo.getNombre() + ";" +
-                            equipo.getAñoFundacion() + ";" +
-                            equipo.getCiudad() + ";" +
-                            equipo.getNombreEstadio() + ";" +
-                            equipo.getNombrePresidente() + ";" +
-                            equipo.getEntrenador());
-                    bw.newLine();
+            for (Equipos equipo : listaEquipos) {
+                bw.write(equipo.getNombre() + ";" +
+                        equipo.getAñoFundacion() + ";" +
+                        equipo.getCiudad() + ";" +
+                        equipo.getNombreEstadio() + ";" +
+                        equipo.getNombrePresidente() + ";" +
+                        equipo.getEntrenador().getNombre());
+                bw.newLine();
 
+                try (BufferedWriter bwJugadores = new BufferedWriter(new FileWriter(rutaArchivoEquipos + equipo.getNombre() + ".txt"))) {
 
-                    try (BufferedWriter bwJugadores = new BufferedWriter(new FileWriter(rutaArchivoEquipos + "/" + equipo.getNombre() + ".txt"))) {
-                        for (Jugador jugador : equipo.getJugadores()) {
-                            bwJugadores.write(jugador.getNombre() + ";" +
-                                    jugador.getApellido() + ";" +
-                                    jugador.getFechaNacimiento() + ";" +
-                                    jugador.getNivelMotivacion() + ";" +
-                                    jugador.getSueldoAnual() + ";" +
-                                    jugador.getDorsal() + ";" +
-                                    jugador.getPosicion() + ";" +
-                                    jugador.getQualidad());
+                    bwJugadores.write(
+                            "E;" +
+                                    equipo.getEntrenador().getNombre() + ";" +
+                                    equipo.getEntrenador().getApellido() + ";" +
+                                    equipo.getEntrenador().getFechaNacimiento() + ";" +
+                                    equipo.getEntrenador().getNivelMotivacion() + ";" +
+                                    equipo.getEntrenador().getSueldoAnual() + ";" +
+                                    equipo.getEntrenador().getNumTorneosGanados() + ";" +
+                                    equipo.getEntrenador().isSeleccionadorNacional()
+                    );
+                    bwJugadores.newLine();
 
-                            bwJugadores.newLine();
-                        }
-
-                    } catch (IOException e) {
-                        System.out.println("Error al escribir el archivo de jugadores para el equipo " + equipo.getNombre() + ": " + e.getMessage());
+                    for (Jugador jugador : equipo.getJugadores()) {
+                        bwJugadores.write(
+                                "J;" +
+                                        jugador.getNombre() + ";" +
+                                        jugador.getApellido() + ";" +
+                                        jugador.getFechaNacimiento() + ";" +
+                                        jugador.getNivelMotivacion() + ";" +
+                                        jugador.getSueldoAnual() + ";" +
+                                        jugador.getDorsal() + ";" +
+                                        jugador.getPosicion() + ";" +
+                                        jugador.getQualidad()
+                        );
+                        bwJugadores.newLine();
                     }
+
+                } catch (IOException e) {
+                    System.out.println("Error al escribir el archivo del equipo " + equipo.getNombre() + ": " + e.getMessage());
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Error al leer el archivo + " + e.getMessage());
+
+        } catch (IOException e) {
+            System.out.println("Error al escribir guardarEquipos.txt: " + e.getMessage());
         }
     }
+
 }

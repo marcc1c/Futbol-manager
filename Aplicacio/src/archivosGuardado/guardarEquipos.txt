@@ -1,2 +1,1 @@
-ee;22;ee;e;;Personas{nombre='null', apellido='null', fechaNacimiento='null', nivelMotivacion='0', sueldoAnual='0.0'}Entrenador{numTorneosGanados='0', seleccionadorNacional=false}
-sigmaequipo;2026;barcelona;grieta;marc;Personas{nombre='null', apellido='null', fechaNacimiento='null', nivelMotivacion='0', sueldoAnual='0.0'}Entrenador{numTorneosGanados='0', seleccionadorNacional=false}
+sigmaEquipo;2026;barcelona;;marc;Manuel
