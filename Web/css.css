@@ -114,6 +114,7 @@ hr {
     position: absolute;
     top: 40px;
     width: 160px;
+      height: 160px ;
 }
 
 /* NOMBRE CENTRADO HORIZONTAL Y VERTICAL */
@@ -138,4 +139,15 @@ hr {
     font-size: 16px;
     color: var(--negro-pers);
     text-align: center;
+}
+
+.select2-container {
+    width: 250px !important; /* ancho del select */
+    height: 70px;
+}
+
+.select2-container .select2-selection--single {
+    height: 70px;           /* altura total del área visible */
+    line-height: 50px;      /* centra verticalmente el texto */
+    border-radius: 8px;     /* opcional: bordes redondeados */
 }

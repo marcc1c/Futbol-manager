@@ -4,9 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css.css">
   <title>Plantilles dels equips</title>
   <link rel="shortcut icon" href="../src/img/Favicom.ico"/>
+    <!--Carrega Select2 per posar img dins del select -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css.css">
+
 </head>
 
 <body>
@@ -22,30 +25,30 @@
     </nav>
   </header>
   <main>
-    <select id="Desplegable_Equips">
+   <select id="Desplegable_Equips">
       <option value="">Selecciona un equip</option>
-      <option value="FC Barcelona">FC Barcelona</option>
-      <option value="Real Madrid CF">Real Madrid CF</option>
-      <option value="Atlético de Madrid">Atlético de Madrid</option>
-      <option value="Sevilla FC">Sevilla FC</option>
-      <option value="Real Sociedad">Real Sociedad</option>
-      <option value="Real Betis">Real Betis</option>
-      <option value="Athletic Club">Athletic Club</option>
-      <option value="Villarreal CF">Villarreal CF</option>
-      <option value="Valencia CF">Valencia CF</option>
-      <option value="RC Celta de Vigo">RC Celta de Vigo</option>
-      <option value="RCD Mallorca">RCD Mallorca</option>
-      <option value="Girona FC">Girona FC</option>
-      <option value="CA Osasuna">CA Osasuna</option>
-      <option value="Getafe CF">Getafe CF</option>
-      <option value="UD Las Palmas">UD Las Palmas</option>
-      <option value="RCD Espanyol">RCD Espanyol</option>
-      <option value="CD Leganés">CD Leganés</option>
-      <option value="Real Valladolid CF">Real Valladolid CF</option>
-      <option value="Rayo Vallecano">Rayo Vallecano</option>
-      <option value="Deportivo Alavés">Deportivo Alavés</option>
+      <option value="FC Barcelona" data-img="../src/img/escudos/barcelona.png">FC Barcelona</option>
+      <option value="Real Madrid CF" data-img="../src/img/escudos/real-madrid.png">Real Madrid CF</option>
+      <option value="Atlético de Madrid" data-img="../src/img/escudos/atletico-madrid.png">Atlético de Madrid</option>
+      <option value="Sevilla FC" data-img="../src/img/escudos/sevilla.png">Sevilla FC</option>
+      <option value="Real Sociedad" data-img="../src/img/escudos/real-sociedad.png">Real Sociedad</option>
+      <option value="Real Betis" data-img="../src/img/escudos/betis.png">Real Betis</option>
+      <option value="Athletic Club" data-img="../src/img/escudos/athletic.png">Athletic Club</option>
+      <option value="Villarreal CF" data-img="../src/img/escudos/villarreal.png">Villarreal CF</option>
+      <option value="Valencia CF" data-img="../src/img/escudos/valencia.png">Valencia CF</option>
+      <option value="RC Celta de Vigo" data-img="../src/img/escudos/celta.png">RC Celta de Vigo</option>
+      <option value="RCD Mallorca" data-img="../src/img/escudos/mallorca.png">RCD Mallorca</option>
+      <option value="Girona FC" data-img="../src/img/escudos/girona.png">Girona FC</option>
+      <option value="CA Osasuna" data-img="../src/img/escudos/osasuna.png">CA Osasuna</option>
+      <option value="Getafe CF" data-img="../src/img/escudos/getafe.png">Getafe CF</option>
+      <option value="UD Las Palmas" data-img="../src/img/escudos/las-palmas.png">UD Las Palmas</option>
+      <option value="RCD Espanyol" data-img="../src/img/escudos/espanyol.png">RCD Espanyol</option>
+      <option value="CD Leganés" data-img="../src/img/escudos/leganes.png">CD Leganés</option>
+      <option value="Real Valladolid CF" data-img="../src/img/escudos/valladolid.png">Real Valladolid CF</option>
+      <option value="Rayo Vallecano" data-img="../src/img/escudos/rayo.png">Rayo Vallecano</option>
+      <option value="Deportivo Alavés" data-img="../src/img/escudos/alaves.png">Deportivo Alavés</option>
     </select>
-    <div class="targetes-jugadors">
+    <div class="targetes-jugadors"> 
       <div class="targeta-jugador">
           <img class="imatge-fondo"src="../src/img/pngtree-empty-gold-player-card-rating-vector-png-image_12575430.png"></img>
           <img class="imatge-a-dalt" src="../src/img/entrenadores/Borja Jiménez.png"></img>
@@ -54,6 +57,14 @@
       </div>
     </div>
   </main>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Script propio -->
     <script src="../src/Scripts/Plantilles_Equips.js"></script>
+    <!--console.log("Script carregat correctament");
+        alert("JS s'ha carregat!"); -->
 </body>
 </html>
