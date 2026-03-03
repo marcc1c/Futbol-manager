@@ -7,7 +7,7 @@ public class Entrenador extends Personas {
     public Entrenador() {
     }
 
-    public Entrenador(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, int sueldoAnual, int numTorneosGanados, boolean seleccionadorNacional) {
+    public Entrenador(String nombre, String apellido, String fechaNacimiento, int nivelMotivacion, double sueldoAnual, int numTorneosGanados, boolean seleccionadorNacional) {
         super(nombre, apellido, fechaNacimiento, nivelMotivacion, sueldoAnual);
         this.numTorneosGanados = numTorneosGanados;
         this.seleccionadorNacional = seleccionadorNacional;
@@ -31,10 +31,10 @@ public class Entrenador extends Personas {
 
     @Override
     public String toString() {
-        return super.toString() + "Entrenador{" +
-                "numTorneosGanados='" + numTorneosGanados + '\'' +
-                ", seleccionadorNacional=" + seleccionadorNacional +
-                '}';
+        return "=".repeat(10) + " Entrenador "  + "=".repeat(10) +
+                super.toString() +
+                "\nTorneos ganados:       " + numTorneosGanados +
+                "\nSeleccionador nacional:    " + (seleccionadorNacional ? "Sí" : "No");
     }
 
     public void incrementarSou () {
