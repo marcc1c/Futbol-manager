@@ -48,9 +48,7 @@ nav a {
 
 /* GRUP NOTICIES */
 .Grupnoticies {
-    margin-top: 100px;
-    align-items: center;
-    justify-content: center;
+    margin: 100px auto 0 auto;
     max-width: 45%;
     min-width: 45%;
 }
@@ -77,6 +75,8 @@ nav a {
 .TextFoto img {
     border-radius: 3px;
     margin-left: 40px;
+    max-width: 400px;
+    max-height: 400px;
 }
 
 hr {
