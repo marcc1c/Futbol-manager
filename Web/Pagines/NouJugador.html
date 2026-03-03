@@ -19,5 +19,35 @@
             <a href="./Resultats.html" class="links">Resultats dels partits</a>
         </nav>
     </header>
+    <main>
+        <h2>Nou Jugador // Entrenador</h2>
+        <form action="">
+            <label for="JoE">Jugador o Entrenador?</label>
+            <select name="JoE" id="JoE">
+                <option value="Jugador">Jugador</option>
+                <option value="Entrenador">Entrenador</option>
+            </select>
+            <br>
+            <label for="Nom">Nom</label>
+            <input type="text" id="Nom" name="Nom">
+            <br>
+            <label for="Qualitat">Qualitat</label>
+            <input type="number" id="qualitat" min="0" max="100">
+            <br>
+            <label for="Dorsal">Dorsal</label>
+            <input type="number" id="Dorsal" name="Dorsal">
+            <br>
+            <label for="Posicio">Posició</label>
+            <select name="Posicio" id="Posicio">
+                <option value="Porter">Porter</option>
+                <option value="Defensa">Defensa</option>
+                <option value="Migcampista">Mitja</option>
+                <option value="Davanter">Davanter</option>
+            </select>
+            <br>
+            <label for="Foto">Foto</label>
+            <input type="file" id="Foto" name="Foto">
+        </form>
+    </main>
 </body>
 </html>
