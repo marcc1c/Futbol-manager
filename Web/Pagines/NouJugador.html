@@ -14,39 +14,46 @@
         <nav>
             <a href="../index.html" class="links">Inici</a>
             <a href="./Classificacio.html" class="links">Classificacio</a>
-            <a href="./NouJugador.html" class="links">Inscriure nou jugador</a>
+            <a href="./NouJugador.html" class="links">Inscripcions</a>
             <a href="./Plantilles.html" class="links">Plantilles d'equips</a>
             <a href="./Resultats.html" class="links">Resultats dels partits</a>
         </nav>
     </header>
-    <main>
-        <h2>Nou Jugador // Entrenador</h2>
-        <form action="">
-            <label for="JoE">Jugador o Entrenador?</label>
-            <select name="JoE" id="JoE">
+    <main class="Main_Form">
+        <h2> Nou Jugador // Entrenador</h2>
+        <form class="Form" action="">
+            <label class="Etiqueta_Form" for="JoE">Jugador o Entrenador?</label>
+            <br>
+            <select class="Select_Form" name="JoE" id="JoE">
                 <option value="Jugador">Jugador</option>
                 <option value="Entrenador">Entrenador</option>
             </select>
             <br>
-            <label for="Nom">Nom</label>
-            <input type="text" id="Nom" name="Nom">
+            <label class="Etiqueta_Form" for="Nom">Nom</label>
             <br>
-            <label for="Qualitat">Qualitat</label>
-            <input type="number" id="qualitat" min="0" max="100">
+            <input class="Box_Form" type="text" id="Nom" name="Nom">
             <br>
-            <label for="Dorsal">Dorsal</label>
-            <input type="number" id="Dorsal" name="Dorsal">
+            <label class="Etiqueta_Form" for="Qualitat">Qualitat</label>
             <br>
-            <label for="Posicio">Posició</label>
-            <select name="Posicio" id="Posicio">
+            <input class="Box_Form" type="number" id="qualitat" min="0" max="100">
+            <br>
+            <label class="Etiqueta_Form" for="Dorsal">Dorsal</label>
+            <br>
+            <input class="Box_Form" type="number" id="Dorsal" name="Dorsal" min="0" max="99">
+            <br>
+            <label class="Etiqueta_Form" for="Posicio">Posició</label>
+            <br>
+            <select class="Select_Form" name="Posicio" id="Posicio">
                 <option value="Porter">Porter</option>
                 <option value="Defensa">Defensa</option>
                 <option value="Migcampista">Mitja</option>
                 <option value="Davanter">Davanter</option>
             </select>
             <br>
-            <label for="Foto">Foto</label>
-            <input type="file" id="Foto" name="Foto">
+            <label class="Etiqueta_Form" for="Foto">Foto</label>
+            <br>
+            <input class="File_Form" type="file" id="Foto" name="Foto">
+            <input type="submit" value="Inscriure">
         </form>
     </main>
 </body>

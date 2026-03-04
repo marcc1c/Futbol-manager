@@ -46,7 +46,7 @@ nav a {
     margin: 5px;
 }
 
-/* GRUP NOTICIES */
+/* NOTICIES */
 .Grupnoticies {
     margin: 100px auto 0 auto;
     max-width: 45%;
@@ -84,8 +84,38 @@ hr {
     height: 2px;
     background-color: var(--rojo-primario);
 }
+/* FORMULARI NOU JUGADOR */
+.Main_Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+}
 
-/* TARJETAS JUGADORES */
+.Form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.Etiqueta_Form {
+    font-size: 18px;
+    color: var(--negro-pers);
+}
+
+.Box_Form, .Select_Form {
+    width: 250px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--negro-pers);
+    color:var(--negro-pers);
+    background-color :var(--daurat-accent)
+}
+
+/* CLASSIFICACIO */
+/* PLANTILLES EQUIPS */
 .targetes-jugadors {
     display: flex;
     justify-content: center;
@@ -101,7 +131,6 @@ hr {
     align-items: center;
 }
 
-/* Imagen fondo */
 .imatge-fondo {
     width: 439px;
     height: 439px;
@@ -109,7 +138,6 @@ hr {
     object-fit: cover;
 }
 
-/* Imagen jugador arriba */
 .imatge-a-dalt {
     position: absolute;
     top: 40px;
@@ -117,7 +145,6 @@ hr {
       height: 160px ;
 }
 
-/* NOMBRE CENTRADO HORIZONTAL Y VERTICAL */
 .Nom {
     position: absolute;
     top: 50%;
@@ -129,7 +156,6 @@ hr {
     text-align: center;
 }
 
-/* INFO DEBAJO DEL NOMBRE */
 .info {
     position: absolute;
     top: 65%;
@@ -141,13 +167,15 @@ hr {
     text-align: center;
 }
 
+/* Desplegable */
 .select2-container {
-    width: 250px !important; /* ancho del select */
+    width: 250px !important; 
     height: 70px;
 }
 
 .select2-container .select2-selection--single {
-    height: 70px;           /* altura total del área visible */
-    line-height: 50px;      /* centra verticalmente el texto */
-    border-radius: 8px;     /* opcional: bordes redondeados */
+    height: 70px;
+    line-height: 50%;
+    border-radius: 8px; /* Arrodoneix les cantonades */
 }
+/* RESULTATS DELS PARTITS */
