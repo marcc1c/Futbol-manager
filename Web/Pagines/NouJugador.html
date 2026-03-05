@@ -19,42 +19,44 @@
             <a href="./Resultats.html" class="links">Resultats dels partits</a>
         </nav>
     </header>
-    <main class="Main_Form">
-        <h2> Nou Jugador // Entrenador</h2>
-        <form class="Form" action="">
-            <label class="Etiqueta_Form" for="JoE">Jugador o Entrenador?</label>
-            <br>
-            <select class="Select_Form" name="JoE" id="JoE">
-                <option value="Jugador">Jugador</option>
-                <option value="Entrenador">Entrenador</option>
-            </select>
-            <br>
-            <label class="Etiqueta_Form" for="Nom">Nom</label>
-            <br>
-            <input class="Box_Form" type="text" id="Nom" name="Nom">
-            <br>
-            <label class="Etiqueta_Form" for="Qualitat">Qualitat</label>
-            <br>
-            <input class="Box_Form" type="number" id="qualitat" min="0" max="100">
-            <br>
-            <label class="Etiqueta_Form" for="Dorsal">Dorsal</label>
-            <br>
-            <input class="Box_Form" type="number" id="Dorsal" name="Dorsal" min="0" max="99">
-            <br>
-            <label class="Etiqueta_Form" for="Posicio">Posició</label>
-            <br>
-            <select class="Select_Form" name="Posicio" id="Posicio">
-                <option value="Porter">Porter</option>
-                <option value="Defensa">Defensa</option>
-                <option value="Migcampista">Mitja</option>
-                <option value="Davanter">Davanter</option>
-            </select>
-            <br>
-            <label class="Etiqueta_Form" for="Foto">Foto</label>
-            <br>
-            <input class="File_Form" type="file" id="Foto" name="Foto">
-            <input type="submit" value="Inscriure">
-        </form>
+    <main id="Form_Main">
+        <div class="Main_Form">
+          <h2> Nou Jugador // Entrenador</h2>
+          <form class="Form" action="">
+                <label class="Etiqueta_Form" for="JoE">Jugador o Entrenador?</label>
+                <br>
+                <select class="Select_Form" name="JoE" id="JoE">
+                          <option value="Jugador">Jugador</option>
+                          <option value="Entrenador">Entrenador</option>
+                </select>
+                <br>
+                <label class="Etiqueta_Form" for="Nom">Nom</label>
+                <br>
+                <input class="Box_Form" type="text" id="Nom" name="Nom">
+                <br>
+                <label class="Etiqueta_Form" for="Qualitat">Qualitat</label>
+                <br>
+                <input class="Box_Form" type="number" id="qualitat" min="0" max="100">
+                <br>
+                <label class="Etiqueta_Form" for="Dorsal">Dorsal</label>
+                <br>
+                <input class="Box_Form" type="number" id="Dorsal" name="Dorsal" min="0" max="99">
+                <br>
+                <label class="Etiqueta_Form" for="Posicio">Posició</label>
+                <br>
+                <select class="Select_Form" name="Posicio" id="Posicio">
+                          <option value="Porter">Porter</option>
+                          <option value="Defensa">Defensa</option>
+                          <option value="Migcampista">Mitja</option>
+                          <option value="Davanter">Davanter</option>
+                </select>
+                <br>
+                <label class="Etiqueta_Form" for="Foto">Foto</label>
+                <br>
+                <input class="File_Form" type="file" id="Foto" name="Foto">
+                <input class="Submit_Form" type="submit" value="Inscriure">
+          </form>
+        </div>
     </main>
 </body>
 </html>

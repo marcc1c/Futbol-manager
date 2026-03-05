@@ -3,7 +3,7 @@
     --rojo-fondo: #780000;
     --negro-pers: #1B1B1B;
     --blanco-contraste: #FDF0D5;
-    --daurat-accent: #FFB703;
+    --daurat-accent: #b9a14d;
 }
 
 /* GENERAL */
@@ -112,6 +112,14 @@ hr {
     border: 1px solid var(--negro-pers);
     color:var(--negro-pers);
     background-color :var(--daurat-accent)
+}
+
+.File_Form, .Submit_Form{
+    margin-bottom: 50px;
+}
+
+.Form_Main{
+    opacity: 50%;
 }
 
 /* CLASSIFICACIO */

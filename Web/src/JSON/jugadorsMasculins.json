@@ -280,7 +280,7 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "",
+                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAthletic/OihanSancet.png",
                 "dorsal": 14,
                 "posicio": "Migcampista",
                 "qualitat": 85,
