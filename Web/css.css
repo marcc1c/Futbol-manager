@@ -119,10 +119,15 @@ hr {
 }
 
 .Form_Main{
-    opacity: 50%;
+      opacity: 50% ;
 }
 
 /* CLASSIFICACIO */
+.Main_Classificacio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /* PLANTILLES EQUIPS */
 .targetes-jugadors {
     display: flex;
