@@ -4,35 +4,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBarca/TERStegen.jpg",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/ter_stegen.png",
                 "dorsal": 1,
                 "posicio": "Porter",
                 "qualitat": 90,
                 "nomPersona": "Marc-André ter Stegen"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBarca/10-Lamine.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/yamal.png",
                 "dorsal": 10,
                 "posicio": "Davanter",
                 "qualitat": 95,
                 "nomPersona": "Lamine Yamal"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBarca/Cubarsi.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/cubarsi.png",
                 "dorsal": 3,
                 "posicio": "Defensa",
                 "qualitat": 85,
                 "nomPersona": "Pau Cubarsí"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBarca/09-Lewandowski.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/lewandowski.png",
                 "dorsal": 7,
                 "posicio": "Davanter",
                 "qualitat": 94,
                 "nomPersona": "Robert Lewandowski"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBarca/20-Olmo.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/olmo.png",
                 "dorsal": 5,
                 "posicio": "Migcampista",
                 "qualitat": 88,
@@ -50,35 +50,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/jugadoresMadrid/vini.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/vinicius_junior.png",
                 "dorsal": 9,
                 "posicio": "Davanter",
                 "qualitat": 89,
                 "nomPersona": "Vinicius Junior"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/jugadoresMadrid/Modric.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/modric.png",
                 "dorsal": 19,
                 "posicio": "Migcampista",
                 "qualitat": 87,
                 "nomPersona": "Luka Modric"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/jugadoresMadrid/Rudiget.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/rudiger.png",
                 "dorsal": 4,
                 "posicio": "Defensa",
                 "qualitat": 88,
                 "nomPersona": "Antonio Rüdiger"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/jugadoresMadrid/Carvajal.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/carvajal.png",
                 "dorsal": 17,
                 "posicio": "Defensa",
                 "qualitat": 85,
                 "nomPersona": "Dani Carvajal"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/jugadoresMadrid/Bellingham.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/bellingham.png",
                 "dorsal": 8,
                 "posicio": "Migcampista",
                 "qualitat": 86,
@@ -96,35 +96,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAtleticoMad/morata.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/morata.png",
                 "dorsal": 10,
                 "posicio": "Davanter",
                 "qualitat": 84,
                 "nomPersona": "Raúl Morata"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAtleticoMad/Barrios.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/barrios.png",
                 "dorsal": 21,
                 "posicio": "Migcampista",
                 "qualitat": 85,
                 "nomPersona": "Pablo Barrios"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAtleticoMad/Gimenez.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/gimenez.png",
                 "dorsal": 18,
                 "posicio": "Defensa",
                 "qualitat": 83,
                 "nomPersona": "José María Giménez"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAtleticoMad/Griezman.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/griezmann.png",
                 "dorsal": 11,
                 "posicio": "Davanter",
                 "qualitat": 80,
                 "nomPersona": "Antoine Griezman"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAtleticoMad/koke.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/koke.png",
                 "dorsal": 20,
                 "posicio": "Migcampista",
                 "qualitat": 82,
@@ -142,35 +142,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresSevilla/ñiguez.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/ñiguez.png",
                 "dorsal": 6,
                 "posicio": "Migcampista",
                 "qualitat": 86,
                 "nomPersona": "Saúl Ñiguez"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresSevilla/7.-ISAAC.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/i_romero.png",
                 "dorsal": 7,
                 "posicio": "Davanter",
                 "qualitat": 87,
                 "nomPersona": "Isaac Romero"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresSevilla/6.-GUDELJ.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/gudelj.png",
                 "dorsal": 8,
                 "posicio": "Migcampista",
                 "qualitat": 85,
                 "nomPersona": "Nemanja Gudelj"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresSevilla/sow.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/sow.png",
                 "dorsal": 14,
                 "posicio": "Migcampista",
                 "qualitat": 84,
                 "nomPersona": "Djibril Sow"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresSevilla/dyland.jpg",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/nyland.png",
                 "dorsal": 13,
                 "posicio": "Porter",
                 "qualitat": 88,
@@ -188,35 +188,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRealSociedad/oyarzabal.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/oyarzabal.png",
                 "dorsal": 23,
                 "posicio": "Davanter",
                 "qualitat": 83,
                 "nomPersona": "Mikel Oyarzabal"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRealSociedad/BraisMendez.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/mendez.png",
                 "dorsal": 16,
                 "posicio": "Migcampista",
                 "qualitat": 84,
                 "nomPersona": "Brais Méndez"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRealSociedad/takekubo.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/kubo.png",
                 "dorsal": 9,
                 "posicio": "Davanter",
                 "qualitat": 82,
                 "nomPersona": "Take Kubo"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRealSociedad/zubimendi.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/zubimendi.png",
                 "dorsal": 15,
                 "posicio": "Migcampista",
                 "qualitat": 83,
                 "nomPersona": "Martín Zubimendi"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRealSociedad/becker.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/becker.png",
                 "dorsal": 22,
                 "posicio": "Davanter",
                 "qualitat": 81,
@@ -234,35 +234,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBetis/Abde.jpg",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/abde.png",
                 "dorsal": 19,
                 "posicio": "Davanter",
                 "qualitat": 82,
                 "nomPersona": "Ez Abde"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBetis/MarcBartra.jpg",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/bartra.png",
                 "dorsal": 3,
                 "posicio": "Defensa",
                 "qualitat": 83,
                 "nomPersona": "Marc Bartra"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBetis/HectorBellerinç.jpg",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/bellerin.png",
                 "dorsal": 5,
                 "posicio": "Defensa",
                 "qualitat": 85,
                 "nomPersona": "Héctor Bellerín"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBetis/Llorente.jpg",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/llorente.png",
                 "dorsal": 12,
                 "posicio": "Defensa",
                 "qualitat": 84,
                 "nomPersona": "Diego Llorente"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresBetis/RicardoRodriguez.jpg",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/rodriguez.png",
                 "dorsal": 2,
                 "posicio": "Defensa",
                 "qualitat": 82,
@@ -280,35 +280,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAthletic/OihanSancet.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/sancet.png",
                 "dorsal": 14,
                 "posicio": "Migcampista",
                 "qualitat": 85,
                 "nomPersona": "Oihan Sancet"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAthletic/AnderHerrera.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/herrera.png",
                 "dorsal": 21,
                 "posicio": "Migcampista",
                 "qualitat": 82,
                 "nomPersona": "Ander Herrera"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAthletic/Iñaki.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/i_williams.png",
                 "dorsal": 18,
                 "posicio": "Davanter",
                 "qualitat": 84,
                 "nomPersona": "Iñaki Williams"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAthletic/Prados.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/prados.png",
                 "dorsal": 4,
                 "posicio": "Migcampista",
                 "qualitat": 81,
                 "nomPersona": "Beñat Prados"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAthletic/Nico.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/n_williams.png",
                 "dorsal": 20,
                 "posicio": "Davanter",
                 "qualitat": 83,
@@ -326,35 +326,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresVillareal/Albiol.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/albiol.png",
                 "dorsal": 11,
                 "posicio": "Defensa",
                 "qualitat": 80,
                 "nomPersona": "Raúl Albiol"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresVillareal/Alex Baena.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/baena.png",
                 "dorsal": 24,
                 "posicio": "Migcampista",
                 "qualitat": 79,
                 "nomPersona": "Álex Baena"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresVillareal/DiegoConde.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/conde.png",
                 "dorsal": 13,
                 "posicio": "Porter",
                 "qualitat": 77,
                 "nomPersona": "Diego Conde"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresVillareal/COSTA.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/costa.png",
                 "dorsal": 25,
                 "posicio": "Defensa",
                 "qualitat": 78,
                 "nomPersona": "Logan Costa"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresVillareal/Dani.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/parejo.png",
                 "dorsal": 12,
                 "posicio": "Migcampista",
                 "qualitat": 76,
@@ -372,35 +372,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValencia/HugoDuro.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/duro.png",
                 "dorsal": 2,
                 "posicio": "Davanter",
                 "qualitat": 75,
                 "nomPersona": "Hugo Duro"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValencia/DiegoLopez.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/lopez.png",
                 "dorsal": 5,
                 "posicio": "Davanter",
                 "qualitat": 74,
                 "nomPersona": "Diego López"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValencia/Javi.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/guerra.png",
                 "dorsal": 6,
                 "posicio": "Migcampista",
                 "qualitat": 72,
                 "nomPersona": "Javi Guerra"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValencia/gaya.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/gaya.png",
                 "dorsal": 1,
                 "posicio": "Defensa",
                 "qualitat": 73,
                 "nomPersona": "José Gayà"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValencia/giorgi.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/mamardashvili.png",
                 "dorsal": 3,
                 "posicio": "Porter",
                 "qualitat": 80,
@@ -418,35 +418,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresCeltaDeVigo/Marcos.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/m_alonso.png",
                 "dorsal": 22,
                 "posicio": "Defensa",
                 "qualitat": 85,
                 "nomPersona": "Marcos Alonso"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresCeltaDeVigo/Mingueza.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/mingueza.png",
                 "dorsal": 15,
                 "posicio": "Defensa",
                 "qualitat": 84,
                 "nomPersona": "Óscar Mingueza"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresCeltaDeVigo/Aspas.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/aspas.png",
                 "dorsal": 17,
                 "posicio": "Davanter",
                 "qualitat": 86,
                 "nomPersona": "Iago Aspas"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresCeltaDeVigo/torre.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/delatorre.png",
                 "dorsal": 18,
                 "posicio": "Migcampista",
                 "qualitat": 84,
                 "nomPersona": "Luca de la Torre"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresCeltaDeVigo/Ilaix.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/moriba.png",
                 "dorsal": 10,
                 "posicio": "Migcampista",
                 "qualitat": 85,
@@ -464,35 +464,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresMallorca/samu.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/costa.png",
                 "dorsal": 19,
                 "posicio": "Migcampista",
                 "qualitat": 83,
                 "nomPersona": "Samu Costa"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresMallorca/darder.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/darder.png",
                 "dorsal": 14,
                 "posicio": "Migcampista",
                 "qualitat": 82,
                 "nomPersona": "Sergi Darder"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresMallorca/Muriqui.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/muriqi.png",
                 "dorsal": 9,
                 "posicio": "Davanter",
                 "qualitat": 82,
                 "nomPersona": "Vedat Muriqui"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresMallorca/larin.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/larin.png",
                 "dorsal": 11,
                 "posicio": "Davanter",
                 "qualitat": 80,
                 "nomPersona": "Cyle Larin"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresMallorca/prats.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/prats.png",
                 "dorsal": 7,
                 "posicio": "Davanter",
                 "qualitat": 81,
@@ -510,35 +510,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGirona/abel.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/ruiz.png",
                 "dorsal": 8,
                 "posicio": "Davanter",
                 "qualitat": 79,
                 "nomPersona": "Abel Ruíz"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGirona/oriol.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/romeu.png",
                 "dorsal": 16,
                 "posicio": "Migcampista",
                 "qualitat": 76,
                 "nomPersona": "Oriol Romeu"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGirona/miguel.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/gutierrez.png",
                 "dorsal": 3,
                 "posicio": "Defensa",
                 "qualitat": 78,
                 "nomPersona": "Miguel Gutiérrez"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGirona/Stuani.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/stuani.png",
                 "dorsal": 4,
                 "posicio": "Davanter",
                 "qualitat": 75,
                 "nomPersona": "Cristhian Stuani"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGirona/Daley.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/blind.png",
                 "dorsal": 2,
                 "posicio": "Defensa",
                 "qualitat": 77,
@@ -556,35 +556,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresOsasuna/aimar.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/oroz.png",
                 "dorsal": 21,
                 "posicio": "Migcampista",
                 "qualitat": 88,
                 "nomPersona": "Aimar Oroz"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresOsasuna/ante.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/budimir.png",
                 "dorsal": 11,
                 "posicio": "Davanter",
                 "qualitat": 85,
                 "nomPersona": "Ante Budimir"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresOsasuna/nacho.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/vidal.png",
                 "dorsal": 6,
                 "posicio": "Defensa",
                 "qualitat": 86,
                 "nomPersona": "Nacho Vidal"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresOsasuna/zaragoza.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/zaragoza.png",
                 "dorsal": 7,
                 "posicio": "Davanter",
                 "qualitat": 84,
                 "nomPersona": "Bryan Zaragoza"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresOsasuna/juan.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/cruz.png",
                 "dorsal": 5,
                 "posicio": "Defensa",
                 "qualitat": 85,
@@ -602,35 +602,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGetafe/luis.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/l_milla.png",
                 "dorsal": 10,
                 "posicio": "Migcampista",
                 "qualitat": 83,
                 "nomPersona": "Luis Milla"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGetafe/uche.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/uche.png",
                 "dorsal": 2,
                 "posicio": "Migcampista",
                 "qualitat": 81,
                 "nomPersona": "Christantus Uche"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGetafe/carles.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/aleña.png",
                 "dorsal": 13,
                 "posicio": "Migcampista",
                 "qualitat": 82,
                 "nomPersona": "Carles Aleñá"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGetafe/mauro.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/arambarri.png",
                 "dorsal": 18,
                 "posicio": "Migcampista",
                 "qualitat": 80,
                 "nomPersona": "Mauro Arambarri"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresGetafe/alex.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/sola.png",
                 "dorsal": 20,
                 "posicio": "Migcampista",
                 "qualitat": 82,
@@ -648,35 +648,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLaspalmas/peter.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/cillessen.png",
                 "dorsal": 23,
                 "posicio": "Porter",
                 "qualitat": 79,
                 "nomPersona": "Peter Cillessen"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLaspalmas/javi.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/muñoz.png",
                 "dorsal": 15,
                 "posicio": "Migcampista",
                 "qualitat": 81,
                 "nomPersona": "Javi Muñoz"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLaspalmas/sandro.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/ramirez.png",
                 "dorsal": 9,
                 "posicio": "Davanter",
                 "qualitat": 85,
                 "nomPersona": "Sandro Ramírez"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLaspalmas/alberto.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/moleiro.png",
                 "dorsal": 8,
                 "posicio": "Migcampista",
                 "qualitat": 82,
                 "nomPersona": "Alberto Moleiro"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLaspalmas/jaime.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/mata.png",
                 "dorsal": 17,
                 "posicio": "Davanter",
                 "qualitat": 92,
@@ -694,35 +694,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresEspañol/pere.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/p_milla.png",
                 "dorsal": 8,
                 "posicio": "Davanter",
                 "qualitat": 78,
                 "nomPersona": "Pere Milla"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresEspañol/javi.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/gragera.png",
                 "dorsal": 14,
                 "posicio": "Migcampista",
                 "qualitat": 79,
                 "nomPersona": "José Gragera"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresEspañol/alvaro.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/aguado.png",
                 "dorsal": 27,
                 "posicio": "Migcampista",
                 "qualitat": 78,
                 "nomPersona": "Álvaro Aguado"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresEspañol/javier.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/puado.png",
                 "dorsal": 22,
                 "posicio": "Davanter",
                 "qualitat": 82,
                 "nomPersona": "Javier Puado"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresEspañol/jose.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/cabrera.png",
                 "dorsal": 2,
                 "posicio": "Defensa",
                 "qualitat": 81,
@@ -740,35 +740,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLeganes/javi.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/hernandez.png",
                 "dorsal": 14,
                 "posicio": "Defensa",
                 "qualitat": 77,
                 "nomPersona": "Javi Hernández"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLeganes/sergio.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/gonzalez.png",
                 "dorsal": 22,
                 "posicio": "Defensa",
                 "qualitat": 78,
                 "nomPersona": "Sergio González"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLeganes/jorge.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/saez.png",
                 "dorsal": 5,
                 "posicio": "Defensa",
                 "qualitat": 76,
                 "nomPersona": "Jorge Sáez"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLeganes/enric.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/franquesa.png",
                 "dorsal": 12,
                 "posicio": "Defensa",
                 "qualitat": 77,
                 "nomPersona": "Enric Franquesa"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresLeganes/marko.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/dmitrovic.png",
                 "dorsal": 13,
                 "posicio": "Porter",
                 "qualitat": 79,
@@ -786,35 +786,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValladolid/raul moro.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/moro.png",
                 "dorsal": 18,
                 "posicio": "Migcampista",
                 "qualitat": 76,
                 "nomPersona": "Raúl Moro"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValladolid/mario.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/martin.png",
                 "dorsal": 20,
                 "posicio": "Migcampista",
                 "qualitat": 75,
                 "nomPersona": "Mario Martín"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValladolid/juanmi.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/latasa.png",
                 "dorsal": 21,
                 "posicio": "Davanter",
                 "qualitat": 82,
                 "nomPersona": "Juanmi Latasa"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValladolid/david.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/torres.png",
                 "dorsal": 25,
                 "posicio": "Defensa",
                 "qualitat": 81,
                 "nomPersona": "David Torres"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresValladolid/marcos.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/andre.png",
                 "dorsal": 7,
                 "posicio": "Davanter",
                 "qualitat": 85,
@@ -832,35 +832,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRayoVallecano/james.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/rodriguez.png",
                 "dorsal": 19,
                 "posicio": "Migcampista",
                 "qualitat": 79,
                 "nomPersona": "James Rodríguez"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRayoVallecano/isaac.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/palazon.png",
                 "dorsal": 10,
                 "posicio": "Migcampista",
                 "qualitat": 84,
                 "nomPersona": "Isaac Palazón"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRayoVallecano/unai.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/u_lopez.png",
                 "dorsal": 3,
                 "posicio": "Migcampista",
                 "qualitat": 85,
                 "nomPersona": "Unai López"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRayoVallecano/oscar.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/trejo.png",
                 "dorsal": 16,
                 "posicio": "Migcampista",
                 "qualitat": 80,
                 "nomPersona": "Óscar Trejo"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresRayoVallecano/augusto.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/batalla.png",
                 "dorsal": 12,
                 "posicio": "Porter",
                 "qualitat": 82,
@@ -878,35 +878,35 @@
         "escut": "",
         "jugadors": [
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAlaves/asier.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/villalibre.png",
                 "dorsal": 30,
                 "posicio": "Davanter",
                 "qualitat": 80,
                 "nomPersona": "Asier Villalibre"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAlaves/jon.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/guridi.png",
                 "dorsal": 29,
                 "posicio": "Migcampista",
                 "qualitat": 79,
                 "nomPersona": "Jon Guridi"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAlaves/manu.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/sanchez.png",
                 "dorsal": 6,
                 "posicio": "Defensa",
                 "qualitat": 83,
                 "nomPersona": "Manu Sánchez"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAlaves/luka.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/i_romero.png",
                 "dorsal": 11,
                 "posicio": "Migcampista",
                 "qualitat": 78,
                 "nomPersona": "Luka Romero"
             },
             {
-                "foto": "../src/img/Jugadors-es/Masculins/JugadoresAlaves/kike.png",
+                "foto": "../src/img/Jugadors-es/Jugadors-Sergi/garcia.png",
                 "dorsal": 24,
                 "posicio": "Davanter",
                 "qualitat": 80,
