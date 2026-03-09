@@ -85,116 +85,272 @@ hr {
     background-color: var(--rojo-primario);
 }
 /* FORMULARI NOU JUGADOR */
+/* Container del formulari */
 .Main_Form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    margin-top: 50px;
+    gap: 25px;
+    margin: 50px auto;
+    padding: 30px;
+    width: 350px;
+    background-color: #fdf6e3; /* color suau de fons */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-.Form{
+/* Títol del formulari */
+.Main_Form h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Formulari */
+.Form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 5px;
+    gap: 15px;
+    width: 100%;
 }
 
+/* Labels */
 .Etiqueta_Form {
-    font-size: 18px;
-    color: var(--negro-pers);
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
 }
 
-.Box_Form, .Select_Form {
-    width: 250px;
+/* Inputs i selects */
+.Box_Form, .Select_Form, .File_Form {
+    width: 100%;
     height: 40px;
     border-radius: 8px;
-    border: 1px solid var(--negro-pers);
-    color:var(--negro-pers);
-    background-color :var(--daurat-accent)
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
-.File_Form, .Submit_Form{
-    margin-bottom: 50px;
+.Box_Form:focus, .Select_Form:focus, .File_Form:focus {
+    outline: none;
+    border-color: #ffb347; /* accent suau */
+    box-shadow: 0 0 5px rgba(255,179,71,0.5);
 }
 
-.Form_Main{
-      opacity: 50% ;
+/* Botó submit */
+.Submit_Form {
+    width: 100%;
+    height: 45px;
+    background: linear-gradient(90deg, #ffb347, #ffcc33);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.Submit_Form:hover {
+    background: linear-gradient(90deg, #ffcc33, #ffb347);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 /* CLASSIFICACIO */
-.Main_Classificacio{
+/* TAULES CLASSIFICACIO */
+.Main_Classificacio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    margin: 50px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Main_Classificacio h2 {
+    font-size: 32px;
+    color: var(--negro-pers);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Taula genèrica */
+.Main_Classificacio table {
+    width: 90%;
+    max-width: 900px;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Encapçalament */
+.Main_Classificacio th {
+    background: var(--rojo-primario);
+    color: var(--blanco-contraste);
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+/* Files */
+.Main_Classificacio td {
+    padding: 12px 15px;
+    font-size: 16px;
+    color: var(--negro-pers);
+    vertical-align: middle;
+}
+
+/* Alternança de colors */
+.Main_Classificacio tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover suau */
+.Main_Classificacio tr:hover {
+    background-color: #ffeaa0;
+    transition: background-color 0.3s ease;
+}
+
+/* Imatges equips i jugadors */
+.Main_Classificacio img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Jugadors golejadors */
+.Jugador_Classificacio {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--daurat-accent);
+}
+
+/* Taula golejadors */
+.Main_Classificacio table:nth-of-type(2) th, 
+.Main_Classificacio table:nth-of-type(2) td {
+    text-align: center;
+}
+
+/*| Propiedad                   | Función                                                 |
+| --------------------------- | ------------------------------------------------------- |
+| `border-collapse: collapse` | Fusiona bordes de celdas para tabla más limpia          |
+| `overflow: hidden`          | Oculta contenido que sobresale del contenedor           |
+| `vertical-align: middle`    | Centra contenido verticalmente en celdas o inline       |
+| `object-fit: cover`         | Ajusta imagen para llenar contenedor sin deformar       |
+| `nth-of-type(2)`            | Aplica estilos solo a la segunda tabla de su contenedor |
+*/
+
+/* PLANTILLES EQUIPS */
+/* CONTENEDOR DE TARGETES */
+.targetes-jugadors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* TARGETA JUGADOR */
+.targeta-jugador {
+    position: relative;
+    width: 220px;
+    height: 320px;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efecte hover */
+.targeta-jugador:hover {
+    transform: translateY(-8px) scale(1.03);
+}
+
+/* IMATGE DE FONS */
+.imatge-fondo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* IMATGE JUGADOR */
+.imatge-a-dalt {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--daurat-accent);
+    background-color: #fff;
+}
+
+/* NOM DEL JUGADOR - centrat horitzontal */
+.Nom {
+    position: absolute;
+    top: 160px;          /* distància des de dalt de la targeta */
+    left: 50%;           /* centragem horitzontal */
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;          /* espai per ajustar text llarg */
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--negro-pers);
+    margin: 0;
+}
+
+/* INFORMACIÓ DEL JUGADOR - centrat horitzontal */
+.info {
+    position: absolute;
+    bottom: 20px;        /* distància des de baix de la targeta */
+    left: 50%;           /* centragem horitzontal */
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;          /* espai per ajustar text llarg */
+    font-size: 16px;
+    color: var(--negro-pers);
+    line-height: 1.4;
+}
+/* RESULTATS DELS PARTITS */
+.Main_Resultats{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.Jugador_Classificacio{
-    width: 160px; 
-    height: 160px 
-}
-
-/* PLANTILLES EQUIPS */
-.targetes-jugadors {
+.Resultats_Partits{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 20px;
-    flex-wrap: wrap;
     margin-top: 50px;
 }
 
-.targeta-jugador {
-    position: relative;
+.Partit{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
-.imatge-fondo {
-    width: 439px;
-    height: 439px;
-    height: auto;
-    object-fit: cover;
+.Equips_Partit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
-
-.imatge-a-dalt {
-    position: absolute;
-    top: 40px;
-    width: 160px; 
-    height: 160px ;
+.Equips_Partit img{
+    width: 80px;
+    height: 80px;
 }
-
-.Nom {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    font-size: 20px;
-    color: var(--negro-pers);
-    text-align: center;
-}
-
-.info {
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
-    font-size: 16px;
-    color: var(--negro-pers);
-    text-align: center;
-}
-
-/* Desplegable */
-.select2-container {
-    width: 250px !important; 
-    height: 70px;
-}
-
-.select2-container .select2-selection--single {
-    height: 70px;
-    line-height: 50%;
-    border-radius: 8px; /* Arrodoneix les cantonades */
-}
-/* RESULTATS DELS PARTITS */
