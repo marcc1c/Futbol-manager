@@ -239,8 +239,8 @@ hr {
 .Main_Classificacio table:nth-of-type(2) td {
     text-align: center;
 }
-
-/*| Propiedad                   | Función                                                 |
+/*
+| Propiedad                   | Función                                                 |
 | --------------------------- | ------------------------------------------------------- |
 | `border-collapse: collapse` | Fusiona bordes de celdas para tabla más limpia          |
 | `overflow: hidden`          | Oculta contenido que sobresale del contenedor           |
@@ -299,7 +299,7 @@ hr {
 /* NOM DEL JUGADOR - centrat horitzontal */
 .Nom {
     position: absolute;
-    top: 160px;          /* distància des de dalt de la targeta */
+    top: 150px;          /* distància des de dalt de la targeta */
     left: 50%;           /* centragem horitzontal */
     transform: translateX(-50%);
     text-align: center;
@@ -313,7 +313,7 @@ hr {
 /* INFORMACIÓ DEL JUGADOR - centrat horitzontal */
 .info {
     position: absolute;
-    bottom: 20px;        /* distància des de baix de la targeta */
+    bottom: 40px;        /* distància des de baix de la targeta */
     left: 50%;           /* centragem horitzontal */
     transform: translateX(-50%);
     text-align: center;
@@ -323,34 +323,76 @@ hr {
     line-height: 1.4;
 }
 /* RESULTATS DELS PARTITS */
+/* MAIN RESULTATS */
 .Main_Resultats{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 40px;
 }
 
+.Main_Resultats h2{
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+/* CONTENIDOR DE PARTITS */
 .Resultats_Partits{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 50px;
+    gap: 25px;
+    width: 90%;
+    max-width: 800px;
 }
 
+/* TARGETA PARTIT */
 .Partit{
     display: flex;
     flex-direction: column;
+    background: linear-gradient(145deg, #ffffff, #fdf0d5);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* HOVER PARTIT */
+.Partit:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+/* EQUIPS */
+.Equips_Partit{
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-.Equips_Partit{
+/* EQUIP */
+.Equip{
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--negro-pers);
 }
+
+/* ESCUTS */
 .Equips_Partit img{
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+/* RESULTAT */
+.Resultat{
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--rojo-primario);
+    background-color: var(--blanco-contraste);
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: 2px solid var(--daurat-accent);
 }
