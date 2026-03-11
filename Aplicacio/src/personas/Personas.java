@@ -48,11 +48,12 @@ public class Personas {
 
     @Override
     public String toString() {
-        return
-                "\nNombre:           " + nombre + "\n" +
-                "Apellido:         " + apellido + "\n" +
-                "Fecha nacimiento: " + fechaNacimiento + "\n" +
-                "Motivación:       " + nivelMotivacion + "\n" +
-                "Sueldo anual:     " + sueldoAnual;
+        return String.format(
+                "Nombre:                %-20s\n" +  // Alineado a la izquierda con un ancho fijo
+                        "Apellido:              %-20s\n" +  // Alineado a la izquierda con un ancho fijo
+                        "Fecha nacimiento:      %-20s\n" +  // Alineado a la izquierda con un ancho fijo
+                        "Motivación:            %-20d\n" +  // Alineado a la izquierda con un ancho fijo
+                        "Sueldo anual:          %-20.2f\n",  // Alineado a la izquierda con un ancho fijo y 2 decimales
+                nombre, apellido, fechaNacimiento, nivelMotivacion, sueldoAnual);
     }
 }

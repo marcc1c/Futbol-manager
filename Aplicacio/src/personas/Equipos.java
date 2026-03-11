@@ -113,7 +113,7 @@ public class Equipos {
     @Override
     public String toString() {
         return "\n" + "=".repeat(35) +
-                "\n         " + nombre.toUpperCase() +
+                "\n" + nombre.toUpperCase() +
                 "\n" + "=".repeat(35) +
                 "\nAño de fundación : " + añoFundacion +
                 "\nCiudad           : " + ciudad +
@@ -121,7 +121,6 @@ public class Equipos {
                 "\nPresidente       : " + nombrePresidente +
                 "\nNúmero jugadores : " + jugadores.size() +
                 "\nMedia calidad    : " + calcularMediana() +
-                "\n" + entrenador +
-                "\n" + "=".repeat(30);
+                "\n\n" + entrenador;
     }
 }

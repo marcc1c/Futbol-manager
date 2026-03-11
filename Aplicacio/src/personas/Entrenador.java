@@ -31,15 +31,11 @@ public class Entrenador extends Personas {
 
     @Override
     public String toString() {
-        return "=".repeat(10) + " Entrenador "  + "=".repeat(10) +
-                super.toString() +
-                "\nTorneos ganados:       " + numTorneosGanados +
-                "\nSeleccionador nacional:    " + (seleccionadorNacional ? "Sí" : "No");
-    }
-
-    public void incrementarSou () {
-        System.out.print("El sueldo a incrementado de " + this.sueldoAnual + " a ");
-        this.sueldoAnual = this.sueldoAnual + this.sueldoAnual / 200;
-        System.out.println(this.sueldoAnual + " (0,5%)");
+        return String.format("========== Entrenador ==========\n%s" +
+                        "\nTorneos ganados:        %-20d" +
+                        "\nSeleccionador nacional: %-20s",
+                super.toString(),
+                numTorneosGanados,
+                seleccionadorNacional ? "Sí" : "No\n");
     }
 }

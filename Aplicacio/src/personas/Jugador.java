@@ -44,15 +44,17 @@ public class Jugador extends Personas {
         this.qualidad = qualidad;
     }
 
-    @Override
     public String toString() {
-        return super.toString() + "Jugador{" +
-                "dorsal=" + dorsal +
-                ", posicion='" + posicion + '\'' +
-                ", qualidadTeorica=" + qualidad +
-                '}';
+        return String.format("========== Jugador ==========\n" +
+                        "%s" +                          // Información de la clase Persona
+                        "Dorsal:               %-20d\n" + // Alineado a la izquierda con 20 caracteres
+                        "Posición:             %-20s\n" + // Alineado a la izquierda con 20 caracteres
+                        "Calidad Teórica:      %-20d\n",   // Alineado a la izquierda con 20 caracteres
+                super.toString(),
+                dorsal,
+                posicion,
+                qualidad);
     }
-
     /*CAMBI DE POSICIONS ENTRE JUGADORS*/
     public void canviDePosicion(String nuevaPosicion) {
         Random random = new Random();
@@ -75,6 +77,7 @@ public class Jugador extends Personas {
                 }
             } else {
                 System.out.println("Has introducido una posición incorrecta, prueba con: ");
+
                 for (int j = 0; j < Posiciones.length; j++) {
                     System.out.println(Posiciones[j]);
                 }

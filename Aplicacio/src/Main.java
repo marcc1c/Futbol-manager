@@ -65,7 +65,7 @@ public class Main {
                 String apellido = dades[2];
                 String fechaNacimiento = dades[3];
                 int nivelMotivacion = Integer.parseInt(dades[4]);
-                int salario = Integer.parseInt(dades[5]);
+                double salario = Double.parseDouble(dades[5]);
                 if (JoE.equals("J")) {
                     int dorsal = Integer.parseInt(dades[6]);
                     String posicion = dades[7];
@@ -139,7 +139,6 @@ public class Main {
                     String tipo = datos[0];
 
                     if (tipo.equals("E")) {
-                        // E;Nombre;Apellido;Fecha;Motivacion;Sueldo;NumTorneos;Seleccionador
                         if (datos.length < 8) continue;
 
                         String nombreEntrenador = datos[1];
@@ -161,10 +160,8 @@ public class Main {
                         );
 
                         equipos.setEntrenador(ent);
-                        listaPersonas.add(ent);
 
                     } else if (tipo.equals("J")) {
-                        // J;Nombre;Apellido;Fecha;Motivacion;Sueldo;Dorsal;Posicion;Calidad
                         if (datos.length < 9) continue;
 
                         String nombreJugador = datos[1];
@@ -188,8 +185,7 @@ public class Main {
                         );
 
                         equipos.getJugadores().add(j1);
-                        listaPersonas.add(j1);
-                    }
+    }
                 }
 
             } catch (IOException e) {
@@ -224,19 +220,23 @@ public class Main {
         System.out.println("Introduce la ciudad del equipo");
         String ciudad = scanner.nextLine();
 
-        boolean entrenadorCorrecto = true;
-        while (entrenadorCorrecto) {
+        boolean entrenadorCorrecto = false;
+        while (!entrenadorCorrecto) {
+            for (Personas personas : listaPersonas) {
+                if (personas instanceof Entrenador)
+                    System.out.println(personas + "\n");
+            }
             System.out.println("Introduce el nombre del entrenador");
             String nombreEntrenador = scanner.nextLine();
 
             for (Personas personas : listaPersonas) {
-                if (personas.getNombre().equalsIgnoreCase(nombreEntrenador)) {
+                if (personas instanceof Entrenador && personas.getNombre().equalsIgnoreCase(nombreEntrenador)) {
                     objetoEntrenador = (Entrenador) personas;
-                    entrenadorCorrecto = false;
+                    entrenadorCorrecto = true;
                 }
             }
-            if (entrenadorCorrecto) {
-                System.out.println("introduce un entrenador valido");
+            if (!entrenadorCorrecto) {
+                System.out.println("Entrenador incorrecto");
             }
         }
 
@@ -258,6 +258,9 @@ public class Main {
             Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, objetoEntrenador);
             listaEquipos.add(e1);
         }
+        listaPersonas.remove(objetoEntrenador);
+        actualizarMercadoFichaje(listaPersonas);
+        guardarEquipos(listaEquipos);
     }
 
     public static void altaJugadorEntrenador(ArrayList<Personas> listaPersonas) {
@@ -360,8 +363,8 @@ public class Main {
             case "SE":
                 break;
             case "DD":
-                guardarEquipos(listaEquipos);
                 actualizarMercadoFichaje(listaPersonas);
+                guardarEquipos(listaEquipos);
                 break;
             case "GE":
                 gestionarMiEquipo(listaEquipos, listaPersonas);
@@ -480,6 +483,8 @@ public class Main {
         if (!fichado) {
             System.out.println("No se ha fichado a este fichaje, datos incorrectos");
         }
+        actualizarMercadoFichaje(listaPersonas);
+        guardarEquipos(listaEquipos);
     }
 
     public static void modificarPresidente(ArrayList<Equipos> listaEquipos, Equipos equipo) {
@@ -619,12 +624,15 @@ public class Main {
         }
     }
 
-    public static void actualizarMercadoFichaje(ArrayList<Personas> listaEquipos) {
-        try (BufferedWriter bwJugadores = new BufferedWriter(new FileWriter("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
+    public static void actualizarMercadoFichaje(ArrayList<Personas> listaPersonas) {
+        // Primero, limpia el archivo de datos antiguos, ya que lo sobrescribimos completamente
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
 
-            for (Personas persona : listaEquipos) {
+            // Escribimos los datos de todas las personas (jugadores y entrenadores)
+            for (Personas persona : listaPersonas) {
+                // Solo escribimos si el objeto no es nulo y si pertenece a Jugador o Entrenador
                 if (persona instanceof Entrenador) {
-                    bwJugadores.write(
+                    bw.write(
                             "E;" +
                                     persona.getNombre() + ";" +
                                     persona.getApellido() + ";" +
@@ -634,9 +642,9 @@ public class Main {
                                     ((Entrenador) persona).getNumTorneosGanados() + ";" +
                                     ((Entrenador) persona).isSeleccionadorNacional()
                     );
-                    bwJugadores.newLine();
+                    bw.newLine();
                 } else if (persona instanceof Jugador) {
-                    bwJugadores.write(
+                    bw.write(
                             "J;" +
                                     persona.getNombre() + ";" +
                                     persona.getApellido() + ";" +
@@ -645,13 +653,15 @@ public class Main {
                                     persona.getSueldoAnual() + ";" +
                                     ((Jugador) persona).getDorsal() + ";" +
                                     ((Jugador) persona).getPosicion() + ";" +
-                                    ((Jugador) persona).getQualidad());
+                                    ((Jugador) persona).getQualidad()
+                    );
+                    bw.newLine();
                 }
             }
 
+            System.out.println("Archivo de mercado de fichajes actualizado correctamente.");
         } catch (IOException e) {
-            System.out.println("Error " + e.getMessage());
+            System.out.println("Error al actualizar el archivo de mercado de fichajes: " + e.getMessage());
         }
     }
-
 }
