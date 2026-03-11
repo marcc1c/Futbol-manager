@@ -1,62 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css.css">
-    <title>Inscriure nou jugador</title>
-    <link rel="shortcut icon" href="../src/img/Favicom.ico"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css.css">
+  <title>Inscriure nou jugador</title>
+  <link rel="shortcut icon" href="../src/img/Favicom.ico"/>
 </head>
 <body>
-    <header>
-        <img src="../src/img/Logo.jpeg" alt="" height="100">
-        <h1 class="title">Manageador del Piepelota</h1>
-        <nav>
-            <a href="../index.html" class="links">Inici</a>
-            <a href="./Classificacio.html" class="links">Classificacio</a>
-            <a href="./NouJugador.html" class="links">Inscripcions</a>
-            <a href="./Plantilles.html" class="links">Plantilles d'equips</a>
-            <a href="./Resultats.html" class="links">Resultats dels partits</a>
-        </nav>
-    </header>
-    <main id="Form_Main">
-        <div class="Main_Form">
-          <h2> Nou Jugador // Entrenador</h2>
-          <form class="Form" action="">
-                <label class="Etiqueta_Form" for="JoE">Jugador o Entrenador?</label>
-                <br>
-                <select class="Select_Form" name="JoE" id="JoE">
-                          <option value="Jugador">Jugador</option>
-                          <option value="Entrenador">Entrenador</option>
-                </select>
-                <br>
-                <label class="Etiqueta_Form" for="Nom">Nom</label>
-                <br>
-                <input class="Box_Form" type="text" id="Nom" name="Nom">
-                <br>
-                <label class="Etiqueta_Form" for="Qualitat">Qualitat</label>
-                <br>
-                <input class="Box_Form" type="number" id="qualitat" min="0" max="100">
-                <br>
-                <label class="Etiqueta_Form" for="Dorsal">Dorsal</label>
-                <br>
-                <input class="Box_Form" type="number" id="Dorsal" name="Dorsal" min="0" max="99">
-                <br>
-                <label class="Etiqueta_Form" for="Posicio">Posició</label>
-                <br>
-                <select class="Select_Form" name="Posicio" id="Posicio">
-                          <option value="Porter">Porter</option>
-                          <option value="Defensa">Defensa</option>
-                          <option value="Migcampista">Mitja</option>
-                          <option value="Davanter">Davanter</option>
-                </select>
-                <br>
-                <label class="Etiqueta_Form" for="Foto">Foto</label>
-                <br>
-                <input class="File_Form" type="file" id="Foto" name="Foto">
-                <input class="Submit_Form" type="submit" value="Inscriure">
-          </form>
-        </div>
-    </main>
+  <header>
+    <img src="../src/img/Logo.jpeg" alt="" height="100">
+      <h1 class="title">Manageador del Piepelota</h1>
+      <nav>
+          <a href="../index.html" class="links">Inici</a>
+          <a href="./Classificacio.html" class="links">Classificacio</a>
+          <a href="./NouJugador.html" class="links">Inscripcions</a>
+          <a href="./Plantilles.html" class="links">Plantilles d'equips</a>
+          <a href="./Resultats.html" class="links">Resultats dels partits</a>
+      </nav>
+  </header>
+  <main id="Form_Main">
+    <div class="Main_Form">
+
+      <h2>Alta de jugador / entrenador</h2>
+
+      <form class="Form">
+
+          <label class="Etiqueta_Form">Jugador o entrenador?</label>
+
+          <select id="tipusPersona" class="Select_Form" required>
+                <option value="">Selecciona</option>
+                <option value="jugador">Jugador</option>
+                <option value="entrenador">Entrenador</option>
+          </select>
+
+
+          <label class="Etiqueta_Form">Nom</label>
+          <input class="Box_Form" type="text" required minlength="2">
+
+
+          <label class="Etiqueta_Form">Alçada (cm)</label>
+          <input class="Box_Form" type="number" min="120" max="230" required>
+
+
+          <label class="Etiqueta_Form">Pes (kg)</label>
+          <input class="Box_Form" type="number" min="40" max="150" step="0.1" required>
+
+
+          <label class="Etiqueta_Form">Data de naixement</label>
+          <input class="Box_Form" type="date" required>
+
+
+          <label class="Etiqueta_Form">Fotografia</label>
+          <input class="File_Form" type="file" accept="image/*">
+
+
+          <!-- POSICIONS (només jugadors) -->
+
+          <div id="posicions">
+
+                <p class="Etiqueta_Form">Posició</p>
+
+                <label><input type="checkbox"> Porter</label>
+                <label><input type="checkbox"> Defensa</label>
+                <label><input type="checkbox"> Migcampista</label>
+                <label><input type="checkbox"> Davanter</label>
+
+          </div>
+
+
+          <!-- EQUIP -->
+
+          <label class="Etiqueta_Form">Equip</label>
+          <select id="selectEquip" class="Select_Form" required>
+          <option value="">Selecciona un equip</option>
+          </select>
+          <script src="../src/Scripts/Desplegable_Formulari.js"></script>
+
+
+          <input class="Submit_Form" type="submit" value="Inscriure">
+
+      </form>
+    </div>
+    <script src="../src/Scripts/Es_Entrenador_Formulari.js"></script>
+  </main>
 </body>
 </html>

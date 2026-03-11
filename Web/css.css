@@ -85,29 +85,21 @@ hr {
     background-color: var(--rojo-primario);
 }
 /* FORMULARI NOU JUGADOR */
-/* Container del formulari */
+/* CONTENEDOR FORMULARIO */
 .Main_Form {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 25px;
     margin: 50px auto;
-    padding: 30px;
-    width: 350px;
-    background-color: #fdf6e3; /* color suau de fons */
+    padding: 35px;
+    width: 380px;
+    background-color: #fdf6e3;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Títol del formulari */
-.Main_Form h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* Formulari */
+/* FORMULARIO */
 .Form {
     display: flex;
     flex-direction: column;
@@ -115,48 +107,64 @@ hr {
     width: 100%;
 }
 
-/* Labels */
+/* LABELS */
 .Etiqueta_Form {
     font-size: 16px;
     font-weight: 500;
-    color: #555;
+    color: var(--negro-pers);
 }
 
-/* Inputs i selects */
-.Box_Form, .Select_Form, .File_Form {
+/* INPUTS Y SELECTS */
+.Box_Form,
+.Select_Form {
     width: 100%;
-    height: 40px;
+    height: 42px;
     border-radius: 8px;
     border: 1px solid #ccc;
     padding: 0 10px;
     font-size: 16px;
-    transition: all 0.3s ease;
+    background-color: white;
+    box-sizing: border-box;
+    transition: all 0.25s ease;
 }
 
-.Box_Form:focus, .Select_Form:focus, .File_Form:focus {
-    outline: none;
-    border-color: #ffb347; /* accent suau */
-    box-shadow: 0 0 5px rgba(255,179,71,0.5);
-}
-
-/* Botó submit */
-.Submit_Form {
+/* INPUT FILE MEJORADO */
+.File_Form {
     width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* FOCUS CAMPOS */
+.Box_Form:focus,
+.Select_Form:focus,
+.File_Form:focus {
+    outline: none;
+    border-color: var(--daurat-accent);
+    box-shadow: 0 0 5px rgba(185,161,77,0.5);
+}
+
+/* BOTÓN */
+.Submit_Form {
+    margin-top: 10px;
     height: 45px;
-    background: linear-gradient(90deg, #ffb347, #ffcc33);
-    border: none;
     border-radius: 10px;
-    color: #fff;
+    border: none;
     font-size: 18px;
     font-weight: bold;
+    color: white;
+    background: linear-gradient(90deg, #ffb347, #ffcc33);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 .Submit_Form:hover {
-    background: linear-gradient(90deg, #ffcc33, #ffb347);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 /* CLASSIFICACIO */
@@ -322,6 +330,18 @@ hr {
     color: var(--negro-pers);
     line-height: 1.4;
 }
+
+.select2-container {
+    width: 250px !important; /* ancho del select */
+    height: 70px;
+}
+
+.select2-container .select2-selection--single {
+    height: 70px;           /* altura total del área visible */
+    line-height: 50px;      /* centra verticalmente el texto */
+    border-radius: 8px;     /* opcional: bordes redondeados */
+}
+
 /* RESULTATS DELS PARTITS */
 /* MAIN RESULTATS */
 .Main_Resultats{
@@ -349,6 +369,7 @@ hr {
 .Partit{
     display: flex;
     flex-direction: column;
+    align-items:space-around;
     background: linear-gradient(145deg, #ffffff, #fdf0d5);
     border-radius: 15px;
     padding: 20px;
