@@ -36,6 +36,7 @@ public class Entrenador extends Personas {
                         "\nSeleccionador nacional: %-20s",
                 super.toString(),
                 numTorneosGanados,
-                seleccionadorNacional ? "Sí" : "No\n");
+                seleccionadorNacional ? "Sí" : "No")
+                + "\n" + "=".repeat(32) + "\n";
     }
 }

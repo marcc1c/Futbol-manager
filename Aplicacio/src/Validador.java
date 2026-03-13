@@ -21,7 +21,7 @@ public class Validador {
         return input;
     }
 
-    public static String arraylist(ArrayList<String> arrayValoresPosibles) {
+    public static String arrayListStrings(ArrayList<String> arrayValoresPosibles) {
         Scanner scanner = new Scanner(System.in);
         String input = "";
 
@@ -30,6 +30,25 @@ public class Validador {
             input = scanner.nextLine();
             for (String palabras : arrayValoresPosibles) {
                 if (palabras.equalsIgnoreCase(input)) {
+                    valido = true;
+                }
+            }
+            if (!valido) {
+                System.out.println("Valor incorrecto");
+            }
+        }
+        return input;
+    }
+
+    public static int arrayListInt(ArrayList<Integer> arrayValoresPosibles) {
+        Scanner scanner = new Scanner(System.in);
+        int input = 0;
+
+        boolean valido = false;
+        while (!valido) {
+            input = scanner.nextInt();
+            for (int palabras : arrayValoresPosibles) {
+                if (palabras == input) {
                     valido = true;
                 }
             }
@@ -106,6 +125,10 @@ public class Validador {
             }
         }
         return input;
+    }
+
+    public static String array(String por, String def, String mig, String dav) {
+        return null;
     }
 }
 

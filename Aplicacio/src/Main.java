@@ -38,7 +38,7 @@ public class Main {
         ArrayList<String> opcionesUsuarioActual = new ArrayList<>();
 
 
-        leerJugadores(listaPersonas);
+        leerMercadoFichajes(listaPersonas);
         leerEquipos(listaEquipos, listaPersonas);
         char tipoUsuario = login(opcionesAdmin, opcionesGestorEquipos, opcionesUsuarioActual);
 
@@ -50,7 +50,7 @@ public class Main {
         }
     }
 
-    private static void leerJugadores(ArrayList<Personas> listaPersonas) {
+    private static void leerMercadoFichajes(ArrayList<Personas> listaPersonas) {
 
         try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
             String linea;
@@ -185,7 +185,7 @@ public class Main {
                         );
 
                         equipos.getJugadores().add(j1);
-    }
+                    }
                 }
 
             } catch (IOException e) {
@@ -213,10 +213,13 @@ public class Main {
             }
         }
 
+
         String nombre = input;
+
         System.out.println("Introduce el año de fundación");
-        int añoFundacion = scanner.nextInt();
-        scanner.nextLine();
+        int añoFundacion = Validador.numerosInicioFinal(-2000, 3000);
+
+
         System.out.println("Introduce la ciudad del equipo");
         String ciudad = scanner.nextLine();
 
@@ -258,9 +261,10 @@ public class Main {
             Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, objetoEntrenador);
             listaEquipos.add(e1);
         }
+
+        guardarEquipos(listaEquipos);
         listaPersonas.remove(objetoEntrenador);
         actualizarMercadoFichaje(listaPersonas);
-        guardarEquipos(listaEquipos);
     }
 
     public static void altaJugadorEntrenador(ArrayList<Personas> listaPersonas) {
@@ -275,23 +279,57 @@ public class Main {
         String apellido = scanner.nextLine();
         System.out.println("Introduce la fecha nacimiento");
         String fechaNacimiento = scanner.nextLine();
-        System.out.println("Introduce la salario anual");
-        double salarioAnual = scanner.nextInt();
+        double salarioAnual = 0;
+        boolean valorDouble = false;
+        while (!valorDouble) {
+            scanner.nextLine();
+            System.out.println("Introduce el salario anual");
+            if (scanner.hasNextDouble()) {
+                salarioAnual = scanner.nextDouble();
+                scanner.nextLine();
+                valorDouble = true;
+            } else {
+                System.out.println("El valor introducido no es un numero");
+            }
+        }
 
-        if (JoE.equalsIgnoreCase("j"
-        )) {
+        if (JoE.equalsIgnoreCase("j")) {
             System.out.println("Introduce el dorsal");
-            int dorsal = scanner.nextInt();
-            System.out.println("Introduce su posición");
-            String posicion = scanner.nextLine();
+            int dorsal = Validador.numerosInicioFinal(0, 99);
+
+            System.out.println("Introduce su posición: Portero (POR), Defensa, (DEF), Mediocampo (MIG), Delantero, (DAV)");
+            String posicion = Validador.array("POR", "DEF", "MIG", "DAV");
+
+
             Jugador j1 = new Jugador(nombre, apellido, fechaNacimiento, 5,
                     salarioAnual, dorsal, posicion, random.nextInt((99) + 1));
             listaPersonas.add(j1);
+
         } else {
-            System.out.println("Introduce el numero de torneos ganados");
-            int torneosGanados = scanner.nextInt();
+            int torneosGanados = 0;
+
+            boolean valorInt = false;
+            while (!valorInt) {
+                scanner.nextLine();
+                System.out.println("Introduce el numero de torneos ganados");
+                if (scanner.hasNextInt()) {
+                    torneosGanados = scanner.nextInt();
+                    scanner.nextLine();
+                    valorInt = true;
+                } else {
+                    System.out.println("El valor introducido no es un numero");
+                }
+            }
+
             System.out.println("Introduce si es seleccionador nacinal");
-            boolean seleccionadorNacional = scanner.nextBoolean();
+            boolean seleccionadorNacional;
+
+            String stringSeleccionadorNacional = Validador.numero2("si", "no");
+            if (stringSeleccionadorNacional.equalsIgnoreCase("si"))
+                seleccionadorNacional = true;
+            else {
+                seleccionadorNacional = false;
+            }
             Entrenador e1 = new Entrenador(nombre, apellido, fechaNacimiento, 5,
                     salarioAnual, torneosGanados, seleccionadorNacional);
             listaPersonas.add(e1);
@@ -380,45 +418,49 @@ public class Main {
 
     public static void gestionarMiEquipo(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> nuevaListaEquipos = new ArrayList<>();
+        ArrayList<String> nombreEquipos = new ArrayList<>();
 
-        System.out.println("Que equipo queres gestionar");
-        String nombreEquipoGestionar = scanner.nextLine();
-
-        for (Equipos equipo : listaEquipos) {
-            if (nombreEquipoGestionar.equalsIgnoreCase(equipo.getNombre())) {
-
-                System.out.println("Team Manager:");
-                System.out.println("1- Donar de baixa l'equip");
-                System.out.println("2- Modificar president/a");
-                System.out.println("3- Destituir entrenador/a");
-                System.out.println("4- Fitxar jugador/a o entrenador/a");
-                System.out.println("0- Sortir");
-
-                int input = Validador.numerosInicioFinal(0, 4);
-
-                switch (input) {
-                    case 1:
-                        bajaEquipo(listaEquipos, equipo);
-                        break;
-                    case 2:
-                        modificarPresidente(listaEquipos, equipo);
-                        break;
-                    case 3:
-                        destituirEntrenador(listaEquipos, equipo);
-                        break;
-                    case 4:
-                        ficharJugadorEntrenador(listaEquipos, listaPersonas, equipo);
-                        break;
-                }
-            } else {
-                System.out.println("Equipo no encontrado");
-            }
+        for (Equipos nombreEquiposString : listaEquipos) {
+            nombreEquipos.add(nombreEquiposString.getNombre());
+            System.out.println(nombreEquiposString.getNombre());
         }
 
+        System.out.println("Que equipo queres gestionar");
+        String nombreEquipoGestionar = Validador.arrayListStrings(nombreEquipos);
+        Equipos equipo = new Equipos();
+
+        for (Equipos equipoo : listaEquipos) {
+            if (nombreEquipoGestionar.equalsIgnoreCase(equipo.getNombre())) {
+                equipo = equipoo;
+            }
+        }
+            System.out.println("Team Manager:");
+            System.out.println("1- Donar de baixa l'equip");
+            System.out.println("2- Modificar president/a");
+            System.out.println("3- Destituir entrenador/a");
+            System.out.println("4- Fitxar jugador/a o entrenador/a");
+            System.out.println("0- Sortir");
+
+            int input = Validador.numerosInicioFinal(0, 4);
+
+            switch (input) {
+                case 1:
+                    bajaEquipo(listaEquipos, equipo, listaPersonas);
+                    break;
+                case 2:
+                    modificarPresidente(listaEquipos, equipo);
+                    break;
+                case 3:
+                    destituirEntrenador(listaEquipos, equipo);
+                    break;
+                case 4:
+                    ficharJugadorEntrenador(listaEquipos, listaPersonas, equipo);
+                    break;
+            }
     }
 
-    public static void ficharJugadorEntrenador(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas, Equipos equipo) {
+    public static void ficharJugadorEntrenador
+            (ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas, Equipos equipo) {
         Scanner scanner = new Scanner(System.in);
 
         boolean fichado = false;
@@ -466,7 +508,7 @@ public class Main {
             for (Personas personas : listaPersonas) {
                 if (personas instanceof Entrenador) {
                     if (nombre.equalsIgnoreCase(personas.getNombre()) && apellido.equalsIgnoreCase(personas.getApellido())) {
-                        listaPersonas.add(equipo.getEntrenador());
+                        equipo.setEntrenador((Entrenador) personas);
                         equipo.setEntrenador((Entrenador) personas);
                         personaABorrar = personas;
                         System.out.println("El entrenador " + nombre + " ahora es entrenador de " + equipo.getNombre());
@@ -477,6 +519,7 @@ public class Main {
         }
 
         if (personaABorrar != null) {
+            System.out.println(personaABorrar);
             listaPersonas.remove(personaABorrar);
         }
 
@@ -516,7 +559,8 @@ public class Main {
 
     }
 
-    public static void bajaEquipo(ArrayList<Equipos> listaEquipos, Equipos equipo) {
+    public static void bajaEquipo(ArrayList<Equipos> listaEquipos, Equipos
+            equipo, ArrayList<Personas> listaPersonas) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("¿Estás seguro que quieres dar de baja al equipo actual? (s) sí, (n) no");
@@ -524,14 +568,22 @@ public class Main {
 
         if (input.equalsIgnoreCase("s")) {
 
+            listaPersonas.addAll(equipo.getJugadores());
+            listaPersonas.add(equipo.getEntrenador());
             listaEquipos.remove(equipo);
-            System.out.println("Equipo eliminado, guarda los cambios en el menú principal");
+
+            guardarEquipos(listaEquipos);
+            System.out.println("Equipo eliminado");
         }
     }
 
     public static void consultarDatosEquipo(ArrayList<Equipos> listaEquipos) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Que equipo quieres consultar");
+
+        for (Equipos nombreEquipo : listaEquipos) {
+            System.out.println(nombreEquipo.getNombre());
+        }
 
         String input = scanner.nextLine();
         for (Equipos equipo : listaEquipos) {
@@ -545,26 +597,43 @@ public class Main {
 
     public static void consultarJugadorEquipo(ArrayList<Equipos> listaEquipos) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Que equipo quieres consultar");
-        String input = scanner.nextLine();
+        ArrayList<String> nombreJugadores = new ArrayList<>();
+        ArrayList<Integer> dorsalJugadores = new ArrayList<>();
+        ArrayList<String> nombreEquipos = new ArrayList<>();
 
+
+        System.out.println("Que equipo quieres consultar");
+
+        for (Equipos nombreEquipo : listaEquipos) {
+            nombreEquipos.add(nombreEquipo.getNombre());
+            System.out.println(nombreEquipo.getNombre());
+        }
+
+        String input = Validador.arrayListStrings(nombreEquipos);
         for (Equipos equipo : listaEquipos) {
             if (equipo.getNombre().equalsIgnoreCase(input)) {
+                System.out.println(equipo);
+            }
 
+            for (Jugador jugador : equipo.getJugadores()) {
+                nombreJugadores.add(jugador.getNombre());
+                dorsalJugadores.add(jugador.getDorsal());
+                System.out.println("Nombre: " + jugador.getNombre());
+                System.out.println("Dorsal: " + jugador.getDorsal() + "\n");
+            }
+
+            if (!equipo.getJugadores().isEmpty()) {
                 System.out.println("Cual es el nombre del jugador");
-                String nombreJugador = scanner.nextLine();
+                String nombreJugador = Validador.arrayListStrings(nombreJugadores);
+
                 System.out.println("Cual es el dorsal del jugador");
-                int dorsaljugador = scanner.nextInt();
+                int dorsaljugador = Validador.arrayListInt(dorsalJugadores);
 
                 for (Jugador jugador : equipo.getJugadores()) {
                     if (jugador.getNombre().equalsIgnoreCase(nombreJugador) && jugador.getDorsal() == dorsaljugador) {
                         System.out.println(jugador);
-                    } else {
-                        System.out.println("Jugador no encontrado");
                     }
                 }
-            } else {
-                System.out.println("Equipo no encontrado");
             }
         }
     }
