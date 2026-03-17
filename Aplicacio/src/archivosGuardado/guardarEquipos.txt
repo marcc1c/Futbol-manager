@@ -1,4 +1,1 @@
-papa;2026;barcelona;;;Ernesto
-sigmaequipo;2022;pepe;;;pepe
-aaa;121;;;;Diego
-peperoni;-122;aa;;;marc
+pepe;2020;barcelona;aaaa;;Carlo

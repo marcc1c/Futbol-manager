@@ -55,33 +55,54 @@ public class Jugador extends Personas {
                 posicion,
                 qualidad);
     }
-    /*CAMBI DE POSICIONS ENTRE JUGADORS*/
-    public void canviDePosicion(String nuevaPosicion) {
+    /**
+     * Intenta canviar la posició del jugador/a a una posició específica.
+     * Hi ha un 5% de probabilitats que el canvi es produeixi.
+     * Si es produeix el canvi, la qualitat del jugador augmenta en 1 punt.
+     *
+     * @param nuevaPosicion Nova posició a intentar assignar
+     * @return true si el canvi s'ha produït, false en cas contrari
+     */
+    public boolean canviDePosicion(String nuevaPosicion) {
         Random random = new Random();
         int numRandom = random.nextInt(100) + 1;
+        boolean haCambiado = false;
 
         int fallo = 0;
-        for (int i = 0; i < Posiciones.length; i++) {
-            if (!Posiciones[i].equals(nuevaPosicion.toUpperCase())) {
+        for (String posicione : Posiciones) {
+            if (!posicione.equals(nuevaPosicion.toUpperCase())) {
                 fallo++;
             }
         }
-            if (fallo != Posiciones.length) {
-                if (numRandom <= 5) {
-                    System.out.print("Has cambiado de posición al jugador " + this.nombre + " de " + this.posicion + " a ");
-                    this.posicion = nuevaPosicion.toUpperCase();
-                    System.out.print(nuevaPosicion.toUpperCase());
-                    qualidad++;
-                } else {
-                    System.out.println("El jugador " + this.nombre + " no ha cambiado de posicion, sigue siendo " + this.posicion);
-                }
-            } else {
-                System.out.println("Has introducido una posición incorrecta, prueba con: ");
-
-                for (int j = 0; j < Posiciones.length; j++) {
-                    System.out.println(Posiciones[j]);
-                }
+        if (fallo != Posiciones.length) {
+            if (numRandom <= 5) {
+                System.out.println("El jugador " + this.nombre + " ha canviat de posició de " + this.posicion + " a " + nuevaPosicion.toUpperCase() + "!");
+                this.posicion = nuevaPosicion.toUpperCase();
+                qualidad++;
+                haCambiado = true;
             }
+        } else {
+            System.out.println("Has introduït una posició incorrecta, prova amb: POR, DEF, MIG, DAV");
+        }
+        return haCambiado;
+    }
+
+    /**
+     * Realitza una sessió d'entrenament per al jugador/a del mercat de fitxatges.
+     * Augmenta el nivell de motivació en 1 si no ha arribat al màxim (10).
+     * A més, intenta un canvi de posició aleatori amb el mètode canviDePosicio.
+     */
+    public void entrenament() {
+        if (this.nivelMotivacion < 10) {
+            this.nivelMotivacion++;
+        }
+        // Escollim una posició aleatòria diferent de l'actual
+        Random random = new Random();
+        String novaPos = this.posicion;
+        while (novaPos.equals(this.posicion)) {
+            novaPos = Posiciones[random.nextInt(Posiciones.length)];
+        }
+        canviDePosicion(novaPos);
     }
 }
 

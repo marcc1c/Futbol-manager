@@ -128,7 +128,20 @@ public class Validador {
     }
 
     public static String array(String por, String def, String mig, String dav) {
-        return null;
+        Scanner scanner = new Scanner(System.in);
+        String input = "";
+        boolean valido = false;
+
+        while (!valido) {
+            input = scanner.nextLine();
+            if (input.equalsIgnoreCase(por) || input.equalsIgnoreCase(def)
+                    || input.equalsIgnoreCase(mig) || input.equalsIgnoreCase(dav)) {
+                valido = true;
+            } else {
+                System.out.println("Valor incorrecto. Prova amb: " + por + ", " + def + ", " + mig + ", " + dav);
+            }
+        }
+        return input.toUpperCase();
     }
 }
 

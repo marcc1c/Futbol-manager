@@ -1,92 +1,1031 @@
 import personas.Entrenador;
 import personas.Equipos;
 import personas.Jugador;
+import personas.Lliga;
 import personas.Personas;
 
 import java.io.*;
 import java.util.*;
 
+/**
+ * Classe principal del Football Manager.
+ * Gestiona els menús, el flux del programa i crida a les funcionalitats
+ * de la resta de classes.
+ */
 public class Main {
+
+    /**
+     * Punt d'entrada de l'aplicació.
+     * Carrega les dades inicials (mercat de fitxatges i equips),
+     * gestiona el login i executa el bucle del menú principal.
+     *
+     * @param args Arguments de la línia de comandes (no s'utilitzen)
+     */
     public static void main(String[] args) {
-
-
-        HashMap<String, String> opciones = new HashMap<>();
-
-        opciones.put("VC", "Veure classificació lliga actual 🏆");
-        opciones.put("AE", "Donar d'alta equip");
-        opciones.put("AJ", "Donar d'alta jugador/a o entrenador/a");
-        opciones.put("DA", "Consultar dades equip");
-        opciones.put("DJ", "Consultar dades jugador/a equip");
-        opciones.put("DV", "Disputar nova lliga");
-        opciones.put("SE", "Realitzar sessió entrenament (del mercat fitxatges)");
-        opciones.put("DD", "Desar dades equips");
-        opciones.put("S", "Sortir");
-        opciones.put("VA", "Veure classificació lliga actual 🏆");
-        opciones.put("GE", "Gestionar el meu equip ⚽");
-
 
         ArrayList<Personas> listaPersonas = new ArrayList<>();
         ArrayList<Equipos> listaEquipos = new ArrayList<>();
+        Lliga lligaActual = null;
 
-        String[] opcionesAdmin = new String[]{
-                "VC", "AE", "AJ", "DA", "DJ", "DV", "SE", "DD", "S"
-        };
-        String[] opcionesGestorEquipos = new String[]{
-                "VA", "GE", "DA", "DJ", "TJ", "DD", "S"
-        };
-
-        ArrayList<String> opcionesUsuarioActual = new ArrayList<>();
-
-
+        // Carreguem les dades dels fitxers
         leerMercadoFichajes(listaPersonas);
         leerEquipos(listaEquipos, listaPersonas);
-        char tipoUsuario = login(opcionesAdmin, opcionesGestorEquipos, opcionesUsuarioActual);
 
+        // Login
+        char tipoUsuario = login();
 
+        // Bucle del menú principal
         boolean bucleMenuMain = true;
         while (bucleMenuMain) {
-            String input = mostrarMenu(tipoUsuario, opcionesAdmin, opcionesGestorEquipos, opciones);
-            bucleMenuMain = escogerOpcion(input, tipoUsuario, listaEquipos, listaPersonas);
+            mostrarMenu(tipoUsuario);
+            String input = leerOpcionMenu(tipoUsuario);
+            bucleMenuMain = escogerOpcion(input, tipoUsuario, listaEquipos, listaPersonas, lligaActual);
+
+            // Actualitzem la referència de la lliga si s'ha creat una de nova dins escogerOpcion
+            // (es gestiona passant-la com a variable dins del switch)
+            if (input.equalsIgnoreCase("DV") || input.equalsIgnoreCase("6")) {
+                // La lliga ja s'actualitza dins del switch
+            }
         }
     }
 
-    private static void leerMercadoFichajes(ArrayList<Personas> listaPersonas) {
+    // =========================================================
+    //  LOGIN
+    // =========================================================
 
+    /**
+     * Gestiona el procés de login de l'aplicació.
+     * Demana si l'usuari és admin (a) o gestor d'equip (g).
+     *
+     * @return Caràcter 'a' per admin, 'g' per gestor d'equip
+     */
+    public static char login() {
+        System.out.println("-".repeat(15) + " Iniciant login " + "-".repeat(15));
+        System.out.println("Ets admin (a) o ets un gestor d'equip (g)?");
+        String input = Validador.numero2("a", "g");
+        return input.charAt(0);
+    }
+
+    // =========================================================
+    //  MENÚS
+    // =========================================================
+
+    /**
+     * Mostra el menú principal corresponent al tipus d'usuari.
+     *
+     * @param tipoUsuario Caràcter que indica el rol: 'a' per admin, 'g' per gestor
+     */
+    public static void mostrarMenu(char tipoUsuario) {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("  Welcome to Politècnics Football Manager");
+        System.out.println("=".repeat(50));
+
+        if (tipoUsuario == 'a') {
+            System.out.println("  1- Veure classificació lliga actual \uD83C\uDFC6");
+            System.out.println("  2- Donar d'alta equip");
+            System.out.println("  3- Donar d'alta jugador/a o entrenador/a");
+            System.out.println("  4- Consultar dades equip");
+            System.out.println("  5- Consultar dades jugador/a equip");
+            System.out.println("  6- Disputar nova lliga");
+            System.out.println("  7- Realitzar sessió entrenament (del mercat fitxatges)");
+            System.out.println("  8- Desar dades equips");
+            System.out.println("  0- Sortir");
+        } else {
+            System.out.println("  1- Veure classificació lliga actual \uD83C\uDFC6");
+            System.out.println("  2- Gestionar el meu equip \u26BD");
+            System.out.println("  3- Consultar dades equip");
+            System.out.println("  4- Consultar dades jugador/a equip");
+            System.out.println("  5- Transferir jugador/a");
+            System.out.println("  6- Desar dades equips");
+            System.out.println("  0- Sortir");
+        }
+        System.out.println("=".repeat(50));
+        System.out.print("Escull una opció: ");
+    }
+
+    /**
+     * Llegeix l'opció del menú introduïda per l'usuari i valida que sigui correcta.
+     *
+     * @param tipoUsuario Rol de l'usuari actual
+     * @return Cadena amb l'opció vàlida introduïda
+     */
+    public static String leerOpcionMenu(char tipoUsuario) {
+        Scanner scanner = new Scanner(System.in);
+        String[] opcionesAdmin = {"0", "1", "2", "3", "4", "5", "6", "7", "8"};
+        String[] opcionesGestor = {"0", "1", "2", "3", "4", "5", "6"};
+
+        if (tipoUsuario == 'a') {
+            return Validador.array(opcionesAdmin);
+        } else {
+            return Validador.array(opcionesGestor);
+        }
+    }
+
+    /**
+     * Gestiona l'opció escollida per l'usuari i crida la funcionalitat corresponent.
+     *
+     * @param input        Opció escollida per l'usuari
+     * @param tipoUsuario  Rol de l'usuari actual
+     * @param listaEquipos Llista d'equips de l'aplicació
+     * @param listaPersonas Llista del mercat de fitxatges
+     * @param lligaActual  Objecte de la lliga actual (pot ser null)
+     * @return false si l'usuari vol sortir, true en cas contrari
+     */
+    public static boolean escogerOpcion(String input, char tipoUsuario,
+                                        ArrayList<Equipos> listaEquipos,
+                                        ArrayList<Personas> listaPersonas,
+                                        Lliga lligaActual) {
+        if (tipoUsuario == 'a') {
+            switch (input) {
+                case "0":
+                    System.out.println("Sortint del Football Manager. Fins aviat!");
+                    return false;
+                case "1":
+                    verClasificacion(lligaActual);
+                    break;
+                case "2":
+                    altaEquipo(listaEquipos, listaPersonas);
+                    break;
+                case "3":
+                    altaJugadorEntrenador(listaPersonas);
+                    break;
+                case "4":
+                    consultarDatosEquipo(listaEquipos);
+                    break;
+                case "5":
+                    consultarJugadorEquipo(listaEquipos);
+                    break;
+                case "6":
+                    lligaActual = disputarNovaLliga(listaEquipos);
+                    break;
+                case "7":
+                    sesionEntrenamiento(listaPersonas);
+                    break;
+                case "8":
+                    actualizarMercadoFichaje(listaPersonas);
+                    guardarEquipos(listaEquipos);
+                    System.out.println("Dades desades correctament.");
+                    break;
+                default:
+                    System.out.println("Opció incorrecta.");
+                    break;
+            }
+        } else {
+            switch (input) {
+                case "0":
+                    System.out.println("Sortint del Football Manager. Fins aviat!");
+                    return false;
+                case "1":
+                    verClasificacion(lligaActual);
+                    break;
+                case "2":
+                    gestionarMiEquipo(listaEquipos, listaPersonas);
+                    break;
+                case "3":
+                    consultarDatosEquipo(listaEquipos);
+                    break;
+                case "4":
+                    consultarJugadorEquipo(listaEquipos);
+                    break;
+                case "5":
+                    transferirJugador(listaEquipos);
+                    break;
+                case "6":
+                    actualizarMercadoFichaje(listaPersonas);
+                    guardarEquipos(listaEquipos);
+                    System.out.println("Dades desades correctament.");
+                    break;
+                default:
+                    System.out.println("Opció incorrecta.");
+                    break;
+            }
+        }
+        return true;
+    }
+
+    // =========================================================
+    //  LLIGA
+    // =========================================================
+
+    /**
+     * Mostra la classificació de la lliga actual.
+     * Si no hi ha cap lliga creada, ho indica a l'usuari.
+     *
+     * @param lligaActual Objecte de la lliga actual (pot ser null)
+     */
+    public static void verClasificacion(Lliga lligaActual) {
+        if (lligaActual == null || lligaActual.getEquipos().isEmpty()) {
+            System.out.println("No hi ha cap lliga disputada encara. Escull l'opció 'Disputar nova lliga' primer.");
+        } else {
+            lligaActual.mostrarClasificacion();
+        }
+    }
+
+    /**
+     * Crea una nova lliga, afegeix els equips participants i la disputa.
+     * Es demana el nom, el nombre d'equips i quins equips hi participen.
+     * No es permet afegir equips repetits.
+     *
+     * @param listaEquipos Llista d'equips de l'aplicació
+     * @return La nova Lliga creada i disputada
+     */
+    public static Lliga disputarNovaLliga(ArrayList<Equipos> listaEquipos) {
+        Scanner scanner = new Scanner(System.in);
+
+        if (listaEquipos.size() < 2) {
+            System.out.println("Calen almenys 2 equips per disputar una lliga.");
+            return null;
+        }
+
+        System.out.println("Introdueix el nom de la nova lliga:");
+        String nomLliga = scanner.nextLine();
+
+        System.out.println("Quants equips hi participaran? (màxim " + listaEquipos.size() + ")");
+        int numEquipos = Validador.numerosInicioFinal(2, listaEquipos.size());
+
+        Lliga novaLliga = new Lliga(nomLliga, numEquipos);
+
+        System.out.println("\nEquips disponibles:");
+        for (Equipos equipo : listaEquipos) {
+            System.out.println("  - " + equipo.getNombre());
+        }
+
+        ArrayList<String> nomesAfegits = new ArrayList<>();
+
+        for (int i = 0; i < numEquipos; i++) {
+            System.out.println("Introdueix el nom de l'equip " + (i + 1) + ":");
+            boolean trobat = false;
+
+            while (!trobat) {
+                String nomEquip = scanner.nextLine();
+
+                // Comprovem que existeix
+                Equipos equipTrobat = null;
+                for (Equipos equip : listaEquipos) {
+                    if (equip.getNombre().equalsIgnoreCase(nomEquip)) {
+                        equipTrobat = equip;
+                    }
+                }
+
+                if (equipTrobat == null) {
+                    System.out.println("Equip no trobat. Torna a introduir un nom vàlid:");
+                } else {
+                    // Comprovem que no s'ha afegit ja
+                    boolean jaAfegit = false;
+                    for (String nom : nomesAfegits) {
+                        if (nom.equalsIgnoreCase(nomEquip)) {
+                            jaAfegit = true;
+                        }
+                    }
+
+                    if (jaAfegit) {
+                        System.out.println("Aquest equip ja ha estat afegit a la lliga. Tria un altre:");
+                    } else {
+                        novaLliga.afegirEquip(equipTrobat);
+                        nomesAfegits.add(equipTrobat.getNombre());
+                        System.out.println("Equip " + equipTrobat.getNombre() + " afegit a la lliga.");
+                        trobat = true;
+                    }
+                }
+            }
+        }
+
+        // Disputem tots els partits automàticament
+        novaLliga.disputarTodosLosPartidos();
+        novaLliga.mostrarClasificacion();
+
+        // Mostrem el màxim golador i el que ha rebut més gols
+        Equipos maxGoleador = novaLliga.equipoMasGoleador();
+        Equipos mesGolesContra = novaLliga.equipoMenosGoleador();
+        if (maxGoleador != null) {
+            System.out.println("⚽ Equip més golejador: " + maxGoleador.getNombre());
+        }
+        if (mesGolesContra != null) {
+            System.out.println("🥅 Equip amb més gols en contra: " + mesGolesContra.getNombre());
+        }
+
+        return novaLliga;
+    }
+
+    // =========================================================
+    //  SESSIÓ ENTRENAMENT
+    // =========================================================
+
+    /**
+     * Realitza una sessió d'entrenament per a tots els jugadors i entrenadors
+     * disponibles al mercat de fitxatges.
+     * Cada jugador executa el seu mètode entrenament() (motivació + intent canvi posició).
+     * Cada entrenador executa el seu mètode entrenament() (motivació) i incrementarSou().
+     *
+     * @param listaPersonas Llista del mercat de fitxatges
+     */
+    public static void sesionEntrenamiento(ArrayList<Personas> listaPersonas) {
+        if (listaPersonas.isEmpty()) {
+            System.out.println("No hi ha cap jugador ni entrenador al mercat de fitxatges.");
+            return;
+        }
+
+        System.out.println("\n--- Iniciant sessió d'entrenament del mercat de fitxatges ---");
+
+        for (Personas persona : listaPersonas) {
+            if (persona instanceof Jugador) {
+                Jugador jugador = (Jugador) persona;
+                jugador.entrenament();
+            } else if (persona instanceof Entrenador) {
+                Entrenador entrenador = (Entrenador) persona;
+                entrenador.entrenament();
+                entrenador.incrementarSou();
+            }
+        }
+
+        System.out.println("--- Sessió d'entrenament finalitzada ---\n");
+    }
+
+    // =========================================================
+    //  TRANSFERIR JUGADOR (opció gestor)
+    // =========================================================
+
+    /**
+     * Permet transferir un jugador d'un equip a un altre.
+     * Es comprova que tots dos equips existeixin i que el jugador existeixi a l'equip d'origen.
+     * En cas que el dorsal del jugador ja estigui ocupat a l'equip de destí,
+     * es demana un nou dorsal fins que sigui vàlid.
+     *
+     * @param listaEquipos Llista d'equips de l'aplicació
+     */
+    public static void transferirJugador(ArrayList<Equipos> listaEquipos) {
+        Scanner scanner = new Scanner(System.in);
+
+        if (listaEquipos.size() < 2) {
+            System.out.println("Calen almenys 2 equips per fer una transferència.");
+            return;
+        }
+
+        // Seleccionem equip d'origen
+        System.out.println("\nEquips disponibles:");
+        for (Equipos equip : listaEquipos) {
+            System.out.println("  - " + equip.getNombre());
+        }
+
+        System.out.println("Introdueix el nom de l'equip d'ORIGEN:");
+        Equipos equipOrigen = null;
+        while (equipOrigen == null) {
+            String nomOrigen = scanner.nextLine();
+            for (Equipos equip : listaEquipos) {
+                if (equip.getNombre().equalsIgnoreCase(nomOrigen)) {
+                    equipOrigen = equip;
+                }
+            }
+            if (equipOrigen == null) {
+                System.out.println("Equip no trobat. Torna a introduir el nom:");
+            }
+        }
+
+        if (equipOrigen.getJugadores().isEmpty()) {
+            System.out.println("L'equip " + equipOrigen.getNombre() + " no té cap jugador.");
+            return;
+        }
+
+        // Seleccionem equip de destí
+        System.out.println("Introdueix el nom de l'equip de DESTÍ:");
+        Equipos equipDesti = null;
+        while (equipDesti == null) {
+            String nomDesti = scanner.nextLine();
+            if (nomDesti.equalsIgnoreCase(equipOrigen.getNombre())) {
+                System.out.println("L'equip de destí no pot ser el mateix que el d'origen. Torna a introduir:");
+                continue;
+            }
+            for (Equipos equip : listaEquipos) {
+                if (equip.getNombre().equalsIgnoreCase(nomDesti)) {
+                    equipDesti = equip;
+                }
+            }
+            if (equipDesti == null) {
+                System.out.println("Equip no trobat. Torna a introduir el nom:");
+            }
+        }
+
+        // Mostrem jugadors de l'equip d'origen
+        System.out.println("\nJugadors de " + equipOrigen.getNombre() + ":");
+        for (Jugador j : equipOrigen.getJugadores()) {
+            System.out.println("  Nom: " + j.getNombre() + " " + j.getApellido() + " | Dorsal: " + j.getDorsal());
+        }
+
+        // Demanem nom i dorsal del jugador
+        System.out.print("Nom del jugador a transferir: ");
+        String nomJugador = scanner.nextLine();
+        System.out.print("Dorsal del jugador a transferir: ");
+        int dorsalJugador = Validador.numerosInicioFinal(0, 99);
+
+        // Busquem el jugador a l'equip d'origen
+        Jugador jugadorATransferir = null;
+        for (Jugador j : equipOrigen.getJugadores()) {
+            if (j.getNombre().equalsIgnoreCase(nomJugador) && j.getDorsal() == dorsalJugador) {
+                jugadorATransferir = j;
+            }
+        }
+
+        if (jugadorATransferir == null) {
+            System.out.println("No s'ha trobat cap jugador amb aquest nom i dorsal a " + equipOrigen.getNombre() + ".");
+            return;
+        }
+
+        // Comprovem si el dorsal ja existeix a l'equip de destí
+        boolean dorsalOcupat = true;
+        int nouDorsal = jugadorATransferir.getDorsal();
+
+        while (dorsalOcupat) {
+            dorsalOcupat = false;
+            for (Jugador j : equipDesti.getJugadores()) {
+                if (j.getDorsal() == nouDorsal) {
+                    dorsalOcupat = true;
+                }
+            }
+            if (dorsalOcupat) {
+                System.out.println("El dorsal " + nouDorsal + " ja està ocupat a " + equipDesti.getNombre() + ". Introdueix un nou dorsal:");
+                nouDorsal = Validador.numerosInicioFinal(0, 99);
+            }
+        }
+
+        // Fem la transferència
+        jugadorATransferir.setDorsal(nouDorsal);
+        equipOrigen.getJugadores().remove(jugadorATransferir);
+        equipDesti.setJugadores(jugadorATransferir);
+
+        System.out.println("Transferència completada! " + jugadorATransferir.getNombre() + " " +
+                jugadorATransferir.getApellido() + " ara juga a " + equipDesti.getNombre() +
+                " amb el dorsal " + nouDorsal + ".");
+    }
+
+    // =========================================================
+    //  ALTA EQUIP
+    // =========================================================
+
+    /**
+     * Dóna d'alta un nou equip a l'aplicació.
+     * Es comprova que el nom no estigui repetit.
+     * Es demana tota la informació necessària, incloent els camps opcionals (estadi i president).
+     *
+     * @param listaEquipos  Llista d'equips de l'aplicació
+     * @param listaPersonas Llista del mercat de fitxatges
+     */
+    public static void altaEquipo(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nom de l'equip (sense repeticions)
+        System.out.println("Quin equip vols donar d'alta? Introdueix el nom:");
+        String nombre = "";
+        boolean nombreRepetido = true;
+        while (nombreRepetido) {
+            nombre = scanner.nextLine();
+            nombreRepetido = false;
+            for (Equipos equipo : listaEquipos) {
+                if (nombre.equalsIgnoreCase(equipo.getNombre())) {
+                    System.out.println("Ja existeix un equip amb aquest nom. Introdueix un altre:");
+                    nombreRepetido = true;
+                }
+            }
+        }
+
+        System.out.println("Introdueix l'any de fundació:");
+        int añoFundacion = Validador.numerosInicioFinal(-2000, 3000);
+        scanner.nextLine(); // netejar buffer
+
+        System.out.println("Introdueix la ciutat de l'equip:");
+        String ciudad = scanner.nextLine();
+
+        // Camp opcional: estadi
+        System.out.println("Vols indicar el nom de l'estadi? (s/n)");
+        String veuEstadi = Validador.numero2("s", "n");
+        String nombreEstadio = "";
+        if (veuEstadi.equalsIgnoreCase("s")) {
+            System.out.println("Introdueix el nom de l'estadi:");
+            nombreEstadio = scanner.nextLine();
+        }
+
+        // Camp opcional: president
+        System.out.println("Vols indicar el nom del/la president/a? (s/n)");
+        String veuPresident = Validador.numero2("s", "n");
+        String nombrePresidente = "";
+        if (veuPresident.equalsIgnoreCase("s")) {
+            System.out.println("Introdueix el nom del/la president/a:");
+            nombrePresidente = scanner.nextLine();
+        }
+
+        // Seleccionem entrenador del mercat de fitxatges
+        Entrenador objetoEntrenador = new Entrenador();
+        boolean entrenadorCorrecto = false;
+
+        boolean hiHaEntrenadors = false;
+        for (Personas personas : listaPersonas) {
+            if (personas instanceof Entrenador) hiHaEntrenadors = true;
+        }
+
+        if (hiHaEntrenadors) {
+            System.out.println("\nEntrenadors disponibles al mercat:");
+            for (Personas personas : listaPersonas) {
+                if (personas instanceof Entrenador) {
+                    System.out.println("  - " + personas.getNombre() + " " + personas.getApellido());
+                }
+            }
+            System.out.println("Introdueix el nom de l'entrenador:");
+            while (!entrenadorCorrecto) {
+                String nombreEntrenador = scanner.nextLine();
+                for (Personas personas : listaPersonas) {
+                    if (personas instanceof Entrenador && personas.getNombre().equalsIgnoreCase(nombreEntrenador)) {
+                        objetoEntrenador = (Entrenador) personas;
+                        entrenadorCorrecto = true;
+                    }
+                }
+                if (!entrenadorCorrecto) {
+                    System.out.println("Entrenador no trobat. Torna a introduir el nom:");
+                }
+            }
+        } else {
+            System.out.println("No hi ha entrenadors al mercat. L'equip es crearà sense entrenador.");
+        }
+
+        // Creem l'equip
+        Equipos nouEquip = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, objetoEntrenador);
+        listaEquipos.add(nouEquip);
+
+        if (entrenadorCorrecto) {
+            listaPersonas.remove(objetoEntrenador);
+            actualizarMercadoFichaje(listaPersonas);
+        }
+
+        guardarEquipos(listaEquipos);
+        System.out.println("Equip " + nombre + " donat d'alta correctament!");
+    }
+
+    // =========================================================
+    //  ALTA JUGADOR / ENTRENADOR
+    // =========================================================
+
+    /**
+     * Dóna d'alta un nou jugador o entrenador al mercat de fitxatges.
+     * La qualitat del jugador es genera aleatòriament (entre 30 i 100).
+     * La motivació inicial és sempre 5.
+     *
+     * @param listaPersonas Llista del mercat de fitxatges
+     */
+    public static void altaJugadorEntrenador(ArrayList<Personas> listaPersonas) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.println("Vols donar d'alta un jugador (j) o un entrenador (e)?");
+        String JoE = Validador.numero2("j", "e");
+
+        System.out.println("Introdueix el nom:");
+        String nombre = scanner.nextLine();
+        System.out.println("Introdueix el cognom:");
+        String apellido = scanner.nextLine();
+        System.out.println("Introdueix la data de naixement (dd/mm/aaaa):");
+        String fechaNacimiento = scanner.nextLine();
+
+        System.out.println("Introdueix el salari anual:");
+        double salarioAnual = 0;
+        boolean salariValid = false;
+        while (!salariValid) {
+            if (scanner.hasNextDouble()) {
+                salarioAnual = scanner.nextDouble();
+                scanner.nextLine();
+                salariValid = true;
+            } else {
+                System.out.println("El valor introduït no és un número vàlid. Torna a introduir:");
+                scanner.nextLine();
+            }
+        }
+
+        if (JoE.equalsIgnoreCase("j")) {
+            System.out.println("Introdueix el dorsal (0-99):");
+            int dorsal = Validador.numerosInicioFinal(0, 99);
+            scanner.nextLine(); // netejar buffer
+
+            System.out.println("Introdueix la posició: Portero (POR), Defensa (DEF), Migcampista (MIG), Davanter (DAV)");
+            String posicion = Validador.array("POR", "DEF", "MIG", "DAV");
+
+            // Qualitat aleatòria entre 30 i 100
+            int qualitat = 30 + random.nextInt(71);
+
+            Jugador j1 = new Jugador(nombre, apellido, fechaNacimiento, 5, salarioAnual, dorsal, posicion, qualitat);
+            listaPersonas.add(j1);
+            System.out.println("Jugador " + nombre + " " + apellido + " donat d'alta al mercat de fitxatges!");
+
+        } else {
+            System.out.println("Introdueix el nombre de tornejos guanyats:");
+            int torneosGanados = Validador.numerosInicioFinal(0, 999);
+            scanner.nextLine(); // netejar buffer
+
+            System.out.println("És seleccionador nacional? (si/no)");
+            String sn = Validador.numero2("si", "no");
+            boolean seleccionadorNacional = sn.equalsIgnoreCase("si");
+
+            Entrenador e1 = new Entrenador(nombre, apellido, fechaNacimiento, 5,
+                    salarioAnual, torneosGanados, seleccionadorNacional);
+            listaPersonas.add(e1);
+            System.out.println("Entrenador " + nombre + " " + apellido + " donat d'alta al mercat de fitxatges!");
+        }
+
+        // Actualitzem el fitxer
+        actualizarMercadoFichaje(listaPersonas);
+    }
+
+    // =========================================================
+    //  CONSULTAR DADES EQUIP
+    // =========================================================
+
+    /**
+     * Demana el nom d'un equip i mostra les seves dades completes,
+     * incloent l'entrenador i la llista de jugadors.
+     *
+     * @param listaEquipos Llista d'equips de l'aplicació
+     */
+    public static void consultarDatosEquipo(ArrayList<Equipos> listaEquipos) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Quin equip vols consultar? Equips disponibles:");
+        for (Equipos eq : listaEquipos) {
+            System.out.println("  - " + eq.getNombre());
+        }
+        System.out.print("Nom de l'equip: ");
+        String input = scanner.nextLine();
+
+        boolean trobat = false;
+        for (Equipos equipo : listaEquipos) {
+            if (equipo.getNombre().equalsIgnoreCase(input)) {
+                System.out.println(equipo);
+                // Mostrem els jugadors
+                if (equipo.getJugadores().isEmpty()) {
+                    System.out.println("L'equip no té jugadors.");
+                } else {
+                    System.out.println("\n--- Jugadors ---");
+                    for (Jugador j : equipo.getJugadores()) {
+                        System.out.println(j);
+                    }
+                }
+                trobat = true;
+            }
+        }
+
+        if (!trobat) {
+            System.out.println("Equip no trobat. Tornant al menú principal.");
+        }
+    }
+
+    // =========================================================
+    //  CONSULTAR DADES JUGADOR D'UN EQUIP
+    // =========================================================
+
+    /**
+     * Demana el nom d'un equip i cerca un jugador per nom i dorsal.
+     * Mostra les dades del jugador trobat.
+     *
+     * @param listaEquipos Llista d'equips de l'aplicació
+     */
+    public static void consultarJugadorEquipo(ArrayList<Equipos> listaEquipos) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Quin equip vols consultar?");
+        for (Equipos eq : listaEquipos) {
+            System.out.println("  - " + eq.getNombre());
+        }
+        System.out.print("Nom de l'equip: ");
+        String inputEquip = scanner.nextLine();
+
+        Equipos equipoTrobat = null;
+        for (Equipos equipo : listaEquipos) {
+            if (equipo.getNombre().equalsIgnoreCase(inputEquip)) {
+                equipoTrobat = equipo;
+            }
+        }
+
+        if (equipoTrobat == null) {
+            System.out.println("Equip no trobat. Tornant al menú principal.");
+            return;
+        }
+
+        if (equipoTrobat.getJugadores().isEmpty()) {
+            System.out.println("L'equip " + equipoTrobat.getNombre() + " no té jugadors.");
+            return;
+        }
+
+        System.out.println("\nJugadors de " + equipoTrobat.getNombre() + ":");
+        for (Jugador j : equipoTrobat.getJugadores()) {
+            System.out.println("  Nom: " + j.getNombre() + " " + j.getApellido() + " | Dorsal: " + j.getDorsal());
+        }
+
+        System.out.print("Nom del jugador: ");
+        String nomJugador = scanner.nextLine();
+        System.out.print("Dorsal del jugador: ");
+        int dorsalJugador = Validador.numerosInicioFinal(0, 99);
+
+        boolean jugadorTrobat = false;
+        for (Jugador jugador : equipoTrobat.getJugadores()) {
+            if (jugador.getNombre().equalsIgnoreCase(nomJugador) && jugador.getDorsal() == dorsalJugador) {
+                System.out.println(jugador);
+                jugadorTrobat = true;
+            }
+        }
+
+        if (!jugadorTrobat) {
+            System.out.println("Jugador no trobat. Tornant al menú principal.");
+        }
+    }
+
+    // =========================================================
+    //  GESTIONAR EL MEU EQUIP (sub-menú gestor)
+    // =========================================================
+
+    /**
+     * Mostra el sub-menú de gestió d'equip i permet a l'usuari escollir
+     * les opcions de gestió disponibles.
+     *
+     * @param listaEquipos  Llista d'equips de l'aplicació
+     * @param listaPersonas Llista del mercat de fitxatges
+     */
+    public static void gestionarMiEquipo(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nQuin equip vols gestionar?");
+        for (Equipos eq : listaEquipos) {
+            System.out.println("  - " + eq.getNombre());
+        }
+        System.out.print("Nom de l'equip: ");
+        String nomEquip = scanner.nextLine();
+
+        Equipos equipo = null;
+        for (Equipos eq : listaEquipos) {
+            if (eq.getNombre().equalsIgnoreCase(nomEquip)) {
+                equipo = eq;
+            }
+        }
+
+        if (equipo == null) {
+            System.out.println("Equip no trobat. Tornant al menú principal.");
+            return;
+        }
+
+        // Sub-menú Team Manager
+        System.out.println("\n" + "=".repeat(40));
+        System.out.println("  Team Manager - " + equipo.getNombre());
+        System.out.println("=".repeat(40));
+        System.out.println("  1- Donar de baixa l'equip");
+        System.out.println("  2- Modificar president/a");
+        System.out.println("  3- Destituir entrenador/a");
+        System.out.println("  4- Fitxar jugador/a o entrenador/a");
+        System.out.println("  0- Sortir");
+        System.out.println("=".repeat(40));
+        System.out.print("Escull una opció: ");
+
+        int input = Validador.numerosInicioFinal(0, 4);
+        scanner.nextLine(); // netejar buffer
+
+        switch (input) {
+            case 0:
+                System.out.println("Tornant al menú principal.");
+                break;
+            case 1:
+                bajaEquipo(listaEquipos, equipo, listaPersonas);
+                break;
+            case 2:
+                modificarPresidente(equipo);
+                break;
+            case 3:
+                destituirEntrenador(equipo, listaPersonas);
+                break;
+            case 4:
+                ficharJugadorEntrenador(listaEquipos, listaPersonas, equipo);
+                break;
+        }
+    }
+
+    /**
+     * Dóna de baixa un equip de l'aplicació, prèvia confirmació.
+     * Els jugadors i l'entrenador de l'equip passen al mercat de fitxatges.
+     *
+     * @param listaEquipos  Llista d'equips de l'aplicació
+     * @param equipo        Equip a eliminar
+     * @param listaPersonas Llista del mercat de fitxatges
+     */
+    public static void bajaEquipo(ArrayList<Equipos> listaEquipos, Equipos equipo, ArrayList<Personas> listaPersonas) {
+        System.out.println("Estàs segur que vols donar de baixa l'equip " + equipo.getNombre() + "? (s/n)");
+        String input = Validador.numero2("s", "n");
+
+        if (input.equalsIgnoreCase("s")) {
+            // Afegim tots els jugadors i l'entrenador al mercat
+            for (Jugador j : equipo.getJugadores()) {
+                listaPersonas.add(j);
+            }
+            if (equipo.getEntrenador() != null && equipo.getEntrenador().getNombre() != null) {
+                listaPersonas.add(equipo.getEntrenador());
+            }
+            listaEquipos.remove(equipo);
+            guardarEquipos(listaEquipos);
+            actualizarMercadoFichaje(listaPersonas);
+            System.out.println("Equip " + equipo.getNombre() + " eliminat correctament.");
+        } else {
+            System.out.println("Operació cancel·lada.");
+        }
+    }
+
+    /**
+     * Modifica el/la president/a d'un equip.
+     * Informa l'usuari si és el mateix que ja hi havia o si no n'hi havia cap.
+     *
+     * @param equipo Equip al qual es vol modificar el/la president/a
+     */
+    public static void modificarPresidente(Equipos equipo) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Indica el nom del nou/nova president/a:");
+        String nouPresident = scanner.nextLine();
+
+        if (equipo.getNombrePresidente() == null || equipo.getNombrePresidente().isBlank()) {
+            System.out.println("L'equip no tenia president/a. El nou president és: " + nouPresident);
+            equipo.setNombrePresidente(nouPresident);
+        } else if (equipo.getNombrePresidente().equalsIgnoreCase(nouPresident)) {
+            System.out.println("Estàs introduint el mateix president/a, no hi ha hagut canvis.");
+        } else {
+            System.out.println("S'ha canviat el/la president/a de " + equipo.getNombrePresidente() + " a " + nouPresident + ".");
+            equipo.setNombrePresidente(nouPresident);
+        }
+    }
+
+    /**
+     * Destitueix l'entrenador d'un equip, prèvia confirmació.
+     * L'entrenador passa a formar part del mercat de fitxatges.
+     *
+     * @param equipo        Equip del qual es vol destituir l'entrenador
+     * @param listaPersonas Llista del mercat de fitxatges
+     */
+    public static void destituirEntrenador(Equipos equipo, ArrayList<Personas> listaPersonas) {
+        if (equipo.getEntrenador() == null || equipo.getEntrenador().getNombre() == null) {
+            System.out.println("L'equip " + equipo.getNombre() + " no té cap entrenador assignat.");
+            return;
+        }
+
+        System.out.println("Segur que vols que " + equipo.getEntrenador().getNombre() + " " +
+                equipo.getEntrenador().getApellido() + " deixi de ser entrenador de " +
+                equipo.getNombre() + "? (s/n)");
+        String entrada = Validador.numero2("s", "n");
+
+        if (entrada.equalsIgnoreCase("s")) {
+            // L'entrenador passa al mercat
+            listaPersonas.add(equipo.getEntrenador());
+            equipo.setEntrenador(new Entrenador());
+            actualizarMercadoFichaje(listaPersonas);
+            System.out.println("L'entrenador ha estat destituït i ara és al mercat de fitxatges.");
+        } else {
+            System.out.println("Operació cancel·lada.");
+        }
+    }
+
+    /**
+     * Permet fitxar un jugador o entrenador del mercat de fitxatges per a un equip.
+     * El jugador o entrenador es treu del mercat i s'afegeix a l'equip.
+     *
+     * @param listaEquipos  Llista d'equips de l'aplicació
+     * @param listaPersonas Llista del mercat de fitxatges
+     * @param equipo        Equip que vol fitxar
+     */
+    public static void ficharJugadorEntrenador(ArrayList<Equipos> listaEquipos,
+                                               ArrayList<Personas> listaPersonas, Equipos equipo) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Vols fitxar un jugador (j) o un entrenador (e)?");
+        String entradaJoE = Validador.numero2("j", "e");
+
+        if (entradaJoE.equalsIgnoreCase("j")) {
+            // Mostrem jugadors disponibles
+            boolean hiHaJugadors = false;
+            System.out.println("\nJugadors disponibles al mercat:");
+            for (Personas persona : listaPersonas) {
+                if (persona instanceof Jugador) {
+                    System.out.println("  - " + persona.getNombre() + " " + persona.getApellido());
+                    hiHaJugadors = true;
+                }
+            }
+            if (!hiHaJugadors) {
+                System.out.println("No hi ha jugadors disponibles al mercat.");
+                return;
+            }
+
+            System.out.print("Nom del jugador: ");
+            String nombre = scanner.nextLine();
+            System.out.print("Cognom del jugador: ");
+            String apellido = scanner.nextLine();
+
+            Personas personaAFitxar = null;
+            for (Personas personas : listaPersonas) {
+                if (personas instanceof Jugador &&
+                        personas.getNombre().equalsIgnoreCase(nombre) &&
+                        personas.getApellido().equalsIgnoreCase(apellido)) {
+                    personaAFitxar = personas;
+                }
+            }
+
+            if (personaAFitxar != null) {
+                equipo.setJugadores((Jugador) personaAFitxar);
+                listaPersonas.remove(personaAFitxar);
+                System.out.println("El jugador " + nombre + " " + apellido + " ha estat fitxat per " + equipo.getNombre() + "!");
+            } else {
+                System.out.println("No s'ha trobat el jugador indicat al mercat.");
+            }
+
+        } else {
+            // Mostrem entrenadors disponibles
+            boolean hiHaEntrenadors = false;
+            System.out.println("\nEntrenadors disponibles al mercat:");
+            for (Personas persona : listaPersonas) {
+                if (persona instanceof Entrenador) {
+                    System.out.println("  - " + persona.getNombre() + " " + persona.getApellido());
+                    hiHaEntrenadors = true;
+                }
+            }
+            if (!hiHaEntrenadors) {
+                System.out.println("No hi ha entrenadors disponibles al mercat.");
+                return;
+            }
+
+            System.out.print("Nom de l'entrenador: ");
+            String nombre = scanner.nextLine();
+            System.out.print("Cognom de l'entrenador: ");
+            String apellido = scanner.nextLine();
+
+            Personas personaAFitxar = null;
+            for (Personas personas : listaPersonas) {
+                if (personas instanceof Entrenador &&
+                        personas.getNombre().equalsIgnoreCase(nombre) &&
+                        personas.getApellido().equalsIgnoreCase(apellido)) {
+                    personaAFitxar = personas;
+                }
+            }
+
+            if (personaAFitxar != null) {
+                equipo.setEntrenador((Entrenador) personaAFitxar);
+                listaPersonas.remove(personaAFitxar);
+                System.out.println("L'entrenador " + nombre + " " + apellido + " ara és entrenador de " + equipo.getNombre() + "!");
+            } else {
+                System.out.println("No s'ha trobat l'entrenador indicat al mercat.");
+            }
+        }
+
+        actualizarMercadoFichaje(listaPersonas);
+        guardarEquipos(listaEquipos);
+    }
+
+    // =========================================================
+    //  PERSISTÈNCIA - LLEGIR
+    // =========================================================
+
+    /**
+     * Llegeix el fitxer del mercat de fitxatges i omple la llista de persones.
+     * El fitxer ha de tenir el format: J/E;nom;cognom;dataNaix;motivació;salari;[camps específics]
+     *
+     * @param listaPersonas Llista on s'afegiran els jugadors i entrenadors llegits
+     */
+    public static void leerMercadoFichajes(ArrayList<Personas> listaPersonas) {
         try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
             String linea;
 
             while ((linea = br.readLine()) != null) {
-
+                if (linea.isEmpty()) continue;
                 String[] dades = linea.split(";");
 
                 String JoE = dades[0];
-
                 String nombre = dades[1];
                 String apellido = dades[2];
                 String fechaNacimiento = dades[3];
                 int nivelMotivacion = Integer.parseInt(dades[4]);
                 double salario = Double.parseDouble(dades[5]);
+
                 if (JoE.equals("J")) {
                     int dorsal = Integer.parseInt(dades[6]);
                     String posicion = dades[7];
                     int calidadTeorica = Integer.parseInt(dades[8]);
-                    Jugador j1 = new Jugador(nombre, apellido, fechaNacimiento, nivelMotivacion, salario,
-                            dorsal, posicion, calidadTeorica);
+                    Jugador j1 = new Jugador(nombre, apellido, fechaNacimiento, nivelMotivacion, salario, dorsal, posicion, calidadTeorica);
                     listaPersonas.add(j1);
                 } else {
                     int torneosGanados = Integer.parseInt(dades[6]);
                     boolean seleccionadoNacional = Boolean.parseBoolean(dades[7]);
-                    Entrenador e1 = new Entrenador(nombre, apellido, fechaNacimiento, nivelMotivacion, salario,
-                            torneosGanados, seleccionadoNacional);
+                    Entrenador e1 = new Entrenador(nombre, apellido, fechaNacimiento, nivelMotivacion, salario, torneosGanados, seleccionadoNacional);
                     listaPersonas.add(e1);
                 }
             }
 
         } catch (IOException e) {
-            System.out.println("Error al leer el fichero: " + e.getMessage());
+            System.out.println("Error al llegir el fitxer del mercat: " + e.getMessage());
         }
     }
 
+    /**
+     * Llegeix el fitxer d'equips i omple la llista d'equips.
+     * Per a cada equip, llegeix el fitxer específic amb els seus jugadors i entrenador.
+     *
+     * @param listaEquipos  Llista on s'afegiran els equips llegits
+     * @param listaPersonas Llista del mercat de fitxatges (per associar entrenadors)
+     */
     public static void leerEquipos(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
 
         try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/guardarEquipos.txt"))) {
@@ -120,10 +1059,11 @@ public class Main {
             }
 
         } catch (IOException e) {
-            System.out.println("Error al leer guardarEquipos.txt: " + e.getMessage());
+            System.out.println("Error al llegir guardarEquipos.txt: " + e.getMessage());
             return;
         }
 
+        // Llegim els fitxers individuals de cada equip (jugadors i entrenador)
         for (Equipos equipos : listaEquipos) {
             try (BufferedReader brr = new BufferedReader(
                     new FileReader("Aplicacio/src/archivosGuardado/equipos/" + equipos.getNombre() + ".txt"))) {
@@ -141,503 +1081,47 @@ public class Main {
                     if (tipo.equals("E")) {
                         if (datos.length < 8) continue;
 
-                        String nombreEntrenador = datos[1];
-                        String apellidoEntrenador = datos[2];
-                        String fechaNacimientoEntrenador = datos[3];
-                        int nivelMotivacionEntrenador = Integer.parseInt(datos[4]);
-                        double salarioEntrenador = Double.parseDouble(datos[5]);
-                        int numTorneosEntrenador = Integer.parseInt(datos[6]);
-                        boolean seleccionadorNacional = Boolean.parseBoolean(datos[7]);
-
                         Entrenador ent = new Entrenador(
-                                nombreEntrenador,
-                                apellidoEntrenador,
-                                fechaNacimientoEntrenador,
-                                nivelMotivacionEntrenador,
-                                salarioEntrenador,
-                                numTorneosEntrenador,
-                                seleccionadorNacional
+                                datos[1], datos[2], datos[3],
+                                Integer.parseInt(datos[4]),
+                                Double.parseDouble(datos[5]),
+                                Integer.parseInt(datos[6]),
+                                Boolean.parseBoolean(datos[7])
                         );
-
                         equipos.setEntrenador(ent);
 
                     } else if (tipo.equals("J")) {
                         if (datos.length < 9) continue;
 
-                        String nombreJugador = datos[1];
-                        String apellidoJugador = datos[2];
-                        String fechaNacimiento = datos[3];
-                        int nivelMotivacion = Integer.parseInt(datos[4]);
-                        double sueldoAnualJugador = Double.parseDouble(datos[5]);
-                        int dorsal = Integer.parseInt(datos[6]);
-                        String posicion = datos[7];
-                        int calidad = Integer.parseInt(datos[8]);
-
                         Jugador j1 = new Jugador(
-                                nombreJugador,
-                                apellidoJugador,
-                                fechaNacimiento,
-                                nivelMotivacion,
-                                sueldoAnualJugador,
-                                dorsal,
-                                posicion,
-                                calidad
+                                datos[1], datos[2], datos[3],
+                                Integer.parseInt(datos[4]),
+                                Double.parseDouble(datos[5]),
+                                Integer.parseInt(datos[6]),
+                                datos[7],
+                                Integer.parseInt(datos[8])
                         );
-
                         equipos.getJugadores().add(j1);
                     }
                 }
 
             } catch (IOException e) {
-                System.out.println("Error al leer el archivo del equipo " + equipos.getNombre() + ": " + e.getMessage());
+                System.out.println("Error al llegir el fitxer de l'equip " + equipos.getNombre() + ": " + e.getMessage());
             }
         }
     }
 
-    public static void altaEquipo(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Que equipo quieres dar de alta?");
-        Entrenador objetoEntrenador = new Entrenador();
-
-        String input = "";
-        boolean nombreRepetido = true;
-
-        while (nombreRepetido) {
-            input = scanner.nextLine();
-            nombreRepetido = false;
-            for (Equipos equipo : listaEquipos) {
-                if (input.equalsIgnoreCase(equipo.getNombre())) {
-                    System.out.println("Hay un equipo con ese nombre, introduzca otro");
-                    nombreRepetido = true;
-                }
-            }
-        }
-
-
-        String nombre = input;
-
-        System.out.println("Introduce el año de fundación");
-        int añoFundacion = Validador.numerosInicioFinal(-2000, 3000);
-
-
-        System.out.println("Introduce la ciudad del equipo");
-        String ciudad = scanner.nextLine();
-
-        boolean entrenadorCorrecto = false;
-        while (!entrenadorCorrecto) {
-            for (Personas personas : listaPersonas) {
-                if (personas instanceof Entrenador)
-                    System.out.println(personas + "\n");
-            }
-            System.out.println("Introduce el nombre del entrenador");
-            String nombreEntrenador = scanner.nextLine();
-
-            for (Personas personas : listaPersonas) {
-                if (personas instanceof Entrenador && personas.getNombre().equalsIgnoreCase(nombreEntrenador)) {
-                    objetoEntrenador = (Entrenador) personas;
-                    entrenadorCorrecto = true;
-                }
-            }
-            if (!entrenadorCorrecto) {
-                System.out.println("Entrenador incorrecto");
-            }
-        }
-
-        System.out.println("(Opcional) Introduce el nombre del presidente");
-        String nombrePresidente = scanner.nextLine();
-        System.out.println("(Opcional) Introduce el nombre del estadio del equipo");
-        String nombreEstadio = scanner.nextLine();
-
-        if (nombrePresidente != null && nombreEstadio != null) {
-            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, nombrePresidente, objetoEntrenador);
-            listaEquipos.add(e1);
-        } else if (nombrePresidente != null && nombreEstadio.isEmpty()) {
-            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombrePresidente, objetoEntrenador);
-            listaEquipos.add(e1);
-        } else if (nombrePresidente.isEmpty() && nombreEstadio != null) {
-            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, nombreEstadio, objetoEntrenador);
-            listaEquipos.add(e1);
-        } else {
-            Equipos e1 = new Equipos(nombre, añoFundacion, ciudad, objetoEntrenador);
-            listaEquipos.add(e1);
-        }
-
-        guardarEquipos(listaEquipos);
-        listaPersonas.remove(objetoEntrenador);
-        actualizarMercadoFichaje(listaPersonas);
-    }
-
-    public static void altaJugadorEntrenador(ArrayList<Personas> listaPersonas) {
-        Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
-
-        System.out.println("Quieres dar de alta un jugador (j) o un entrandor (e)?");
-        String JoE = Validador.numero2("j", "e");
-        System.out.println("Introduce el nombre");
-        String nombre = scanner.nextLine();
-        System.out.println("Introduce el apellido");
-        String apellido = scanner.nextLine();
-        System.out.println("Introduce la fecha nacimiento");
-        String fechaNacimiento = scanner.nextLine();
-        double salarioAnual = 0;
-        boolean valorDouble = false;
-        while (!valorDouble) {
-            scanner.nextLine();
-            System.out.println("Introduce el salario anual");
-            if (scanner.hasNextDouble()) {
-                salarioAnual = scanner.nextDouble();
-                scanner.nextLine();
-                valorDouble = true;
-            } else {
-                System.out.println("El valor introducido no es un numero");
-            }
-        }
-
-        if (JoE.equalsIgnoreCase("j")) {
-            System.out.println("Introduce el dorsal");
-            int dorsal = Validador.numerosInicioFinal(0, 99);
-
-            System.out.println("Introduce su posición: Portero (POR), Defensa, (DEF), Mediocampo (MIG), Delantero, (DAV)");
-            String posicion = Validador.array("POR", "DEF", "MIG", "DAV");
-
-
-            Jugador j1 = new Jugador(nombre, apellido, fechaNacimiento, 5,
-                    salarioAnual, dorsal, posicion, random.nextInt((99) + 1));
-            listaPersonas.add(j1);
-
-        } else {
-            int torneosGanados = 0;
-
-            boolean valorInt = false;
-            while (!valorInt) {
-                scanner.nextLine();
-                System.out.println("Introduce el numero de torneos ganados");
-                if (scanner.hasNextInt()) {
-                    torneosGanados = scanner.nextInt();
-                    scanner.nextLine();
-                    valorInt = true;
-                } else {
-                    System.out.println("El valor introducido no es un numero");
-                }
-            }
-
-            System.out.println("Introduce si es seleccionador nacinal");
-            boolean seleccionadorNacional;
-
-            String stringSeleccionadorNacional = Validador.numero2("si", "no");
-            if (stringSeleccionadorNacional.equalsIgnoreCase("si"))
-                seleccionadorNacional = true;
-            else {
-                seleccionadorNacional = false;
-            }
-            Entrenador e1 = new Entrenador(nombre, apellido, fechaNacimiento, 5,
-                    salarioAnual, torneosGanados, seleccionadorNacional);
-            listaPersonas.add(e1);
-        }
-    }
-
-    public static char login(String[] opcionesAdmin, String[]
-            opcionesGestorEquipos, ArrayList<String> opcionesUsuarioActual) {
-
-        System.out.println("-".repeat(15) + "Iniciando login" + "-".repeat(15));
-        System.out.println("¿Eres admin (a) o eres un gestor de equipo (g)?");
-        String input = Validador.numero2("a", "g");
-
-        char tipousuario = input.charAt(0);
-        if (input.equalsIgnoreCase("a")) {
-            tipousuario = 'a';
-            opcionesUsuarioActual.addAll(Arrays.asList(opcionesAdmin));
-        } else if (input.equalsIgnoreCase("g")) {
-            tipousuario = 'g';
-            opcionesUsuarioActual.addAll(Arrays.asList(opcionesGestorEquipos));
-        } else {
-
-        }
-        return tipousuario;
-    }
-
-    public static String mostrarMenu(char tipoUsuario, String[] opcionesAdmin, String[] opcionesGestorEquipos,
-                                     HashMap<String, String> opcionesTotales) {
-        String[] tipoMenu = {};
-
-        if (tipoUsuario == 'a') {
-            tipoMenu = opcionesAdmin;
-        } else if (tipoUsuario == 'g') {
-            tipoMenu = opcionesGestorEquipos;
-        }
-
-        for (String linea : tipoMenu) {
-            if (opcionesTotales.containsKey(linea)) {
-                System.out.println(linea + " " + opcionesTotales.get(linea));
-            }
-        }
-        return Validador.array(tipoMenu);
-    }
-
-    public static boolean escogerOpcion(String input, char tipoUsuario, ArrayList<
-            Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
-        boolean salir = true;
-        switch (input.toUpperCase()) {
-            case "S":
-                System.out.println("Saliendo del futbol manager");
-                salir = false;
-                break;
-            case "VC":
-                break;
-            case "AE":
-                altaEquipo(listaEquipos, listaPersonas);
-                break;
-            case "AJ":
-                altaJugadorEntrenador(listaPersonas);
-                break;
-            case "DA":
-                consultarDatosEquipo(listaEquipos);
-                break;
-            case "DJ":
-                consultarJugadorEquipo(listaEquipos);
-                break;
-            case "DV":
-                break;
-            case "SE":
-                break;
-            case "DD":
-                actualizarMercadoFichaje(listaPersonas);
-                guardarEquipos(listaEquipos);
-                break;
-            case "GE":
-                gestionarMiEquipo(listaEquipos, listaPersonas);
-                break;
-            case "TJ":
-                break;
-            default:
-                System.out.println("Valor incorrecto");
-                break;
-        }
-        return salir;
-    }
-
-    public static void gestionarMiEquipo(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<String> nombreEquipos = new ArrayList<>();
-
-        for (Equipos nombreEquiposString : listaEquipos) {
-            nombreEquipos.add(nombreEquiposString.getNombre());
-            System.out.println(nombreEquiposString.getNombre());
-        }
-
-        System.out.println("Que equipo queres gestionar");
-        String nombreEquipoGestionar = Validador.arrayListStrings(nombreEquipos);
-        Equipos equipo = new Equipos();
-
-        for (Equipos equipoo : listaEquipos) {
-            if (nombreEquipoGestionar.equalsIgnoreCase(equipo.getNombre())) {
-                equipo = equipoo;
-            }
-        }
-            System.out.println("Team Manager:");
-            System.out.println("1- Donar de baixa l'equip");
-            System.out.println("2- Modificar president/a");
-            System.out.println("3- Destituir entrenador/a");
-            System.out.println("4- Fitxar jugador/a o entrenador/a");
-            System.out.println("0- Sortir");
-
-            int input = Validador.numerosInicioFinal(0, 4);
-
-            switch (input) {
-                case 1:
-                    bajaEquipo(listaEquipos, equipo, listaPersonas);
-                    break;
-                case 2:
-                    modificarPresidente(listaEquipos, equipo);
-                    break;
-                case 3:
-                    destituirEntrenador(listaEquipos, equipo);
-                    break;
-                case 4:
-                    ficharJugadorEntrenador(listaEquipos, listaPersonas, equipo);
-                    break;
-            }
-    }
-
-    public static void ficharJugadorEntrenador
-            (ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas, Equipos equipo) {
-        Scanner scanner = new Scanner(System.in);
-
-        boolean fichado = false;
-        String JoE = "";
-
-        System.out.println("Quieres fichar un jugador (j) o un entrandor (e)");
-        String entradaJoE = Validador.numero2("j", "e");
-
-        if (entradaJoE.equalsIgnoreCase("j")) {
-            for (Personas persona : listaPersonas) {
-                if (persona instanceof Jugador) {
-                    System.out.println(persona);
-                    JoE = "Jugador";
-                }
-            }
-        } else {
-            for (Personas persona : listaPersonas) {
-                if (persona instanceof Entrenador) {
-                    System.out.println(persona);
-                    JoE = "Entrenador";
-                }
-            }
-        }
-
-        System.out.println("A que " + JoE + " quieres fichar");
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Apellido: ");
-        String apellido = scanner.nextLine();
-
-        Personas personaABorrar = null;
-
-        if (entradaJoE.equalsIgnoreCase("j")) {
-            for (Personas personas : listaPersonas) {
-                if (personas instanceof Jugador) {
-                    if (nombre.equalsIgnoreCase(personas.getNombre()) && apellido.equalsIgnoreCase(personas.getApellido())) {
-                        equipo.setJugadores((Jugador) personas);
-                        personaABorrar = personas;
-                        System.out.println("El jugador " + nombre + " ha sido fichado en " + equipo.getNombre());
-                        fichado = true;
-                    }
-                }
-            }
-        } else {
-            for (Personas personas : listaPersonas) {
-                if (personas instanceof Entrenador) {
-                    if (nombre.equalsIgnoreCase(personas.getNombre()) && apellido.equalsIgnoreCase(personas.getApellido())) {
-                        equipo.setEntrenador((Entrenador) personas);
-                        equipo.setEntrenador((Entrenador) personas);
-                        personaABorrar = personas;
-                        System.out.println("El entrenador " + nombre + " ahora es entrenador de " + equipo.getNombre());
-                        fichado = true;
-                    }
-                }
-            }
-        }
-
-        if (personaABorrar != null) {
-            System.out.println(personaABorrar);
-            listaPersonas.remove(personaABorrar);
-        }
-
-        if (!fichado) {
-            System.out.println("No se ha fichado a este fichaje, datos incorrectos");
-        }
-        actualizarMercadoFichaje(listaPersonas);
-        guardarEquipos(listaEquipos);
-    }
-
-    public static void modificarPresidente(ArrayList<Equipos> listaEquipos, Equipos equipo) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Indica el nuevo presidente");
-        String nuevoPresidente = scanner.nextLine();
-
-        if (equipo.getNombrePresidente().equalsIgnoreCase(nuevoPresidente)) {
-            System.out.println("Estas introduciendo el mismo presidente, no ha habido cambios");
-        } else if (equipo.getNombrePresidente().isBlank()) {
-            System.out.println("No existia presidente, el nuevo presidente serà " + nuevoPresidente);
-        } else {
-            System.out.println("Se ha cambiado el presidente de " + equipo.getNombrePresidente() + " a " + nuevoPresidente);
-
-            equipo.setNombrePresidente(nuevoPresidente);
-        }
-    }
-
-    public static void destituirEntrenador(ArrayList<Equipos> listaEquipos, Equipos equipo) {
-        System.out.println("¿Seguro que quieres que tu entrenador deje de ser entrandor de " + equipo.getNombre() + "?" + "Si (s), No (n)");
-
-        String entrada = Validador.numero2("s", "n");
-
-        if (entrada.equalsIgnoreCase("s")) {
-
-        }
-
-
-    }
-
-    public static void bajaEquipo(ArrayList<Equipos> listaEquipos, Equipos
-            equipo, ArrayList<Personas> listaPersonas) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("¿Estás seguro que quieres dar de baja al equipo actual? (s) sí, (n) no");
-        String input = Validador.numero2("s", "n");
-
-        if (input.equalsIgnoreCase("s")) {
-
-            listaPersonas.addAll(equipo.getJugadores());
-            listaPersonas.add(equipo.getEntrenador());
-            listaEquipos.remove(equipo);
-
-            guardarEquipos(listaEquipos);
-            System.out.println("Equipo eliminado");
-        }
-    }
-
-    public static void consultarDatosEquipo(ArrayList<Equipos> listaEquipos) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Que equipo quieres consultar");
-
-        for (Equipos nombreEquipo : listaEquipos) {
-            System.out.println(nombreEquipo.getNombre());
-        }
-
-        String input = scanner.nextLine();
-        for (Equipos equipo : listaEquipos) {
-            if (equipo.getNombre().equalsIgnoreCase(input)) {
-                System.out.println(equipo);
-            } else {
-                System.out.println("Equipo no encontrado");
-            }
-        }
-    }
-
-    public static void consultarJugadorEquipo(ArrayList<Equipos> listaEquipos) {
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<String> nombreJugadores = new ArrayList<>();
-        ArrayList<Integer> dorsalJugadores = new ArrayList<>();
-        ArrayList<String> nombreEquipos = new ArrayList<>();
-
-
-        System.out.println("Que equipo quieres consultar");
-
-        for (Equipos nombreEquipo : listaEquipos) {
-            nombreEquipos.add(nombreEquipo.getNombre());
-            System.out.println(nombreEquipo.getNombre());
-        }
-
-        String input = Validador.arrayListStrings(nombreEquipos);
-        for (Equipos equipo : listaEquipos) {
-            if (equipo.getNombre().equalsIgnoreCase(input)) {
-                System.out.println(equipo);
-            }
-
-            for (Jugador jugador : equipo.getJugadores()) {
-                nombreJugadores.add(jugador.getNombre());
-                dorsalJugadores.add(jugador.getDorsal());
-                System.out.println("Nombre: " + jugador.getNombre());
-                System.out.println("Dorsal: " + jugador.getDorsal() + "\n");
-            }
-
-            if (!equipo.getJugadores().isEmpty()) {
-                System.out.println("Cual es el nombre del jugador");
-                String nombreJugador = Validador.arrayListStrings(nombreJugadores);
-
-                System.out.println("Cual es el dorsal del jugador");
-                int dorsaljugador = Validador.arrayListInt(dorsalJugadores);
-
-                for (Jugador jugador : equipo.getJugadores()) {
-                    if (jugador.getNombre().equalsIgnoreCase(nombreJugador) && jugador.getDorsal() == dorsaljugador) {
-                        System.out.println(jugador);
-                    }
-                }
-            }
-        }
-    }
-
+    // =========================================================
+    //  PERSISTÈNCIA - DESAR
+    // =========================================================
+
+    /**
+     * Desa les dades de tots els equips en dos tipus de fitxers:
+     * - Un fitxer resum (guardarEquipos.txt) amb les dades bàsiques de cada equip.
+     * - Un fitxer per equip (equipos/NomEquip.txt) amb tots els jugadors i l'entrenador.
+     *
+     * @param listaEquipos Llista d'equips a desar
+     */
     public static void guardarEquipos(List<Equipos> listaEquipos) {
 
         String rutaCarpeta = "Aplicacio/src/archivosGuardado/guardarEquipos.txt";
@@ -646,30 +1130,34 @@ public class Main {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaCarpeta))) {
 
             for (Equipos equipo : listaEquipos) {
+                String nomEntrenador = (equipo.getEntrenador() != null && equipo.getEntrenador().getNombre() != null)
+                        ? equipo.getEntrenador().getNombre() : "";
                 bw.write(equipo.getNombre() + ";" +
                         equipo.getAñoFundacion() + ";" +
                         equipo.getCiudad() + ";" +
-                        equipo.getNombreEstadio() + ";" +
-                        equipo.getNombrePresidente() + ";" +
-                        equipo.getEntrenador().getNombre());
+                        (equipo.getNombreEstadio() != null ? equipo.getNombreEstadio() : "") + ";" +
+                        (equipo.getNombrePresidente() != null ? equipo.getNombrePresidente() : "") + ";" +
+                        nomEntrenador);
                 bw.newLine();
 
-                try (BufferedWriter bwJugadores = new BufferedWriter(new FileWriter(rutaArchivoEquipos + equipo.getNombre() + ".txt"))) {
+                try (BufferedWriter bwJugadors = new BufferedWriter(new FileWriter(rutaArchivoEquipos + equipo.getNombre() + ".txt"))) {
 
-                    bwJugadores.write(
-                            "E;" +
-                                    equipo.getEntrenador().getNombre() + ";" +
-                                    equipo.getEntrenador().getApellido() + ";" +
-                                    equipo.getEntrenador().getFechaNacimiento() + ";" +
-                                    equipo.getEntrenador().getNivelMotivacion() + ";" +
-                                    equipo.getEntrenador().getSueldoAnual() + ";" +
-                                    equipo.getEntrenador().getNumTorneosGanados() + ";" +
-                                    equipo.getEntrenador().isSeleccionadorNacional()
-                    );
-                    bwJugadores.newLine();
+                    if (equipo.getEntrenador() != null && equipo.getEntrenador().getNombre() != null) {
+                        bwJugadors.write(
+                                "E;" +
+                                        equipo.getEntrenador().getNombre() + ";" +
+                                        equipo.getEntrenador().getApellido() + ";" +
+                                        equipo.getEntrenador().getFechaNacimiento() + ";" +
+                                        equipo.getEntrenador().getNivelMotivacion() + ";" +
+                                        equipo.getEntrenador().getSueldoAnual() + ";" +
+                                        equipo.getEntrenador().getNumTorneosGanados() + ";" +
+                                        equipo.getEntrenador().isSeleccionadorNacional()
+                        );
+                        bwJugadors.newLine();
+                    }
 
                     for (Jugador jugador : equipo.getJugadores()) {
-                        bwJugadores.write(
+                        bwJugadors.write(
                                 "J;" +
                                         jugador.getNombre() + ";" +
                                         jugador.getApellido() + ";" +
@@ -680,26 +1168,28 @@ public class Main {
                                         jugador.getPosicion() + ";" +
                                         jugador.getQualidad()
                         );
-                        bwJugadores.newLine();
+                        bwJugadors.newLine();
                     }
 
                 } catch (IOException e) {
-                    System.out.println("Error al escribir el archivo del equipo " + equipo.getNombre() + ": " + e.getMessage());
+                    System.out.println("Error al escriure el fitxer de l'equip " + equipo.getNombre() + ": " + e.getMessage());
                 }
             }
 
         } catch (IOException e) {
-            System.out.println("Error al escribir guardarEquipos.txt: " + e.getMessage());
+            System.out.println("Error al escriure guardarEquipos.txt: " + e.getMessage());
         }
     }
 
+    /**
+     * Actualitza el fitxer del mercat de fitxatges amb les dades actuals de la llista.
+     *
+     * @param listaPersonas Llista actual del mercat de fitxatges
+     */
     public static void actualizarMercadoFichaje(ArrayList<Personas> listaPersonas) {
-        // Primero, limpia el archivo de datos antiguos, ya que lo sobrescribimos completamente
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
 
-            // Escribimos los datos de todas las personas (jugadores y entrenadores)
             for (Personas persona : listaPersonas) {
-                // Solo escribimos si el objeto no es nulo y si pertenece a Jugador o Entrenador
                 if (persona instanceof Entrenador) {
                     bw.write(
                             "E;" +
@@ -728,9 +1218,8 @@ public class Main {
                 }
             }
 
-            System.out.println("Archivo de mercado de fichajes actualizado correctamente.");
         } catch (IOException e) {
-            System.out.println("Error al actualizar el archivo de mercado de fichajes: " + e.getMessage());
+            System.out.println("Error al actualitzar el mercat de fitxatges: " + e.getMessage());
         }
     }
 }

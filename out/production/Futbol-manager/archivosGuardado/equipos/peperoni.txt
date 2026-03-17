@@ -1,2 +1,0 @@
-E;marc;garcia;2006;5;1.0E7;2;true
-J;Pau;Torres;16/01/1997;8;5000000.0;4;DEF;77
