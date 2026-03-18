@@ -67,7 +67,7 @@ La carpeta `Web/` es una versión estática con páginas que muestran:
 - Resultados de partidos
 - Formularios para crear jugadores / equipos (principalmente con JS + JSON)
 
-Puedes abrir `https://rbe-politecnics.github.io/Web-Football-Manager/` directamente en tu navegador para verla.
+Puedes abrir [Este Link](https://rbe-politecnics.github.io/Web-Football-Manager/) directamente en tu navegador para verla.
 
 ---
 
