@@ -17,7 +17,6 @@ public class Personas {
 
     }
 
-    /*GETTERS Y SETTER*/
     public int getNivelMotivacion() {
         return nivelMotivacion;
     }
@@ -49,11 +48,11 @@ public class Personas {
     @Override
     public String toString() {
         return String.format(
-                "Nombre:                %-20s\n" +  // Alineado a la izquierda con un ancho fijo
-                        "Apellido:              %-20s\n" +  // Alineado a la izquierda con un ancho fijo
-                        "Fecha nacimiento:      %-20s\n" +  // Alineado a la izquierda con un ancho fijo
-                        "Motivación:            %-20d\n" +  // Alineado a la izquierda con un ancho fijo
-                        "Sueldo anual:          %-20.2f\n",  // Alineado a la izquierda con un ancho fijo y 2 decimales
+                "Nombre:                %-20s\n" +
+                        "Apellido:              %-20s\n" +
+                        "Fecha nacimiento:      %-20s\n" +
+                        "Motivación:            %-20d\n" +
+                        "Sueldo anual:          %-20.2f\n",
                 nombre, apellido, fechaNacimiento, nivelMotivacion, sueldoAnual);
     }
 }

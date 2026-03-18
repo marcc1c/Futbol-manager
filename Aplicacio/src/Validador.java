@@ -78,7 +78,6 @@ public class Validador {
         return input;
     }
 
-
     public static String numero1(String numero) {
         Scanner scanner = new Scanner(System.in);
         String input = "";

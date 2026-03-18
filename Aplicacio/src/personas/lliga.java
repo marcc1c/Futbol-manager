@@ -3,81 +3,45 @@ package personas;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Classe que representa una lliga de futbol.
- * Gestiona els equips participants, disputa els partits
- * i mostra la classificació final.
- */
-public class Lliga {
 
-    /** Nom de la lliga */
+public class lliga {
+
     private String nombre;
 
-    /** Nombre d'equips que participen a la lliga */
     private int numEquipos;
 
-    /** Llista d'equips participants */
     private ArrayList<Equipos> equipos;
 
-    /** Llista de resultats per a cada equip (punts, partits, gols a favor, gols en contra) */
-    private ArrayList<int[]> estadisticas; // [puntos, partidosJugados, golesFavor, golesContra]
+    private ArrayList<int[]> estadisticas;
 
-    /**
-     * Constructor de la Lliga.
-     *
-     * @param nombre    Nom de la lliga
-     * @param numEquipos Nombre d'equips que hi participen
-     */
-    public Lliga(String nombre, int numEquipos) {
+
+    public lliga(String nombre, int numEquipos) {
         this.nombre = nombre;
         this.numEquipos = numEquipos;
         this.equipos = new ArrayList<>();
         this.estadisticas = new ArrayList<>();
     }
 
-    /**
-     * Retorna el nom de la lliga.
-     *
-     * @return Nom de la lliga
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Retorna el nombre d'equips que han de participar a la lliga.
-     *
-     * @return Nombre d'equips
-     */
+
     public int getNumEquipos() {
         return numEquipos;
     }
 
-    /**
-     * Retorna la llista d'equips participants.
-     *
-     * @return ArrayList d'equips
-     */
+
     public ArrayList<Equipos> getEquipos() {
         return equipos;
     }
 
-    /**
-     * Afegeix un equip a la lliga inicialitzant les seves estadístiques a zero.
-     *
-     * @param equipo Equip a afegir
-     */
+
     public void afegirEquip(Equipos equipo) {
         equipos.add(equipo);
-        // [puntos, partidosJugados, golesFavor, golesContra]
         estadisticas.add(new int[]{0, 0, 0, 0});
     }
 
-    /**
-     * Disputa tots els partits de la lliga (anada i tornada).
-     * Cada equip juga contra tots els altres dos cops.
-     * Els gols de cada partit es generen aleatoriament.
-     */
     public void disputarTodosLosPartidos() {
         Random random = new Random();
 
@@ -92,7 +56,6 @@ public class Lliga {
                 Equipos local = equipos.get(i);
                 Equipos visitant = equipos.get(j);
 
-                // Qualitat mitjana determina un petit avantatge als gols
                 double qualLocal = calcularQualitat(local);
                 double qualVisitant = calcularQualitat(visitant);
 
@@ -101,19 +64,16 @@ public class Lliga {
 
                 System.out.println(local.getNombre() + " " + golesLocal + " - " + golesVisitant + " " + visitant.getNombre());
 
-                // Actualitzem estadísticas del local
                 int[] statsLocal = estadisticas.get(i);
-                statsLocal[1]++; // partits jugats
-                statsLocal[2] += golesLocal; // gols a favor
-                statsLocal[3] += golesVisitant; // gols en contra
+                statsLocal[1]++;
+                statsLocal[2] += golesLocal;
+                statsLocal[3] += golesVisitant;
 
-                // Actualitzem estadísticas del visitant
                 int[] statsVisitant = estadisticas.get(j);
                 statsVisitant[1]++;
                 statsVisitant[2] += golesVisitant;
                 statsVisitant[3] += golesLocal;
 
-                // Punts
                 if (golesLocal > golesVisitant) {
                     statsLocal[0] += 3;
                 } else if (golesLocal < golesVisitant) {
@@ -130,13 +90,7 @@ public class Lliga {
         System.out.println("=".repeat(40) + "\n");
     }
 
-    /**
-     * Calcula la qualitat d'un equip en base a la mitja dels seus jugadors.
-     * Si l'equip no té jugadors, retorna 50 per defecte.
-     *
-     * @param equipo Equip a avaluar
-     * @return Qualitat mitja
-     */
+
     private double calcularQualitat(Equipos equipo) {
         if (equipo.getJugadores().isEmpty()) {
             return 50.0;
@@ -148,25 +102,13 @@ public class Lliga {
         return suma / equipo.getJugadores().size();
     }
 
-    /**
-     * Genera un nombre aleatori de gols per a un equip.
-     * La qualitat de l'equip afecta lleugerament la probabilitat de marcar.
-     *
-     * @param random   Objecte Random per generar els gols
-     * @param qualitat Qualitat de l'equip
-     * @return Nombre de gols generats (entre 0 i 5)
-     */
+
     private int generarGols(Random random, double qualitat) {
-        // Base: entre 0 i 4 gols, amb un petit bonus de qualitat
         int base = random.nextInt(5);
         int bonus = (qualitat > 70) ? random.nextInt(2) : 0;
         return base + bonus;
     }
 
-    /**
-     * Mostra la classificació actual de la lliga ordenada per punts.
-     * En cas d'empat de punts, s'ordena per diferència de gols.
-     */
     public void mostrarClasificacion() {
         if (equipos.isEmpty()) {
             System.out.println("No hi ha cap lliga disputada.");
@@ -180,7 +122,6 @@ public class Lliga {
                 "Pos", "Equip", "Pts", "PJ", "GF", "GC", "DG");
         System.out.println("-".repeat(70));
 
-        // Fem una còpia per ordenar sense modificar l'original
         ArrayList<int[]> copiaStats = new ArrayList<>();
         ArrayList<Equipos> copiaEquipos = new ArrayList<>();
 
@@ -189,14 +130,13 @@ public class Lliga {
             copiaEquipos.add(equipos.get(i));
         }
 
-        // Ordenem per punts (i per diferència de gols en cas d'empat) amb un bubble sort
         for (int i = 0; i < copiaEquipos.size() - 1; i++) {
             for (int j = 0; j < copiaEquipos.size() - 1 - i; j++) {
                 int[] statsA = copiaStats.get(j);
                 int[] statsB = copiaStats.get(j + 1);
 
-                int difA = statsA[2] - statsA[3]; // diferència gols A
-                int difB = statsB[2] - statsB[3]; // diferència gols B
+                int difA = statsA[2] - statsA[3];
+                int difB = statsB[2] - statsB[3];
 
                 boolean haDeCanviar = false;
                 if (statsA[0] < statsB[0]) {
@@ -206,10 +146,8 @@ public class Lliga {
                 }
 
                 if (haDeCanviar) {
-                    // Intercanviem estadísticas
                     copiaStats.set(j, statsB);
                     copiaStats.set(j + 1, statsA);
-                    // Intercanviem equips
                     Equipos temp = copiaEquipos.get(j);
                     copiaEquipos.set(j, copiaEquipos.get(j + 1));
                     copiaEquipos.set(j + 1, temp);
@@ -234,11 +172,7 @@ public class Lliga {
         System.out.println("(Pts=Punts, PJ=Partits Jugats, GF=Gols Favor, GC=Gols Contra, DG=Dif. Gols)\n");
     }
 
-    /**
-     * Retorna l'equip amb més gols a favor.
-     *
-     * @return Equip amb més gols a favor, o null si la lliga no té equips
-     */
+
     public Equipos equipoMasGoleador() {
         if (equipos.isEmpty()) return null;
 
@@ -254,11 +188,7 @@ public class Lliga {
         return millor;
     }
 
-    /**
-     * Retorna l'equip amb més gols en contra.
-     *
-     * @return Equip amb més gols en contra, o null si la lliga no té equips
-     */
+
     public Equipos equipoMenosGoleador() {
         if (equipos.isEmpty()) return null;
 

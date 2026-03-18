@@ -15,7 +15,6 @@ class MainTest {
     @Test
     void testMediaEquipos() {
 
-
         Jugador j1 = new Jugador(
                 "Pedri",
                 "Gonzalez",

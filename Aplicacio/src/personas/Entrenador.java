@@ -31,21 +31,17 @@ public class Entrenador extends Personas {
         this.seleccionadorNacional = seleccionadorNacional;
     }
 
-    /**
-     * Incrementa el sou de l'entrenador un 0,5%.
-     */
+
     public void incrementarSou() {
         this.sueldoAnual = this.sueldoAnual + (this.sueldoAnual * 0.005);
     }
 
-    /**
-     * Realitza una sessió d'entrenament.
-     * Augmenta el nivell de motivació en 1 punt si no ha arribat al màxim (10).
-     */
+
     public void entrenament() {
         if (this.nivelMotivacion < 10) {
             this.nivelMotivacion++;
         }
+        incrementarSou();
     }
 
     @Override
