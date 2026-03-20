@@ -803,7 +803,7 @@ public class Main {
     }
 
     public static void leerMercadoFichajes(ArrayList<Personas> listaPersonas) {
-        try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/archivosGuardado/mercat_fitxatges.txt"))) {
             String linea;
 
             while ((linea = br.readLine()) != null) {
@@ -839,7 +839,7 @@ public class Main {
 
     public static void leerEquipos(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/guardarEquipos.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/archivosGuardado/guardarEquipos.txt"))) {
             String linea;
 
             while ((linea = br.readLine()) != null) {
@@ -876,7 +876,7 @@ public class Main {
 
         for (Equipos equipos : listaEquipos) {
             try (BufferedReader brr = new BufferedReader(
-                    new FileReader("Aplicacio/src/archivosGuardado/equipos/" + equipos.getNombre() + ".txt"))) {
+                    new FileReader("src/archivosGuardado/equipos/" + equipos.getNombre() + ".txt"))) {
 
                 String lineaa;
 
@@ -924,8 +924,8 @@ public class Main {
 
     public static void guardarEquipos(List<Equipos> listaEquipos) {
 
-        String rutaCarpeta = "Aplicacio/src/archivosGuardado/guardarEquipos.txt";
-        String rutaArchivoEquipos = "Aplicacio/src/archivosGuardado/equipos/";
+        String rutaCarpeta = "src/archivosGuardado/guardarEquipos.txt";
+        String rutaArchivoEquipos = "src/archivosGuardado/equipos/";
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaCarpeta))) {
 
@@ -983,7 +983,7 @@ public class Main {
 
 
     public static void actualizarMercadoFichaje(ArrayList<Personas> listaPersonas) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/archivosGuardado/mercat_fitxatges.txt"))) {
 
             for (Personas persona : listaPersonas) {
                 if (persona instanceof Entrenador) {
