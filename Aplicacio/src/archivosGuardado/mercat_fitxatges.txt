@@ -4,7 +4,6 @@ J;Marc-André;ter Stegen;30/04/1992;9;1.5E7;1;POR;90
 J;Jules;Koundé;12/11/1998;8;1.0E7;23;DEF;88
 J;Alejandro;Balde;18/10/2003;9;3000000.0;12;DEF;85
 J;Ronald;Araújo;07/03/1999;8;5000000.0;4;DEF;87
-J;Pedri;González;25/11/2002;9;7000000.0;8;MIG;92
 J;Gavi;Páez;05/08/2004;9;5000000.0;6;MIG;86
 E;Diego;Simeone;28/04/1970;9;4000000.0;10;true
 J;Ferran;Torres;29/02/2000;7;6000000.0;11;DAV;85
@@ -16,7 +15,6 @@ J;Vinícius;Júnior;12/07/2000;9;1.2E7;7;DAV;92
 J;Federico;Valverde;22/07/1998;6;1.0E7;15;MIG;70
 J;Thibaut;Courtois;11/05/1992;5;1.5E7;1;POR;91
 J;David;Alaba;24/06/1992;7;1.1E7;4;DEF;72
-E;Manuel;Pellegrini;16/09/1953;8;3500000.0;12;true
 J;Antoine;Griezmann;21/03/1991;8;1.4E7;8;DAV;90
 J;Jan;Oblak;07/01/1993;9;1.0E7;13;POR;91
 J;Koke;Resurrección;08/01/1992;8;7000000.0;6;MIG;68

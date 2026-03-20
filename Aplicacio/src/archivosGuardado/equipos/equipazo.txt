@@ -1,0 +1,2 @@
+E;Manuel;Pellegrini;16/09/1953;8;3500000.0;12;true
+J;Pedri;González;25/11/2002;9;7000000.0;8;MIG;92

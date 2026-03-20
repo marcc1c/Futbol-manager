@@ -1,2 +1,3 @@
 pepe;2020;barcelona;aaaa;;Carlo
 pepes;2020;barcelona;n;;Hansi
+equipazo;2001;madrid;;hatsune miku;Manuel
