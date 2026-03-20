@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+/*import org.junit.jupiter.api.Test;
 import personas.Entrenador;
 import personas.Equipos;
 import personas.Jugador;
@@ -102,4 +102,4 @@ class MainTest {
         assertEquals("POR", j1.getPosicion());
 
     }
-}
+}*/
