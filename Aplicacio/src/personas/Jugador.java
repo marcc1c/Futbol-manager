@@ -79,11 +79,9 @@ public class Jugador extends Personas {
         return haCambiado;
     }
 
-
+    @Override
     public void entrenament() {
-        if (this.nivelMotivacion < 10) {
-            this.nivelMotivacion++;
-        }
+        super.entrenament();
         Random random = new Random();
         String novaPos = this.posicion;
         while (novaPos.equals(this.posicion)) {

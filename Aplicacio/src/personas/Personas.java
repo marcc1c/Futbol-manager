@@ -1,6 +1,6 @@
 package personas;
 
-public class Personas {
+public abstract class Personas {
     protected String nombre, apellido, fechaNacimiento;
     protected double sueldoAnual;
     int nivelMotivacion;
@@ -14,7 +14,6 @@ public class Personas {
         this.fechaNacimiento = fechaNacimiento;
         this.nivelMotivacion = nivelMotivacion;
         this.sueldoAnual = sueldoAnual;
-
     }
 
     public int getNivelMotivacion() {
@@ -54,5 +53,13 @@ public class Personas {
                         "Motivación:            %-20d\n" +
                         "Sueldo anual:          %-20.2f\n",
                 nombre, apellido, fechaNacimiento, nivelMotivacion, sueldoAnual);
+    }
+
+    public void entrenament() {
+            if (this.nivelMotivacion < 10) {
+                System.out.print(this.nombre + "ahora tiene una motivación de " + this.nivelMotivacion);
+                this.nivelMotivacion++;
+                System.out.println(" --> " + this.nivelMotivacion);
+            }
     }
 }

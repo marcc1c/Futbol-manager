@@ -37,10 +37,9 @@ public class Entrenador extends Personas {
     }
 
 
+    @Override
     public void entrenament() {
-        if (this.nivelMotivacion < 10) {
-            this.nivelMotivacion++;
-        }
+        super.entrenament();
         incrementarSou();
     }
 

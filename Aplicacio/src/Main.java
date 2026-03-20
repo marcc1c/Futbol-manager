@@ -46,18 +46,18 @@ public class Main {
         System.out.println("=".repeat(50));
 
         if (tipoUsuario == 'a') {
-            System.out.println("  1- Veure classificació lliga actual \uD83C\uDFC6");
+            System.out.println("  1- Veure classificació lliga actual");
             System.out.println("  2- Donar d'alta equip");
             System.out.println("  3- Donar d'alta jugador/a o entrenador/a");
             System.out.println("  4- Consultar dades equip");
             System.out.println("  5- Consultar dades jugador/a equip");
             System.out.println("  6- Disputar nova lliga");
-            System.out.println("  7- Realitzar sessió entrenament (del mercat fitxatges)");
+            System.out.println("  7- Realitzar sessió entrenament");
             System.out.println("  8- Desar dades equips");
             System.out.println("  0- Sortir");
         } else {
-            System.out.println("  1- Veure classificació lliga actual \uD83C\uDFC6");
-            System.out.println("  2- Gestionar el meu equip \u26BD");
+            System.out.println("  1- Veure classificació lliga actual");
+            System.out.println("  2- Gestionar el meu equip");
             System.out.println("  3- Consultar dades equip");
             System.out.println("  4- Consultar dades jugador/a equip");
             System.out.println("  5- Transferir jugador/a");
@@ -246,17 +246,10 @@ public class Main {
 
         System.out.println("\n--- Iniciant sessió d'entrenament del mercat de fitxatges ---");
 
-        for (Personas persona : listaPersonas) {
-            if (persona instanceof Jugador) {
-                Jugador jugador = (Jugador) persona;
-                jugador.entrenament();
-            } else if (persona instanceof Entrenador) {
-                Entrenador entrenador = (Entrenador) persona;
-                entrenador.entrenament();
-                entrenador.incrementarSou();
-            }
-        }
 
+        for (Personas persona : listaPersonas) {
+            persona.entrenament();
+        }
         System.out.println("--- Sessió d'entrenament finalitzada ---\n");
     }
 
@@ -385,7 +378,6 @@ public class Main {
 
         System.out.println("Introdueix l'any de fundació:");
         int añoFundacion = Validador.numerosInicioFinal(-2000, 3000);
-        scanner.nextLine();
 
         System.out.println("Introdueix la ciutat de l'equip:");
         String ciudad = scanner.nextLine();
@@ -488,7 +480,6 @@ public class Main {
         if (JoE.equalsIgnoreCase("j")) {
             System.out.println("Introdueix el dorsal (0-99):");
             int dorsal = Validador.numerosInicioFinal(0, 99);
-            scanner.nextLine();
 
             System.out.println("Introdueix la posició: Portero (POR), Defensa (DEF), Migcampista (MIG), Davanter (DAV)");
             String posicion = Validador.array("POR", "DEF", "MIG", "DAV");
@@ -502,7 +493,6 @@ public class Main {
         } else {
             System.out.println("Introdueix el nombre de tornejos guanyats:");
             int torneosGanados = Validador.numerosInicioFinal(0, 999);
-            scanner.nextLine();
 
             System.out.println("És seleccionador nacional? (si/no)");
             String sn = Validador.numero2("si", "no");
@@ -534,11 +524,6 @@ public class Main {
                 System.out.println(equipo);
                 if (equipo.getJugadores().isEmpty()) {
                     System.out.println("L'equip no té jugadors.");
-                } else {
-                    System.out.println("\n--- Jugadors ---");
-                    for (Jugador j : equipo.getJugadores()) {
-                        System.out.println(j);
-                    }
                 }
                 trobat = true;
             }
@@ -635,7 +620,6 @@ public class Main {
         System.out.print("Escull una opció: ");
 
         int input = Validador.numerosInicioFinal(0, 4);
-        scanner.nextLine();
 
         switch (input) {
             case 0:
