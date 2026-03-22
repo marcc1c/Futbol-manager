@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+/**
+ * Clase que representa una liga de fútbol.
+ * Gestiona los equipos participantes, la disputa de partidos y la clasificación.
+ */
 public class Lliga {
 
     private String nombre;
@@ -16,6 +20,11 @@ public class Lliga {
     private ArrayList<int[]> estadisticas;
 
 
+    /**
+     * Constructor para crear una nueva liga.
+     * @param nombre El nombre de la liga.
+     * @param numEquipos El número de equipos que participan.
+     */
     public Lliga(String nombre, int numEquipos) {
         this.nombre = nombre;
         this.numEquipos = numEquipos;
@@ -38,11 +47,19 @@ public class Lliga {
     }
 
 
+    /**
+     * Añade un equipo a la liga e inicializa sus estadísticas.
+     * @param equipo El equipo a añadir.
+     */
     public void afegirEquip(Equipos equipo) {
         equipos.add(equipo);
         estadisticas.add(new int[]{0, 0, 0, 0});
     }
 
+    /**
+     * Simula todos los partidos de la liga entre los equipos participantes.
+     * Calcula resultados basados en la calidad y motivación de los equipos.
+     */
     public void disputarTodosLosPartidos() {
 
         System.out.println("\n" + "=".repeat(40));
@@ -151,6 +168,9 @@ public class Lliga {
         return base;
     }
 
+    /**
+     * Muestra la clasificación actual de la liga por consola.
+     */
     public void mostrarClasificacion() {
         if (equipos.isEmpty()) {
             System.out.println("No hi ha cap lliga disputada.");
@@ -158,7 +178,7 @@ public class Lliga {
         }
 
         System.out.println("\n" + "=".repeat(70));
-        System.out.println("  CLASSIFICACIÓ - " + nombre + "  🏆");
+        System.out.println("  CLASSIFICACIÓ - " + nombre);
         System.out.println("=".repeat(70));
         System.out.printf("%-3s %-20s %6s %4s %6s %6s %6s%n",
                 "Pos", "Equip", "Pts", "PJ", "GF", "GC", "DG");
@@ -215,6 +235,10 @@ public class Lliga {
     }
 
 
+    /**
+     * Encuentra el equipo que más goles ha marcado en la liga.
+     * @return El equipo más goleador.
+     */
     public Equipos equipoMasGoleador() {
         if (equipos.isEmpty()) return null;
 
@@ -231,6 +255,10 @@ public class Lliga {
     }
 
 
+    /**
+     * Encuentra el equipo que más goles ha recibido en la liga.
+     * @return El equipo con más goles en contra.
+     */
     public Equipos equipoMenosGoleador() {
         if (equipos.isEmpty()) return null;
 
@@ -246,6 +274,9 @@ public class Lliga {
         return pitjor;
     }
 
+    /**
+     * Guarda el estado actual de la liga en un archivo de texto.
+     */
     public void guardarLliga() {
         try (BufferedWriter writer = new BufferedWriter(
                 new FileWriter("Aplicacio/src/archivosGuardado/liga.txt"))) {
@@ -268,6 +299,11 @@ public class Lliga {
     }
 
 
+    /**
+     * Carga una liga previamente guardada desde un archivo de texto.
+     * @param listaEquiposGlobal Lista de equipos disponibles para asociar por nombre.
+     * @return El objeto Lliga cargado o null si hay errores.
+     */
     public static Lliga cargarLliga(ArrayList<Equipos> listaEquiposGlobal) {
         try (BufferedReader br = new BufferedReader(
                 new FileReader("Aplicacio/src/archivosGuardado/liga.txt"))) {

@@ -1,17 +1,16 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Validador class that provides utility methods to safely get and validate user input.
+ * Clase Validador que proporciona métodos de utilidad para obtener y validar la entrada del usuario de forma segura.
  */
 public class Validador {
 
     /**
-     * Prompts the user for a number within a specified range, handling invalid inputs.
-     * @param numeroInicial the minimum accepted value
-     * @param numeroFinal the maximum accepted value
-     * @return the constrained user input
+     * Solicita al usuario un número dentro de un rango específico, gestionando entradas no válidas.
+     * @param numeroInicial El valor mínimo aceptado.
+     * @param numeroFinal El valor máximo aceptado.
+     * @return La entrada del usuario validada.
      */
     public static int numerosInicioFinal(int numeroInicial, int numeroFinal) {
         Scanner scanner = new Scanner(System.in);
@@ -20,24 +19,24 @@ public class Validador {
 
         while (!valido) {
             try {
-                input = scanner.nextInt();
+                String s = scanner.nextLine();
+                input = Integer.parseInt(s);
                 if (input < numeroInicial || input > numeroFinal) {
                     System.out.println("Valor incorrecto");
                 } else {
                     valido = true;
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Valor incorrecto. Por favor introduce un numero valido.");
-                scanner.next(); // Clear the invalid input
+            } catch (NumberFormatException e) {
+                System.out.println("Valor incorrecto. Por favor introduce un numero entero valido.");
             }
         }
         return input;
     }
 
     /**
-     * Checks if the user's string input exists within the provided list of acceptable strings.
-     * @param arrayValoresPosibles the allowed values
-     * @return the valid string input
+     * Verifica si la entrada de cadena del usuario existe dentro de la lista proporcionada de cadenas aceptables.
+     * @param arrayValoresPosibles Los valores permitidos.
+     * @return La entrada de cadena válida.
      */
     public static String arrayListStrings(ArrayList<String> arrayValoresPosibles) {
         Scanner scanner = new Scanner(System.in);
@@ -60,9 +59,9 @@ public class Validador {
     }
 
     /**
-     * Checks if the user's integer input exists within the provided list of acceptable integers.
-     * @param arrayValoresPosibles the allowed values
-     * @return the valid integer input
+     * Verifica si la entrada entera del usuario existe dentro de la lista proporcionada de enteros aceptables.
+     * @param arrayValoresPosibles Los valores permitidos.
+     * @return La entrada entera válida.
      */
     public static int arrayListInt(ArrayList<Integer> arrayValoresPosibles) {
         Scanner scanner = new Scanner(System.in);
@@ -71,7 +70,8 @@ public class Validador {
 
         while (!valido) {
             try {
-                input = scanner.nextInt();
+                String s = scanner.nextLine();
+                input = Integer.parseInt(s);
                 for (int palabras : arrayValoresPosibles) {
                     if (palabras == input) {
                         valido = true;
@@ -81,18 +81,17 @@ public class Validador {
                 if (!valido) {
                     System.out.println("Valor incorrecto");
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Valor incorrecto. Por favor introduce un numero valido.");
-                scanner.next(); // Clear the invalid input
+            } catch (NumberFormatException e) {
+                System.out.println("Valor incorrecto. Por favor introduce un numero entero valido.");
             }
         }
         return input;
     }
 
     /**
-     * Checks if the user's string input exists within the provided array of acceptable strings.
-     * @param arrayValoresPosibles the allowed values as an array
-     * @return the valid string input
+     * Verifica si la entrada de cadena del usuario existe dentro del array proporcionado de cadenas aceptables.
+     * @param arrayValoresPosibles Los valores permitidos como un array.
+     * @return La entrada de cadena válida.
      */
     public static String array(String[] arrayValoresPosibles) {
         Scanner scanner = new Scanner(System.in);
@@ -115,9 +114,9 @@ public class Validador {
     }
 
     /**
-     * Ensures the user's input strictly matches a specified value.
-     * @param numero the required value
-     * @return the valid string input
+     * Asegura que la entrada del usuario coincida estrictamente con un valor especificado.
+     * @param numero El valor requerido.
+     * @return La entrada de cadena válida.
      */
     public static String numero1(String numero) {
         Scanner scanner = new Scanner(System.in);
@@ -136,10 +135,10 @@ public class Validador {
     }
 
     /**
-     * Ensures the user's input strictly matches one of two specified values.
-     * @param numero1 the first allowed value
-     * @param numero2 the second allowed value
-     * @return the valid string input
+     * Asegura que la entrada del usuario coincida con uno de los dos valores especificados.
+     * @param numero1 El primer valor permitido.
+     * @param numero2 El segundo valor permitido.
+     * @return La entrada de cadena válida.
      */
     public static String numero2(String numero1, String numero2) {
         Scanner scanner = new Scanner(System.in);
@@ -158,11 +157,11 @@ public class Validador {
     }
 
     /**
-     * Ensures the user's input strictly matches one of three specified values.
-     * @param numero1 the first allowed value
-     * @param numero2 the second allowed value
-     * @param numero3 the third allowed value
-     * @return the valid string input
+     * Asegura que la entrada del usuario coincida con uno de los tres valores especificados.
+     * @param numero1 El primer valor permitido.
+     * @param numero2 El segundo valor permitido.
+     * @param numero3 El tercer valor permitido.
+     * @return La entrada de cadena válida.
      */
     public static String numero3(String numero1, String numero2, String numero3) {
         Scanner scanner = new Scanner(System.in);
@@ -203,5 +202,47 @@ public class Validador {
             }
         }
         return input.toUpperCase();
+    }
+
+    /**
+     * Solicita al usuario un valor decimal (double), gestionando entradas no válidas.
+     * @return La entrada decimal válida.
+     */
+    public static double validarDouble() {
+        Scanner scanner = new Scanner(System.in);
+        double input = 0;
+        boolean valido = false;
+
+        while (!valido) {
+            try {
+                String s = scanner.nextLine();
+                input = Double.parseDouble(s);
+                valido = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Valor incorrecto. Por favor introduce un numero (decimal) valido.");
+            }
+        }
+        return input;
+    }
+
+    /**
+     * Solicita al usuario cualquier valor entero, gestionando entradas no válidas.
+     * @return La entrada entera válida.
+     */
+    public static int validarInt() {
+        Scanner scanner = new Scanner(System.in);
+        int input = 0;
+        boolean valido = false;
+
+        while (!valido) {
+            try {
+                String s = scanner.nextLine();
+                input = Integer.parseInt(s);
+                valido = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Valor incorrecto. Por favor introduce un numero entero valido.");
+            }
+        }
+        return input;
     }
 }

@@ -8,8 +8,16 @@ import java.io.*;
 import java.util.*;
 
 
+/**
+ * Clase principal que gestiona el flujo del programa Football Manager.
+ * Permite realizar login, mostrar menús y ejecutar las diversas opciones de gestión de equipos y jugadores.
+ */
 public class Main {
 
+    /**
+     * Punto de entrada principal de la aplicación.
+     * @param args Argumentos de la línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
 
         ArrayList<Personas> listaPersonas = new ArrayList<>();
@@ -33,6 +41,10 @@ public class Main {
     }
 
 
+    /**
+     * Gestiona el proceso de login para determinar si el usuario es administrador o gestor.
+     * @return El carácter que identifica el tipo de usuario ('a' para admin, 'g' para gestor).
+     */
     public static char login() {
         System.out.println("-".repeat(15) + " Iniciant login " + "-".repeat(15));
         System.out.println("Ets admin (a) o ets un gestor d'equip (g)?");
@@ -40,6 +52,10 @@ public class Main {
         return input.charAt(0);
     }
 
+    /**
+     * Muestra el menú principal de la aplicación según el tipo de usuario.
+     * @param tipoUsuario El tipo de usuario logueado ('a' o 'g').
+     */
     public static void mostrarMenu(char tipoUsuario) {
         System.out.println("\n" + "=".repeat(50));
         System.out.println("  Welcome to Politècnics Football Manager");
@@ -69,6 +85,11 @@ public class Main {
     }
 
 
+    /**
+     * Lee y valida la opción seleccionada por el usuario en el menú.
+     * @param tipoUsuario El tipo de usuario logueado.
+     * @return La opción elegida como String validada.
+     */
     public static String leerOpcionMenu(char tipoUsuario) {
         Scanner scanner = new Scanner(System.in);
         String[] opcionesAdmin = {"0", "1", "2", "3", "4", "5", "6", "7", "8"};
@@ -82,6 +103,15 @@ public class Main {
     }
 
 
+    /**
+     * Ejecuta la lógica correspondiente a la opción elegida por el usuario.
+     * @param input La opción introducida por el usuario.
+     * @param tipoUsuario El tipo de usuario logueado.
+     * @param listaEquipos Lista global de equipos.
+     * @param listaPersonas Lista global de personas (mercado de fichajes).
+     * @param lligaActual La liga que se está disputando actualmente.
+     * @return true si el programa debe continuar, false para salir.
+     */
     public static boolean escogerOpcion(String input, char tipoUsuario,
                                         ArrayList<Equipos> listaEquipos,
                                         ArrayList<Personas> listaPersonas,
@@ -160,6 +190,11 @@ public class Main {
         return true;
     }
 
+    /**
+     * Inicia el proceso para disputar una nueva liga.
+     * @param listaEquipos Lista de todos los equipos disponibles.
+     * @return El objeto Lliga creado y disputado.
+     */
     public static Lliga disputarNovaLliga(ArrayList<Equipos> listaEquipos) {
         Scanner scanner = new Scanner(System.in);
 
@@ -225,16 +260,20 @@ public class Main {
         Equipos maxGoleador = novaLliga.equipoMasGoleador();
         Equipos mesGolesContra = novaLliga.equipoMenosGoleador();
         if (maxGoleador != null) {
-            System.out.println("⚽ Equip més golejador: " + maxGoleador.getNombre());
+            System.out.println("Equip més golejador: " + maxGoleador.getNombre());
         }
         if (mesGolesContra != null) {
-            System.out.println("🥅 Equip amb més gols en contra: " + mesGolesContra.getNombre());
+            System.out.println("Equip amb més gols en contra: " + mesGolesContra.getNombre());
         }
 
         return novaLliga;
     }
 
 
+    /**
+     * Realiza una sesión de entrenamiento para todas las personas en el mercado de fichajes.
+     * @param listaPersonas Lista de personas del mercado de fichajes.
+     */
     public static void sesionEntrenamiento(ArrayList<Personas> listaPersonas) {
         if (listaPersonas.isEmpty()) {
             System.out.println("No hi ha cap jugador ni entrenador al mercat de fitxatges.");
@@ -251,6 +290,10 @@ public class Main {
     }
 
 
+    /**
+     * Gestiona la transferencia de un jugador entre dos equipos.
+     * @param listaEquipos Lista global de equipos.
+     */
     public static void transferirJugador(ArrayList<Equipos> listaEquipos) {
         Scanner scanner = new Scanner(System.in);
 
@@ -446,6 +489,10 @@ public class Main {
      *
      * @param listaPersonas Llista del mercat de fitxatges
      */
+    /**
+     * Inicia el proceso para dar de alta un nuevo jugador o entrenador en el mercado de fichajes.
+     * @param listaPersonas Lista del mercado de fichajes.
+     */
     public static void altaJugadorEntrenador(ArrayList<Personas> listaPersonas) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
@@ -461,18 +508,7 @@ public class Main {
         String fechaNacimiento = scanner.nextLine();
 
         System.out.println("Introdueix el salari anual:");
-        double salarioAnual = 0;
-        boolean salariValid = false;
-        while (!salariValid) {
-            if (scanner.hasNextDouble()) {
-                salarioAnual = scanner.nextDouble();
-                scanner.nextLine();
-                salariValid = true;
-            } else {
-                System.out.println("El valor introduït no és un número vàlid. Torna a introduir:");
-                scanner.nextLine();
-            }
-        }
+        double salarioAnual = Validador.validarDouble();
 
         if (JoE.equalsIgnoreCase("j")) {
             System.out.println("Introdueix el dorsal (0-99):");
@@ -505,6 +541,10 @@ public class Main {
     }
 
 
+    /**
+     * Muestra por pantalla los datos de un equipo seleccionado.
+     * @param listaEquipos Lista global de equipos.
+     */
     public static void consultarDatosEquipo(ArrayList<Equipos> listaEquipos) {
         Scanner scanner = new Scanner(System.in);
 
@@ -533,6 +573,10 @@ public class Main {
 
 
 
+    /**
+     * Muestra los datos detallados de un jugador específico de un equipo.
+     * @param listaEquipos Lista global de equipos.
+     */
     public static void consultarJugadorEquipo(ArrayList<Equipos> listaEquipos) {
         Scanner scanner = new Scanner(System.in);
 
@@ -583,6 +627,11 @@ public class Main {
         }
     }
 
+    /**
+     * Accede al submenú de gestión de un equipo específico para un gestor.
+     * @param listaEquipos Lista global de equipos.
+     * @param listaPersonas Lista del mercado de fichajes.
+     */
     public static void gestionarMiEquipo(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
         Scanner scanner = new Scanner(System.in);
 
@@ -638,6 +687,12 @@ public class Main {
     }
 
 
+    /**
+     * Elimina un equipo del sistema, devolviendo sus integrantes al mercado de fichajes.
+     * @param listaEquipos Lista global de equipos.
+     * @param equipo El equipo a dar de baja.
+     * @param listaPersonas Lista del mercado de fichajes.
+     */
     public static void bajaEquipo(ArrayList<Equipos> listaEquipos, Equipos equipo, ArrayList<Personas> listaPersonas) {
         System.out.println("Estàs segur que vols donar de baixa l'equip " + equipo.getNombre() + "? (s/n)");
         String input = Validador.numero2("s", "n");
@@ -659,6 +714,10 @@ public class Main {
     }
 
 
+    /**
+     * Modifica el nombre del presidente de un equipo.
+     * @param equipo El equipo a modificar.
+     */
     public static void modificarPresidente(Equipos equipo) {
         Scanner scanner = new Scanner(System.in);
 
@@ -677,6 +736,11 @@ public class Main {
     }
 
 
+    /**
+     * Destituye al entrenador actual de un equipo y lo envía al mercado de fichajes.
+     * @param equipo El equipo del cual se destituye al entrenador.
+     * @param listaPersonas Lista del mercado de fichajes.
+     */
     public static void destituirEntrenador(Equipos equipo, ArrayList<Personas> listaPersonas) {
         if (equipo.getEntrenador() == null || equipo.getEntrenador().getNombre() == null) {
             System.out.println("L'equip " + equipo.getNombre() + " no té cap entrenador assignat.");
@@ -699,6 +763,12 @@ public class Main {
     }
 
 
+    /**
+     * Permite fichar un nuevo integrante (jugador o entrenador) desde el mercado para un equipo.
+     * @param listaEquipos Lista global de equipos.
+     * @param listaPersonas Lista del mercado de fichajes.
+     * @param equipo El equipo que realiza el fichaje.
+     */
     public static void ficharJugadorEntrenador(ArrayList<Equipos> listaEquipos,
                                                ArrayList<Personas> listaPersonas, Equipos equipo) {
         Scanner scanner = new Scanner(System.in);
@@ -783,6 +853,10 @@ public class Main {
         guardarEquipos(listaEquipos);
     }
 
+    /**
+     * Lee los datos de las personas en el mercado de fichajes desde un archivo de texto.
+     * @param listaPersonas Lista donde se cargarán los datos leídos.
+     */
     public static void leerMercadoFichajes(ArrayList<Personas> listaPersonas) {
         try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
             String linea;
@@ -818,6 +892,11 @@ public class Main {
     }
 
 
+    /**
+     * Lee los datos de los equipos y sus integrantes desde los archivos de persistencia.
+     * @param listaEquipos Lista donde se cargarán los equipos.
+     * @param listaPersonas Lista del mercado de fichajes para asociar entrenadores.
+     */
     public static void leerEquipos(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
 
         try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/guardarEquipos.txt"))) {
@@ -903,6 +982,10 @@ public class Main {
     }
 
 
+    /**
+     * Guarda la información de todos los equipos y sus jugadores en archivos de texto.
+     * @param listaEquipos Lista de equipos a guardar.
+     */
     public static void guardarEquipos(List<Equipos> listaEquipos) {
 
         String rutaCarpeta = "Aplicacio/src/archivosGuardado/guardarEquipos.txt";
@@ -963,6 +1046,10 @@ public class Main {
     }
 
 
+    /**
+     * Actualiza el archivo del mercado de fichajes con el estado actual de la lista de personas.
+     * @param listaPersonas Lista de personas a persistir.
+     */
     public static void actualizarMercadoFichaje(ArrayList<Personas> listaPersonas) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
 

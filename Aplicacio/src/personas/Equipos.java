@@ -2,12 +2,19 @@ package personas;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que representa un equipo de fútbol.
+ * Contiene información sobre su nombre, ciudad, estadio, presidente, entrenador y lista de jugadores.
+ */
 public class Equipos {
     private String nombre, ciudad, nombreEstadio, nombrePresidente;
     private int añoFundacion;
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private Entrenador entrenador;
 
+    /**
+     * Constructor vacío por defecto.
+     */
     public Equipos() {
     }
 
@@ -26,6 +33,15 @@ public class Equipos {
         this.entrenador = entrenador;
     }
 
+    /**
+     * Constructor con todos los campos disponibles.
+     * @param nombre Nombre del equipo.
+     * @param añoFundacion Año en que se fundó el equipo.
+     * @param ciudad Ciudad de origen del equipo.
+     * @param nombreEstadio Nombre del estadio del equipo.
+     * @param nombrePresidente Nombre del presidente del equipo.
+     * @param entrenador Objeto Entrenador asignado al equipo.
+     */
     public Equipos(String nombre, int añoFundacion, String ciudad, String nombreEstadio, String nombrePresidente, Entrenador entrenador) {
         this.nombre = nombre;
         this.añoFundacion = añoFundacion;
@@ -91,6 +107,10 @@ public class Equipos {
         this.jugadores.add(jugadores);
     }
 
+    /**
+     * Calcula la media de calidad de los jugadores del equipo.
+     * @return String con la media formateada a dos decimales o mensaje si no hay jugadores.
+     */
     public String calcularMediana() {
         double suma = 0;
         String mensaje;
