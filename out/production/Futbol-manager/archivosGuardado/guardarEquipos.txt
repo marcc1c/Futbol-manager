@@ -1,1 +1,4 @@
-
+pepe;2020;barcelona;aaaa;3030;Carlo
+pepes;2020;barcelona;n;;Hansi
+ldld;30;p;;;Manuel
+Sigmaequipo;2020;barcelona;camp nou;;ma

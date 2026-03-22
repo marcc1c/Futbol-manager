@@ -1,13 +1,10 @@
 package personas;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 
-/**
- * Modela una Liga de fútbol donde varios equipos disputan partidos entre sí.
- * Mantiene la clasificación y gestiona la generación de partidos.
- */
 public class Lliga {
 
     private String nombre;
@@ -19,11 +16,6 @@ public class Lliga {
     private ArrayList<int[]> estadisticas;
 
 
-    /**
-     * Constructor de la Liga.
-     * @param nombre Nombre de la liga.
-     * @param numEquipos Cantidad de equipos que la disputan.
-     */
     public Lliga(String nombre, int numEquipos) {
         this.nombre = nombre;
         this.numEquipos = numEquipos;
@@ -31,46 +23,27 @@ public class Lliga {
         this.estadisticas = new ArrayList<>();
     }
 
-    /**
-     * @return El nombre de la liga.
-     */
     public String getNombre() {
         return nombre;
     }
 
 
-    /**
-     * @return El número de equipos registrados que disputarán la liga.
-     */
     public int getNumEquipos() {
         return numEquipos;
     }
 
 
-    /**
-     * @return Lista de equipos participantes.
-     */
     public ArrayList<Equipos> getEquipos() {
         return equipos;
     }
 
 
-    /**
-     * Añade un nuevo equipo a la liga y le inicializa las estadísticas.
-     * @param equipo El equipo a agregar.
-     */
     public void afegirEquip(Equipos equipo) {
         equipos.add(equipo);
         estadisticas.add(new int[]{0, 0, 0, 0});
     }
 
-    /**
-     * Simula y disputa todos los partidos posibles entre los equipos de la liga.
-     * Genera los resultados basándose en la calidad, motivación y un componente de aleatoriedad,
-     * y actualiza las estadísticas (puntos, partidos jugados, goles, etc.).
-     */
     public void disputarTodosLosPartidos() {
-        Random random = new Random();
 
         System.out.println("\n" + "=".repeat(40));
         System.out.println("  DISPUTANT LA LLIGA: " + nombre);
@@ -78,24 +51,22 @@ public class Lliga {
 
         for (int i = 0; i < equipos.size(); i++) {
             for (int j = 0; j < equipos.size(); j++) {
-                if (i == j) {
-                    continue;
-                }
+                if (i == j) continue;
 
                 Equipos equip1 = equipos.get(i);
                 Equipos equip2 = equipos.get(j);
 
-                double qualitatEquip1 = calcularQualitat(equip1);
-                double qualitatEquip2 = calcularQualitat(equip2);
+                double quialidadEquip1 = calcularQualitat(equip1);
+                double quialidadEquip2 = calcularQualitat(equip2);
 
-                double motivacioEquip1 = calcularMotivacio(equip1);
-                double motivacioEquipo2 = calcularMotivacio(equip2);
+                double motEquip1 = calcularMotivacio(equip1);
+                double motEquip2 = calcularMotivacio(equip2);
 
-                double forcaEquip1 = calcularForcaEquip(qualitatEquip1, motivacioEquip1);
-                double forcaEquip2 = calcularForcaEquip(qualitatEquip2, motivacioEquipo2);
+                double forcaEquip1 = calcularForca(quialidadEquip1, motEquip1);
+                double forcaEquip2 = calcularForca(quialidadEquip2, motEquip2);
 
-                int golsEquip1 = generarGols( forcaEquip1, forcaEquip2);
-                int golsEquip2 = generarGols( forcaEquip2, forcaEquip1);
+                int golsEquip1 = generarGols(forcaEquip1, forcaEquip2);
+                int golsEquip2 = generarGols(forcaEquip2, forcaEquip1);
 
                 System.out.println(equip1.getNombre() + " " + golsEquip1 + " - " + golsEquip2 + " " + equip2.getNombre());
 
@@ -123,16 +94,10 @@ public class Lliga {
         System.out.println("=".repeat(40));
         System.out.println("  Tots els partits han estat disputats!");
         System.out.println("=".repeat(40) + "\n");
-        
-        guardarResultadosLiga();
+        guardarLliga();
     }
 
 
-    /**
-     * Calcula la media de calidad de los jugadores de un equipo.
-     * @param equipo Equipo a evaluar.
-     * @return Calidad media.
-     */
     private double calcularQualitat(Equipos equipo) {
         if (equipo.getJugadores().isEmpty()) {
             return 50.0;
@@ -144,134 +109,48 @@ public class Lliga {
         return suma / equipo.getJugadores().size();
     }
 
-    /**
-     * Calcula la motivación promedio de un equipo.
-     * @param equipo Equipo a evaluar.
-     * @return Nivel de motivación media.
-     */
     private double calcularMotivacio(Equipos equipo) {
         if (equipo.getJugadores().isEmpty()) {
             return 50.0;
         }
-
         double suma = 0;
-
         for (Jugador j : equipo.getJugadores()) {
             suma += j.getNivelMotivacion();
         }
-
         return suma / equipo.getJugadores().size();
     }
 
-    /**
-     * Determina la fuerza conjunta combinando calidad y motivación.
-     * @param qualitat Calidad calculada.
-     * @param motivacio Motivación calculada.
-     * @return Fuerza global del equipo.
-     */
-    private double calcularForcaEquip(double qualitat, double motivacio) {
+    private double calcularForca(double qualitat, double motivacio) {
         return qualitat * 0.8 + motivacio * 0.2;
     }
 
-    /**
-     * Lógica para generar los goles marcados por un equipo al competir con la fuerza del rival.
-     * @param forcaEquip Fuerza del equipo atacante.
-     * @param forcaRival Fuerza del equipo defensor.
-     * @return Cantidad de goles marcados.
-     */
-    private int generarGols(double forcaEquip, double forcaRival) {
+
+    private int generarGols(double f1, double f2) {
         Random random = new Random();
-        double diferencia = forcaEquip - forcaRival;
 
-        int goles = 0;
+        double diff = f1 - f2;
 
-        if (diferencia > 20) {
-            goles = random.nextInt(4) + 2; // 2 a 5
-        } else if (diferencia > 10) {
-            goles = random.nextInt(4) + 1; // 1 a 4
-        } else if (diferencia >= -10) {
-            goles = random.nextInt(4); // 0 a 3
-        } else if (diferencia >= -20) {
-            goles = random.nextInt(3); // 0 a 2
-        } else {
-            goles = random.nextInt(2); // 0 a 1
+        int base = random.nextInt(3);
+
+        if (diff > 20) {
+            base += random.nextInt(3);
+        } else if (diff > 10) {
+            base += random.nextInt(2);
+        } else if (diff < -20) {
+            if (random.nextInt(100) < 40) {
+                base -= 1;
+            }
+        } else if (diff < -10) {
+            if (random.nextInt(100) < 25) {
+                base -= 1;
+            }
         }
 
-        return goles;
+        if (base < 0) base = 0;
+
+        return base;
     }
 
-    /**
-     * Genera la tabla de clasificación ordenada y la guarda en un archivo de texto persistente.
-     * El archivo sobrescribe las ligas jugadas anteriormente.
-     */
-    public void guardarResultadosLiga() {
-        try (java.io.FileWriter fw = new java.io.FileWriter("src/archivosGuardado/liga.txt", false);
-             java.io.PrintWriter pw = new java.io.PrintWriter(fw)) {
-
-            pw.println("\n" + "=".repeat(70));
-            pw.println("  CLASSIFICACIÓ - " + nombre + "  ");
-            pw.println("=".repeat(70));
-            pw.printf("%-3s %-20s %6s %4s %6s %6s %6s%n",
-                    "Pos", "Equip", "Pts", "PJ", "GF", "GC", "DG");
-            pw.println("-".repeat(70));
-
-            ArrayList<int[]> copiaStats = new ArrayList<>();
-            ArrayList<Equipos> copiaEquipos = new ArrayList<>();
-
-            for (int i = 0; i < equipos.size(); i++) {
-                copiaStats.add(estadisticas.get(i));
-                copiaEquipos.add(equipos.get(i));
-            }
-
-            for (int i = 0; i < copiaEquipos.size() - 1; i++) {
-                for (int j = 0; j < copiaEquipos.size() - 1 - i; j++) {
-                    int[] statsA = copiaStats.get(j);
-                    int[] statsB = copiaStats.get(j + 1);
-
-                    int difA = statsA[2] - statsA[3];
-                    int difB = statsB[2] - statsB[3];
-
-                    boolean haDeCanviar = false;
-                    if (statsA[0] < statsB[0]) {
-                        haDeCanviar = true;
-                    } else if (statsA[0] == statsB[0] && difA < difB) {
-                        haDeCanviar = true;
-                    }
-
-                    if (haDeCanviar) {
-                        copiaStats.set(j, statsB);
-                        copiaStats.set(j + 1, statsA);
-                        Equipos temp = copiaEquipos.get(j);
-                        copiaEquipos.set(j, copiaEquipos.get(j + 1));
-                        copiaEquipos.set(j + 1, temp);
-                    }
-                }
-            }
-
-            for (int i = 0; i < copiaEquipos.size(); i++) {
-                int[] stats = copiaStats.get(i);
-                int difGols = stats[2] - stats[3];
-                pw.printf("%-3d %-20s %6d %4d %6d %6d %+6d%n",
-                        (i + 1),
-                        copiaEquipos.get(i).getNombre(),
-                        stats[0],
-                        stats[1],
-                        stats[2],
-                        stats[3],
-                        difGols);
-            }
-
-            pw.println("=".repeat(70));
-            pw.println("(Pts=Punts, PJ=Partits Jugats, GF=Gols Favor, GC=Gols Contra, DG=Dif. Gols)\n");
-
-        } catch (java.io.IOException e) {
-            System.out.println("Error en guardar la lliga: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Muestra la clasificación actual de la liga ordenando los equipos por puntos e imprimiéndolos.
-     */
     public void mostrarClasificacion() {
         if (equipos.isEmpty()) {
             System.out.println("No hi ha cap lliga disputada.");
@@ -279,7 +158,7 @@ public class Lliga {
         }
 
         System.out.println("\n" + "=".repeat(70));
-        System.out.println("  CLASSIFICACIÓ - " + nombre + "  ");
+        System.out.println("  CLASSIFICACIÓ - " + nombre + "  🏆");
         System.out.println("=".repeat(70));
         System.out.printf("%-3s %-20s %6s %4s %6s %6s %6s%n",
                 "Pos", "Equip", "Pts", "PJ", "GF", "GC", "DG");
@@ -336,10 +215,6 @@ public class Lliga {
     }
 
 
-    /**
-     * Busca entre las estadísticas qué equipo ha anotado más goles a favor.
-     * @return El equipo con más goles marcados, o null si está vacío.
-     */
     public Equipos equipoMasGoleador() {
         if (equipos.isEmpty()) return null;
 
@@ -356,10 +231,6 @@ public class Lliga {
     }
 
 
-    /**
-     * Busca entre las estadísticas qué equipo ha recibido más goles en contra.
-     * @return El equipo con más goles en contra recibidos, o null si está vacío.
-     */
     public Equipos equipoMenosGoleador() {
         if (equipos.isEmpty()) return null;
 
@@ -373,5 +244,73 @@ public class Lliga {
             }
         }
         return pitjor;
+    }
+
+    public void guardarLliga() {
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter("Aplicacio/src/archivosGuardado/liga.txt"))) {
+
+            writer.write("Lliga:" + nombre + "\n");
+            writer.write("NumEquipos:" + equipos.size() + "\n");
+
+            for (int i = 0; i < equipos.size(); i++) {
+                Equipos eq = equipos.get(i);
+                int[] stats = estadisticas.get(i);
+                // format: nomEquip;punts;partits;golsFavor;golsContra
+                writer.write(eq.getNombre() + ";" + stats[0] + ";" + stats[1] + ";" + stats[2] + ";" + stats[3] + "\n");
+            }
+
+            System.out.println("Lliga desada correctament a liga.txt");
+
+        } catch (IOException e) {
+            System.out.println("Error al guardar la lliga: " + e.getMessage());
+        }
+    }
+
+
+    public static Lliga cargarLliga(ArrayList<Equipos> listaEquiposGlobal) {
+        try (BufferedReader br = new BufferedReader(
+                new FileReader("Aplicacio/src/archivosGuardado/liga.txt"))) {
+
+            String line = br.readLine();
+            if (line == null || !line.startsWith("Lliga:")) return null;
+            String nomLliga = line.split(":")[1];
+
+            line = br.readLine();
+            if (line == null || !line.startsWith("NumEquipos:")) return null;
+            int numEquipos = Integer.parseInt(line.split(":")[1]);
+
+            Lliga lliga = new Lliga(nomLliga, numEquipos);
+
+            while ((line = br.readLine()) != null) {
+                if (line.isEmpty()) continue;
+                String[] dades = line.split(";");
+                if (dades.length < 5) continue;
+
+                String nomEquip = dades[0];
+                int pts = Integer.parseInt(dades[1]);
+                int pj = Integer.parseInt(dades[2]);
+                int gf = Integer.parseInt(dades[3]);
+                int gc = Integer.parseInt(dades[4]);
+
+                Equipos equipTrobat = null;
+                for (Equipos e : listaEquiposGlobal) {
+                    if (e.getNombre().equalsIgnoreCase(nomEquip)) {
+                        equipTrobat = e;
+                        break;
+                    }
+                }
+
+                if (equipTrobat != null) {
+                    lliga.equipos.add(equipTrobat);
+                    lliga.estadisticas.add(new int[]{pts, pj, gf, gc});
+                }
+            }
+            return lliga;
+
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("No s'ha pogut carregar la lliga o el fitxer no existeix.");
+            return null;
+        }
     }
 }

@@ -1,7 +1,7 @@
 import personas.Entrenador;
 import personas.Equipos;
 import personas.Jugador;
-import personas.lliga;
+import personas.Lliga;
 import personas.Personas;
 
 import java.io.*;
@@ -14,7 +14,7 @@ public class Main {
 
         ArrayList<Personas> listaPersonas = new ArrayList<>();
         ArrayList<Equipos> listaEquipos = new ArrayList<>();
-        lliga lligaActual = null;
+        Lliga lligaActual = null;
 
         leerMercadoFichajes(listaPersonas);
         leerEquipos(listaEquipos, listaPersonas);
@@ -85,14 +85,17 @@ public class Main {
     public static boolean escogerOpcion(String input, char tipoUsuario,
                                         ArrayList<Equipos> listaEquipos,
                                         ArrayList<Personas> listaPersonas,
-                                        lliga lligaActual) {
+                                        Lliga lligaActual) {
         if (tipoUsuario == 'a') {
             switch (input) {
                 case "0":
                     System.out.println("Sortint del Football Manager. Fins aviat!");
                     return false;
                 case "1":
-                    verClasificacion(lligaActual);
+                    Lliga lligaCarregada = Lliga.cargarLliga(listaEquipos);
+                    if (lligaCarregada != null) {
+                        lligaCarregada.mostrarClasificacion();
+                    }
                     break;
                 case "2":
                     altaEquipo(listaEquipos, listaPersonas);
@@ -127,7 +130,10 @@ public class Main {
                     System.out.println("Sortint del Football Manager. Fins aviat!");
                     return false;
                 case "1":
-                    verClasificacion(lligaActual);
+                    Lliga lligaCarregadaG = Lliga.cargarLliga(listaEquipos);
+                    if (lligaCarregadaG != null) {
+                        lligaCarregadaG.mostrarClasificacion();
+                    }
                     break;
                 case "2":
                     gestionarMiEquipo(listaEquipos, listaPersonas);
@@ -154,16 +160,7 @@ public class Main {
         return true;
     }
 
-
-    public static void verClasificacion(lliga lligaActual) {
-        if (lligaActual == null || lligaActual.getEquipos().isEmpty()) {
-            System.out.println("No hi ha cap lliga disputada encara. Escull l'opció 'Disputar nova lliga' primer.");
-        } else {
-            lligaActual.mostrarClasificacion();
-        }
-    }
-
-    public static lliga disputarNovaLliga(ArrayList<Equipos> listaEquipos) {
+    public static Lliga disputarNovaLliga(ArrayList<Equipos> listaEquipos) {
         Scanner scanner = new Scanner(System.in);
 
         if (listaEquipos.size() < 2) {
@@ -177,7 +174,7 @@ public class Main {
         System.out.println("Quants equips hi participaran? (màxim " + listaEquipos.size() + ")");
         int numEquipos = Validador.numerosInicioFinal(2, listaEquipos.size());
 
-        lliga novaLliga = new lliga(nomLliga, numEquipos);
+        Lliga novaLliga = new Lliga(nomLliga, numEquipos);
 
         System.out.println("\nEquips disponibles:");
         for (Equipos equipo : listaEquipos) {
@@ -787,7 +784,7 @@ public class Main {
     }
 
     public static void leerMercadoFichajes(ArrayList<Personas> listaPersonas) {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/archivosGuardado/mercat_fitxatges.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
             String linea;
 
             while ((linea = br.readLine()) != null) {
@@ -823,7 +820,7 @@ public class Main {
 
     public static void leerEquipos(ArrayList<Equipos> listaEquipos, ArrayList<Personas> listaPersonas) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader("src/archivosGuardado/guardarEquipos.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Aplicacio/src/archivosGuardado/guardarEquipos.txt"))) {
             String linea;
 
             while ((linea = br.readLine()) != null) {
@@ -860,7 +857,7 @@ public class Main {
 
         for (Equipos equipos : listaEquipos) {
             try (BufferedReader brr = new BufferedReader(
-                    new FileReader("src/archivosGuardado/equipos/" + equipos.getNombre() + ".txt"))) {
+                    new FileReader("Aplicacio/src/archivosGuardado/equipos/" + equipos.getNombre() + ".txt"))) {
 
                 String lineaa;
 
@@ -908,8 +905,8 @@ public class Main {
 
     public static void guardarEquipos(List<Equipos> listaEquipos) {
 
-        String rutaCarpeta = "src/archivosGuardado/guardarEquipos.txt";
-        String rutaArchivoEquipos = "src/archivosGuardado/equipos/";
+        String rutaCarpeta = "Aplicacio/src/archivosGuardado/guardarEquipos.txt";
+        String rutaArchivoEquipos = "Aplicacio/src/archivosGuardado/equipos/";
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaCarpeta))) {
 
@@ -967,7 +964,7 @@ public class Main {
 
 
     public static void actualizarMercadoFichaje(ArrayList<Personas> listaPersonas) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/archivosGuardado/mercat_fitxatges.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Aplicacio/src/archivosGuardado/mercat_fitxatges.txt"))) {
 
             for (Personas persona : listaPersonas) {
                 if (persona instanceof Entrenador) {

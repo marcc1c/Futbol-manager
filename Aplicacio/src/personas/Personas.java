@@ -56,10 +56,10 @@ public abstract class Personas {
     }
 
     public void entrenament() {
-            if (this.nivelMotivacion < 10) {
-                System.out.print(this.nombre + "ahora tiene una motivación de " + this.nivelMotivacion);
-                this.nivelMotivacion++;
-                System.out.println(" --> " + this.nivelMotivacion);
-            }
+        if (this.nivelMotivacion < 10) {
+            System.out.print(this.nombre + "ahora tiene una motivación de " + this.nivelMotivacion);
+            this.nivelMotivacion++;
+            System.out.println(" --> " + this.nivelMotivacion);
+        }
     }
 }
