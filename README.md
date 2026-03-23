@@ -1,1 +1,87 @@
-﻿믯⎿䘠瑵潢⁬慍慮敧⁲髢ලഊ숊䊡敩癮湥摩⁯⁡⨪畆扴汯䴠湡条牥⨪‬湵⁡業楮胢憑汰捩捡썩溳搠⁥敧瑳썩溳搠⁥煥極潰⁳敤映뫃扴汯栠捥慨攠⁮⨪慊慶⨪挠湯挠浯汰浥湥潴⁳敷⁢⁹慢敳搠⁥慤潴⁳慰慲洠湡整敮⁲畴⁳慤潴⁳畧牡慤潤⁳湥牴⁥橥捥捵潩敮⹳਍਍ⴭഭഊ⌊‣鿰躔술冿썵₩湥潣瑮慲썲玡攠⁮獥整瀠潲敹瑣㽯਍਍⌣‣鿰芓䔠瑳畲瑣牵⁡敤挠牡数慴൳ഊⴊ⨠䄪汰捩捡潩⨯‪‭慌愠汰捩捡썩溳瀠楲据灩污攠⁮⨪慊慶⨪ഺ ⴠ怠牳⽣⁠‭潃瑮敩敮攠⁬썣撳杩⁯畦湥整䨠癡⹡਍†‭慠捲楨潶䝳慵摲摡⽯⁠‭牁档癩獯搠⁥整瑸⁯獵摡獯瀠牡⁡污慭散慮⁲煥極潰ⱳ樠杵摡牯獥礠攠瑮敲慮潤敲⹳਍†‭䩠癡䑡捯怯ⴠ䐠捯浵湥慴楣돃⁮敧敮慲慤愠瑵浯ꇃ楴慣敭瑮⁥敤⁬썣撳杩⹯਍਍‭⨪䉂䑄⨯‪‭捓楲瑰⁳兓⁌慰慲挠敲牡氯敬慮⁲慬戠獡⁥敤搠瑡獯‬뫃楴⁬楳焠極牥獥瀠牥楳瑳物搠瑡獯攠⁮湵洠瑯牯匠䱑ഺ ⴠ怠潦瑯慢彬慭慮敧彲敮⹷煳恬ⴠ䔠煳敵慭礠搠瑡獯椠楮楣污獥മഊⴊ⨠圪扥⨯‪‭敖獲썩溳眠扥⼠映潲瑮湥⁤慰慲瘠獩慵楬慺⁲慤潴⁳⁹썰枡湩獡攠瑳ꇃ楴慣㩳਍†‭楠摮硥栮浴恬ⴠ倠ꇃ楧慮搠⁥湥牴摡⹡਍†‭捠獳挮獳⁠‭獅楴潬⁳汧扯污獥മ ⴠ怠慐楧敮⽳⁠‭썐枡湩獡䠠䵔⁌敤氠⁡灡楬慣楣돃⁮挨慬楳楦慣楣돃Ɱ爠獥汵慴潤ⱳ瀠慬瑮汩慬ⱳ攠捴⤮മ ⴠ怠牳⽣⁠‭敒畣獲獯⠠浩ꇃ敧敮ⱳ䨠体ⱎ猠牣灩獴 獵摡獯瀠牯氠⁡敷⹢਍਍ⴭഭഊ⌊‣鿰肚䌠돃潭攠敪畣慴⁲慬瘠牥楳돃⁮慊慶⠠灁楬慣楣돃⁮敤挠湯潳慬ഩഊㄊ‮扁敲甠⁮整浲湩污攠⁮䅠汰捩捡潩怯മ㈊‮潃灭汩㩡਍਍恠扠獡൨樊癡捡ⴠ⁤畯⁴牳⽣⸪慪慶猠捲瀯牥潳慮⽳⸪慪慶਍恠ൠഊ㌊‮橅捥瑵㩡਍਍恠扠獡൨樊癡⁡挭⁰畯⁴慍湩਍恠ൠഊ㸊銟₡潃獮橥㩯䔠敪畣慴攠⁬牰祯捥潴搠獥敤甠⁮䑉⁅䤨瑮汥楬⁊䑉䅅‬捅楬獰ⱥ丠瑥敂湡⥳瀠牡⁡慮敶慧⁲敭潪⁲潰⁲汥挠돃楤潧礠甠慳⁲慬朠湥牥捡썩溳搠⁥慊慶潄⹣਍਍ⴭഭഊ⌊‣鿰ꂧ儠썵₩慨散氠⁡灡楬慣楣돃⁮慊慶਍਍慌愠汰捩捡썩溳攠⁳湵⨠未獥潴⁲敤攠畱灩獯⨪挠湯攠瑳獡映湵楣湯污摩摡獥瀠楲据灩污獥ഺഊⴊ䌠牡慧⁲⨪番慧潤敲⩳‪⁹⨪湥牴湥摡牯獥⨪搠獥敤怠牡档癩獯畇牡慤潤洯牥慣彴楦硴瑡敧⹳硴恴മⴊ䌠牡慧⁲⨪煥極潰⩳‪⁹畳⁳潣灭湯湥整⁳敤摳⁥慠捲楨潶䝳慵摲摡⽯畧牡慤䕲畱灩獯琮瑸⁠⁹潬⁳牡档癩獯椠摮癩摩慵敬⁳敤挠摡⁡煥極潰攠⁮慠捲楨潶䝳慵摲摡⽯煥極潰⽳⹠਍‭敍썮₺湩整慲瑣癩⁯琨牥業慮⥬挠湯漠捰潩敮⁳潣潭ഺ ⴠ嘠牥挠慬楳楦慣楣돃⁮敤氠⁡楬慧਍†‭慄⁲敤愠瑬⁡煥極潰ⱳ樠杵摡牯獥礠攠瑮敲慮潤敲൳ ⴠ䌠湯畳瑬牡搠瑡獯搠⁥煥極潰⽳番慧潤敲൳ ⴠ匠浩汵牡氠杩獡礠猠獥潩敮⁳敤攠瑮敲慮業湥潴਍†‭畇牡慤⁲潬⁳慤潴⁳湥搠獩潣਍਍ⴭഭഊ⌊‣鿰邌儠썵₩景敲散氠⁡慰瑲⁥敗ൢഊ䰊⁡慣灲瑥⁡坠扥怯攠⁳湵⁡敶獲썩溳攠瑳ꇃ楴慣挠湯瀠ꇃ楧慮⁳畱⁥畭獥牴湡ഺഊⴊ䌠慬楳楦慣楣돃⁮敤氠⁡楬慧਍‭汐湡楴汬獡搠⁥煥極潰൳ⴊ删獥汵慴潤⁳敤瀠牡楴潤൳ⴊ䘠牯畭慬楲獯瀠牡⁡牣慥⁲番慧潤敲⁳ 煥極潰⁳瀨楲据灩污敭瑮⁥潣⁮半⬠䨠体⥎਍਍畐摥獥愠牢物嬠獅整䰠湩嵫栨瑴獰⼺爯敢瀭汯瑩捥楮獣朮瑩畨⹢潩圯扥䘭潯扴污⵬慍慮敧⽲ 楤敲瑣浡湥整攠⁮畴渠癡来摡牯瀠牡⁡敶汲⹡਍਍ⴭഭഊ⌊‣鿰ꂛ룯₏썃涳⁯潣瑮楲畢物਍਍‭楓焠極牥獥愠牧来牡渠敵慶⁳畦据潩慮楬慤敤ⱳ攠灭敩慺瀠牯怠灁楬慣楣⽯牳⽣⁠䨨癡⥡漠怠敗⽢牳⽣⁠䨨⥓മⴊ䄠뇃摡⁥潤畣敭瑮捡썩溳搠⁥畴⁳慣扭潩⁳湥攠⁬慊慶潄⁣怨灁楬慣楣⽯慊慶潄⽣⥠മⴊ匠⁩浡汰귃獡攠⁬獥畱浥⁡兓ⱌ愠瑣慵楬慺怠䉂䑄是潯扴污浟湡条牥湟睥献汱⹠਍਍ⴭഭഊ⌊‣鿰貓丠瑯獡爠ꇃ楰慤൳ഊⴊ䰠獯搠瑡獯猠⁥畧牡慤⁮湥愠捲楨潶⁳敤琠硥潴瀠慬潮戠橡⁯䅠汰捩捡潩猯捲愯捲楨潶䝳慵摲摡⽯⹠਍‭慐慲氠浩楰牡搠瑡獯‬潢牲⁡獥獯愠捲楨潶⁳⁹敲湩捩慩氠⁡灡楬慣楣돃⹮਍਍ꇂ楄晳畲慴瀠潲牧浡湡潤琠⁵牰灯潩⨠䘪瑵潢⁬慍慮敧⩲K붚਍
+# Futbol Manager ⚽
+
+¡Bienvenido a **Futbol Manager**, una mini‑aplicación de gestión de equipos de fútbol hecha en **Java** con complementos web y base de datos para mantener tus datos guardados entre ejecuciones.
+
+---
+
+## 🔎 ¿Qué encontrarás en este proyecto?
+
+### 📂 Estructura de carpetas
+
+- **Aplicacio/** - La aplicación principal en **Java**:
+  - `src/` - Contiene el código fuente Java.
+  - `archivosGuardado/` - Archivos de texto usados para almacenar equipos, jugadores y entrenadores.
+  - `JavaDoc/` - Documentación generada automáticamente del código.
+
+- **BBDD/** - Scripts SQL para crear/llenar la base de datos, útil si quieres persistir datos en un motor SQL:
+  - `footbal_manager_new.sql` - Esquema y datos iniciales.
+
+- **Web/** - Versión web / frontend para visualizar datos y páginas estáticas:
+  - `index.html` - Página de entrada.
+  - `css.css` - Estilos globales.
+  - `Pagines/` - Páginas HTML de la aplicación (clasificación, resultados, plantillas, etc.).
+  - `src/` - Recursos (imágenes, JSON, scripts) usados por la web.
+
+---
+
+## 🚀 Cómo ejecutar la versión Java (Aplicación de consola)
+
+1. Abre un terminal en `Aplicacio/`.
+2. Compila:
+
+```bash
+javac -d out src/*.java src/personas/*.java
+```
+
+3. Ejecuta:
+
+```bash
+java -cp out Main
+```
+
+> 💡 Consejo: Ejecuta el proyecto desde un IDE (IntelliJ IDEA, Eclipse, NetBeans) para navegar mejor por el código y usar la generación de JavaDoc.
+
+---
+
+## 🧠 Qué hace la aplicación Java
+
+La aplicación es un **gestor de equipos** con estas funcionalidades principales:
+
+- Cargar **jugadores** y **entrenadores** desde `archivosGuardado/mercat_fitxatges.txt`.
+- Cargar **equipos** y sus componentes desde `archivosGuardado/guardarEquipos.txt` y los archivos individuales de cada equipo en `archivosGuardado/equipos/`.
+- Menú interactivo (terminal) con opciones como:
+  - Ver clasificación de la liga
+  - Dar de alta equipos, jugadores y entrenadores
+  - Consultar datos de equipos/jugadores
+  - Simular ligas y sesiones de entrenamiento
+  - Guardar los datos en disco
+
+---
+
+## 🌐 Qué ofrece la parte Web
+
+La carpeta `Web/` es una versión estática con páginas que muestran:
+
+- Clasificación de la liga
+- Plantillas de equipos
+- Resultados de partidos
+- Formularios para crear jugadores / equipos (principalmente con JS + JSON)
+
+Puedes abrir [Este Link](https://rbe-politecnics.github.io/Web-Football-Manager/) directamente en tu navegador para verla.
+
+---
+
+## 🛠️ Cómo contribuir
+
+- Si quieres agregar nuevas funcionalidades, empieza por `Aplicacio/src/` (Java) o `Web/src/` (JS).
+- Añade documentación de tus cambios en el JavaDoc (`Aplicacio/JavaDoc/`).
+- Si amplías el esquema SQL, actualiza `BBDD/footbal_manager_new.sql`.
+
+---
+
+## 📌 Notas rápidas
+
+- Los datos se guardan en archivos de texto plano bajo `Aplicacio/src/archivosGuardado/`.
+- Para limpiar datos, borra esos archivos y reinicia la aplicación.
+
+¡Disfruta programando tu propio **Futbol Manager**! ⚽
