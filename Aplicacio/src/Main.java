@@ -33,7 +33,7 @@ public class Main {
         while (bucleMenuMain) {
             mostrarMenu(tipoUsuario);
             String input = leerOpcionMenu(tipoUsuario);
-            bucleMenuMain = escogerOpcion(input, tipoUsuario, listaEquipos, listaPersonas, lligaActual);
+            bucleMenuMain = escogerOpcion(input, tipoUsuario, listaEquipos, listaPersonas);
 
             if (input.equalsIgnoreCase("DV") || input.equalsIgnoreCase("6")) {
             }
@@ -109,13 +109,11 @@ public class Main {
      * @param tipoUsuario El tipo de usuario logueado.
      * @param listaEquipos Lista global de equipos.
      * @param listaPersonas Lista global de personas (mercado de fichajes).
-     * @param lligaActual La liga que se está disputando actualmente.
      * @return true si el programa debe continuar, false para salir.
      */
     public static boolean escogerOpcion(String input, char tipoUsuario,
                                         ArrayList<Equipos> listaEquipos,
-                                        ArrayList<Personas> listaPersonas,
-                                        Lliga lligaActual) {
+                                        ArrayList<Personas> listaPersonas) {
         if (tipoUsuario == 'a') {
             switch (input) {
                 case "0":
@@ -140,7 +138,7 @@ public class Main {
                     consultarJugadorEquipo(listaEquipos);
                     break;
                 case "6":
-                    lligaActual = disputarNovaLliga(listaEquipos);
+                    disputarNovaLliga(listaEquipos);
                     break;
                 case "7":
                     sesionEntrenamiento(listaPersonas);

@@ -67,10 +67,13 @@ class MainTest {
 
     @Test
     void testEscogerOpcion() {
-        String input = "S";
+        String input = "0";
         char tipoUsuario = 'a';
-        ArrayList<Personas> listaPersonas = new ArrayList<>();
         ArrayList<Equipos> listaEquipos = new ArrayList<>();
+        ArrayList<Personas> listaPersonas = new ArrayList<>();
+
+
+        assertFalse(Main.escogerOpcion(input, tipoUsuario, listaEquipos, listaPersonas));
 
     }
 
