@@ -255,7 +255,7 @@ public class Lliga {
 
     public void guardarLliga() {
         try (BufferedWriter writer = new BufferedWriter(
-                new FileWriter("/src/archivosGuardado/liga.txt"))) {
+                new FileWriter("src/archivosGuardado/liga.txt"))) {
 
             writer.write("Lliga:" + nombre + "\n");
             writer.write("NumEquipos:" + equipos.size() + "\n");
@@ -277,19 +277,19 @@ public class Lliga {
         Lliga resultat = null;
 
         try (BufferedReader br = new BufferedReader(
-                new FileReader("/src/archivosGuardado/liga.txt"))) {
+                new FileReader("src/archivosGuardado/liga.txt"))) {
 
             String line = br.readLine();
             boolean formatValid = (line != null && line.startsWith("Lliga:"));
 
             if (formatValid) {
-                String nomLliga = line.split(";")[1];
+                String nomLliga = line.split(":")[1];
 
                 line = br.readLine();
                 formatValid = (line != null && line.startsWith("NumEquipos:"));
 
                 if (formatValid) {
-                    int numEquipos = Integer.parseInt(line.split(";")[1]);
+                    int numEquipos = Integer.parseInt(line.split(":")[1]);
                     Lliga lliga = new Lliga(nomLliga, numEquipos);
 
                     while ((line = br.readLine()) != null) {
